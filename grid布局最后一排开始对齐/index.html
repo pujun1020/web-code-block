@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .grid-wrapper-wrapper {
+            max-width: 1200px;
+            margin: 0 auto
+        }
+
+        .grid-wrapper {
+            display: grid;
+            grid-gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .item {
+            height: 300px;
+            background-color: black;
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+    <div class="grid-wrapper-wrapper">
+        <div class="grid-wrapper">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+    </div>
+    <script>
+        var gridWrapper = document.querySelector('.grid-wrapper');
+        //是否存在类
+        if (gridWrapper.classList.contains('grid-wrapper')) {
+            //获取最后一个元素
+            var lastItem = gridWrapper.lastElementChild;
+            //获取最后一个元素的上一个元素
+            var prevItem = lastItem.previousElementSibling;
+            //获取最后一个元素的上一个元素的margin-bottom
+            var marginBottom = window.getComputedStyle(prevItem).marginBottom;
+            //设置最后一个元素的margin-bottom
+            lastItem.style.marginBottom = marginBottom;
+            
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const asyncfun1 = () => {
+            return new Promise((resolve, reject) => {
+                    resolve('asyncfun1')
+                    console.log('asyncfun1')
+            })
+        }
+        const asyncfun2 = () => {
+            return new Promise((resolve, reject) => {
+                   
+                    console.log('asyncfun2')
+            })
+        }
+        const asyncfun3 = () => {
+            return new Promise((resolve, reject) => {
+                    resolve('asyncfun3')
+                    console.log('asyncfun3')
+            })
+        }
+        const asyncfun4 = async () => {
+            const a1=await asyncfun1()
+            const a2=await asyncfun2()
+            const a3=await asyncfun3()
+            console.log('打印出来呀')
+        }
+        asyncfun4()
+        //使用async await时promise必须resolve或reject不然工会达不到预期的效果，await是接收一个promise的结果，没有收到就回一直等着收到结果，就一致不会结束代码
+        //await命令用于等待一个异步操作的结果，它后面必须是一个Promise对象
+    </script>
+</body>
+
+</html>

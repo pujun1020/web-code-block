@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" class="fileimg">
+    <img class="img" src="" alt="">
+    <form id="myForm">
+        <label for="name">姓名：</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <button>提交</button>
+    </form>
+    <script>
+        var fileimg = document.querySelector('.fileimg');
+        var img = document.querySelector('.img');
+        /*为fileimg绑定change事件，并且存放到FormData ，用feach请求发送服务器*/
+        fileimg.addEventListener('change',function(){
+            /*获取上传文件的base64和上传进度*/
+            var file = fileimg.files[0];
+            console.log(fileimg.files,888)
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function(e){
+                img.src = this.result;
+                let base=atob("/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAAeAAD/4QMdaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzEzOCA3OS4xNTk4MjQsIDIwMTYvMDkvMTQtMDE6MDk6MDEgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkIyQTRDQzkyRDAzQTExRTZBNzY5QzNCOTQ5RUMyRUMxIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkIyQTRDQzkxRDAzQTExRTZBNzY5QzNCOTQ5RUMyRUMxIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE3IFdpbmRvd3MiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0iQkE2OTM4QTJGNEM5QTY5OTMzQzc0MTIwNjYxNjg2NEEiIHN0UmVmOmRvY3VtZW50SUQ9IkJBNjkzOEEyRjRDOUE2OTkzM0M3NDEyMDY2MTY4NjRBIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+/+4ADkFkb2JlAGTAAAAAAf/bAIQAEAsLCwwLEAwMEBcPDQ8XGxQQEBQbHxcXFxcXHx4XGhoa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")
+                console.log(base)
+                console.log(btoa("pujun"))//将字符串转base64
+                console.log(atob(this.result))//将base64转字符串
+                console.log(new Uint8Array(atob(this.result).split('').map(x => x.charCodeAt(0))))
+                console.log(new Blob([new Uint8Array(atob(this.result).split('').map(x => x.charCodeAt(0)))]))
+                console.log(URL.createObjectURL(new Blob([new Uint8Array(atob(this.result).split('').map(x => x.charCodeAt(0)))])))
+            }
+           
+        })
+        
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         input:focus-visible {
+             border: 2px solid #1e88e5;
+             outline: none;
+             box-shadow: 0 0 5px rgba(30, 136, 229, 0.75);
+         }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        for (let i = 0; i < 3; i++) {//是一个同步程序
+            console.log(i);
+            a = 10099;
+            setTimeout(() => {
+                console.log(i,"let****");
+            }, 500);
+        }
+        /* var i = 0; */
+        for (var i = 0; i < 3; i++) {//是一个同步程序
+            console.log(i);
+            a = 10099;
+            setTimeout(() => {
+                console.log(i,"var****");
+            }, 500);
+        }
+        console.log("循环结束",a);//需要等到for循环完成才会执行
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="file" id="fileInput">99
+    <label for="fileInput">dasd</label>
+    <script>
+        const convertFileToUrl = (file) => URL.createObjectURL(file);
+        const fileInput = document.getElementById('fileInput');
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            const fileUrl = convertFileToUrl(file);
+            // 在这里，您可以将fileUrl用于任何需要文件URL的地方
+            console.log(event);
+        });
+        const options= {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+        };
+        console.log(new Date().toLocaleTimeString("zh-US", options));
+        /* 获取当前时间戳 */
+        console.log(Date.now());
+        console.log(+new Date());
+        console.log(Date.parse("2022-01-01"));
+    </script>
+</body>
+
+</html>

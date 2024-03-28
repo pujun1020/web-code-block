@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function throttle(fn, delay) {
+        let inThrottle;
+        return function() {
+          const args = arguments;
+          const context = this;
+          if (!inThrottle) {
+            fn.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, delay);
+          }
+        }
+      }
+      const throttled = throttle(function(name) {
+        console.log('Function executed',name);
+      }, 1000);
+      
+      // 调用节流函数
+      throttled("pujun");
+      throttled("55");
+      throttled("33");
+</script>
+</body>
+</html>

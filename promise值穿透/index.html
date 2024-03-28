@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1. 创建一个Promise对象
+       Promise.resolve(9).then(5).then(Promise.resolve(3)).then(console.log)
+       // promise值穿透，promise结果会一直传递下去，直到遇到非Promise类型的值
+       // 2. 调用Promise的then方法，传入成功的回调函数
+       // 3. 打印结果
+    </script>
+</body>
+</html>

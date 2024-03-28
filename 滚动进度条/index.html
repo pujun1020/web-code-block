@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/jquery.min.js"></script>
+    <script src="./index.js"></script>
+</head>
+
+<body>
+    <style>
+        body {
+            height: 500vh;
+        }
+        .pregress-box{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+        .progressbox {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 4px;
+            width: 0%;
+            background-color: #4CAF50;
+            transition: width 0.3s ease-in-out;
+        }
+        .pregress-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 4px;
+            width: 100%;
+            background-color: #770b0b;
+        }
+
+    </style>
+    <div class="pregress-box">
+        <div class="pregress-line"></div>
+        <div class="progressbox"></div>
+    </div>
+    <div class="btn">点击</div>
+    
+</body>
+
+</html>

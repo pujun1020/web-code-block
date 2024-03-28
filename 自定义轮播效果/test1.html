@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>瀑布流布局</title>
+    <style>
+        body {
+            overflow: hidden;
+        }
+
+        .pujun-swiper-wapper {
+            --swiper-btn-wapper-width: 0px;
+        }
+
+        .pujun-container-inner {
+            position: relative;
+            width: 50%;
+            height: 50vh;
+            display: flex;
+            transform: translateX(0px);
+            transition: transform cubic-bezier(.61,2.06,0,-0.01) 1s;
+            margin: 0 auto;
+            gap: 30px;
+
+        }
+
+        .pujun-swiper-item {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            flex: 0 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .pujun-swiper-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .pujun-swiper-item::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, .1);
+            transition: all 0.5s;
+        }
+
+        .pujun-swiper-item.active::after {
+            background: transparent;
+            backdrop-filter: blur(0px);
+        }
+
+        .pujun-swiper-btn-wapper {
+            width: var(--swiper-btn-wapper-width);
+            margin: 0 auto;
+
+        }
+
+        .pujun-swipper-btn-inner {
+            max-width: 80%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .pujun-swiper-btn-inner-btns {
+            --btn-line-left: 0px;
+            --btn-line-width: 0px;
+            position: relative;
+            display: flex;
+            height: 35px;
+            justify-content: space-between;
+            border-bottom: 4px solid #cccccc;
+        }
+
+        .pujun-swiper-btn-inner-btns::after {
+            display: block;
+            content: '';
+            background: #000;
+            width: var(--btn-line-width);
+            height: 2px;
+            position: absolute;
+            left: var(--btn-line-left);
+            transition: left 0.5s;
+            bottom: -3px;
+            z-index: 2;
+        }
+
+        .pujun-swiper-btn.active {
+            border-style: none;
+            color: #000;
+            width: fit-content;
+            white-space: nowrap;
+            font-family: "Lato";
+            font-size: 17px;
+            font-style: normal;
+            font-weight: 600;
+            letter-spacing: .1px;
+        }
+
+        .pujun-swiper-btn {
+            color: rgba(0, 0, 0, .3);
+            font-family: "Lato";
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            letter-spacing: .1px;
+            border-style: none;
+            cursor: pointer;
+        }
+
+        .pujun-swipper-btn-inner-text-item {
+            color: #000;
+            text-align: center;
+            font-family: "Lato";
+            font-size: 16px;
+            font-weight: 500;
+            font-style: normal;
+            letter-spacing: .1px;
+            transform: translateX(100%);
+            opacity: 0;
+            transition: transform cubic-bezier(.61,2.06,0,-0.01) 1s;
+        }
+        .pujun-swipper-btn-inner-text-item.active{
+            transform: translateX(0%);
+            opacity: 1;
+        }
+        .pujun-swipper-btn-inner-text {
+            overflow: hidden;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="pujun-swiper-wapper">
+        <div class="pujun-container-inner">
+            <div class="pujun-swiper-item"><img src="https://images.dog.ceo/breeds/malamute/n02110063_14434.jpg" alt="">
+            </div>
+            <div class="pujun-swiper-item"><img src="https://images.dog.ceo/breeds/malamute/n02110063_14434.jpg" alt="">
+            </div>
+            <div class="pujun-swiper-item"><img src="https://images.dog.ceo/breeds/malamute/n02110063_14434.jpg" alt="">
+            </div>
+            <div class="pujun-swiper-item"><img src="https://images.dog.ceo/breeds/malamute/n02110063_14434.jpg" alt="">
+            </div>
+        </div>
+        <div class="pujun-swiper-btn-wapper">
+            <div class="pujun-swipper-btn-inner">
+                <div class="pujun-swiper-btn-inner-btns">
+                    <div class="pujun-swiper-btn">Snapshot Preview</div>
+                    <div class="pujun-swiper-btn">Dual Camera Positioning</div>
+                    <div class="pujun-swiper-btn">Curve Engraving</div>
+                    <div class="pujun-swiper-btn">Ultra HD Result</div>
+                </div>
+                <div class="pujun-swipper-btn-inner-text">
+                    <div class="pujun-swipper-btn-inner-text-item">
+                        projects accurate and automated.
+                    </div>
+                    <div class="pujun-swipper-btn-inner-text-item">
+                        Snap a photo and seamlessly transfer to the desktop software for one-click Smart Fill, making
+                        bulk
+                    </div>
+                    <div class="pujun-swipper-btn-inner-text-item">
+                        Snap a photo and seamlessly transfer to the desktop software for one-click Smart Fill, making
+                        bulk
+                    </div>
+                    <div class="pujun-swipper-btn-inner-text-item">
+                        
+                        projects accurate and automated.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var swiperBtn = document.querySelectorAll('.pujun-swiper-btn');
+        var swiperItem = document.querySelectorAll('.pujun-swiper-item');
+        var swiperWapper = document.querySelector('.pujun-swiper-wapper');
+        let swiperInner = document.querySelector('.pujun-container-inner');
+        let btnwapper = document.querySelector('.pujun-swiper-btn-wapper');
+        let btninner = document.querySelector('.pujun-swiper-btn-inner-btns');
+        let btnbottomtext=document.querySelectorAll('.pujun-swipper-btn-inner-text-item');
+        //第一个添加active类
+        swiperBtn[0].classList.add('active');
+        swiperItem[0].classList.add('active');
+        btnbottomtext[0].classList.add('active');
+        btninner.style.setProperty('--btn-line-width', swiperBtn[0].offsetWidth + 'px');
+        btnwapper.style.setProperty('--swiper-btn-wapper-width', swiperInner.offsetWidth + 'px');
+        swiperBtn.forEach(function (item, index) {
+            item.addEventListener('click', function () {
+                let currentIndex = index;
+                swiperItem.forEach(function (item, index) {
+                    item.classList.remove('active');
+                    swiperItem[currentIndex].classList.add('active');
+
+                })
+                swiperBtn.forEach(function (item, index) {
+                    item.classList.remove('active');
+                    swiperBtn[currentIndex].classList.add('active');
+                })
+                btnbottomtext.forEach(function (item, index) {
+                    item.classList.remove('active');
+                    btnbottomtext[currentIndex].classList.add('active');
+                })
+                btninner.style.setProperty('--btn-line-width', swiperBtn[currentIndex].offsetWidth + 'px');
+                btninner.style.setProperty('--btn-line-left', item.offsetLeft + 'px');
+                var swiperItemWidth = swiperItem[currentIndex].offsetLeft;
+                swiperInner.style.transform = `translateX(-${swiperItemWidth}px)`;
+            })
+        })
+    </script>
+
+</body>
+
+</html>

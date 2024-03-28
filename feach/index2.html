@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload Progress</title>
+</head>
+
+<body>
+    <input type="file" id="fileInput" />
+    <div id="progressBar"></div>
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const progressBar = document.getElementById('progressBar');
+        function onfun(data) {
+            console.log(data);
+        }
+        function upload(fun) {
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+
+            const xhr = new XMLHttpRequest();
+            console.log(xhr);
+            fun("蒲俊设计")
+            
+            xhr.upload.onprogress = (event) => {
+                
+                if (event.lengthComputable) {
+                    const percentComplete = (event.loaded / event.total) * 100;
+                    progressBar.style.width = `${percentComplete}%`;
+                    console.log(88,percentComplete)
+                }
+            };
+             xhr.open('POST', './index.html');
+             xhr.send(formData);
+             return xhr.onload = function() {
+                 if (xhr.status === 200) {
+                     console.log('File uploaded successfully');
+                 } else {
+                     console.error('File upload failed');
+                 }
+             };
+        }
+
+        fileInput.addEventListener('change', function () {
+            upload(onfun)
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .path {
+            stroke-dasharray: 4, 2;
+            animation: dash1 6s linear infinite;
+        }
+
+        @keyframes dash1 {
+            100% {
+                stroke-dashoffset: -100;
+            }
+        }
+
+        svg path {
+            fill: transparent !important;
+            transition: 0s;
+        }
+
+        .divsvg::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: url(https://www.nju.edu.cn/images/list_box19_top.png) no-repeat 50% / cover;
+            animation: circle1 10s linear 0s infinite;
+        }
+
+        @keyframes circle1 {
+            0% {
+                transform: rotate(0);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+
+        }
+
+        .divsvg {
+            width: 60px;
+            height: 60px;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2000px" height="3px">
+        <path class="path" fill-rule="evenodd" stroke="rgb(99, 6, 95)" stroke-width="1px" stroke-dasharray="4, 2"
+            stroke-linecap="butt" stroke-linejoin="miter" fill="none" d="M0.500,1.500 L3000.500,1.500 "></path>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22.5px" height="22.5px">
+        <path class="path" fill-rule="evenodd" stroke="rgb(99, 6, 95)" stroke-width="1px" stroke-dasharray="4, 2"
+            stroke-linecap="butt" stroke-linejoin="miter" fill="rgb(246, 246, 246)"
+            d="M11.000,1.596 C16.193,1.596 20.403,5.807 20.403,11.000 C20.403,16.193 16.193,20.402 11.000,20.402 C5.807,20.402 1.597,16.193 1.597,11.000 C1.597,5.807 5.807,1.596 11.000,1.596 Z">
+        </path>
+    </svg>
+    <div class="divsvg"></div>
+</body>
+
+</html>

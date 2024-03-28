@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" class="fileimg">
+    <img class="img" src="" alt="">
+    <form id="myForm">
+        <label for="name">姓名：</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <button>提交</button>
+    </form>
+    <script>
+        var fileimg = document.querySelector('.fileimg');
+        var img = document.querySelector('.img');
+        /*为fileimg绑定change事件，并且存放到FormData ，用feach请求发送服务器*/
+        fileimg.addEventListener('change',function(){
+            var formdata = new FormData();
+            console.log(this.files[0],7788888)
+            formdata.append('files',this.files[0]);
+            console.log(Object.fromEntries(formdata.entries()))
+            /*js笔记*/
+            const urlparam=new URLSearchParams('foo=bar&baz=qux');
+            console.log(urlparam)
+           
+        })
+        const obj={
+            foo:'bar',
+            baz:'qux'
+        }
+        console.log(Object.fromEntries(Object.entries(obj)),333)
+        /*为myForm绑定提交事件*/
+        var myForm = document.querySelector('#myForm');
+        myForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // 阻止表单默认的提交行为
+            var formData = new FormData(myForm);
+            console.log(formData.get('name')); // 获取表单中的name值
+            console.log(formData); 
+            console.log(Object.fromEntries(formData.entries())); 
+        });
+        
+        
+    </script>
+</body>
+</html>

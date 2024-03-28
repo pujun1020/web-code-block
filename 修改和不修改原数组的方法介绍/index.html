@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .next {
+            color: rebeccapurple;
+            height: 30px;
+            background-color: rosybrown;
+        }
+
+        .prev {
+            color: blue;
+            height: 30px;
+            margin-top: 30px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>22</li>
+        <li>33</li>
+        <li>44</li>
+        <li>55</li>
+        <li>66</li>
+    </ul>
+    <div class="next">next</div>
+    <div class="prev">prev</div>
+    <script>
+        let arr = [1, 2, 3, 4, 5];
+        let newArr = [];
+
+        //  将除第一项之外的元素添加到新数组
+        for (let i = 1; i < arr.length; i++) {
+            newArr.push(arr[i]);
+        }
+
+        //  将第一项添加到新数组的末尾
+        newArr.push(arr[0]);//  这里使用了数组的`push()`方法将第一项添加到新数组的末尾
+
+        console.log(newArr,arr);  //  输出：[1,  2,  3,  4,  5]
+        //这样，数组的第一项就被移动到了最后一项。需要注意的是，数组的索引也会随之改变。如果你需要保留原数组的索引，可以使用  `slice()`  方法和  `unshift()`  方法来实现。以下是另一种解决方案：
+
+        let arr2 = [1, 2, 3, 4, 5];
+      /*   let newArr2 = arr2.splice(1);//会改变原数组 */
+        let newArr2 = arr2.slice(1);//不会改变原数组
+
+        console.log(newArr2,arr2);  //  输出：[1,  2,  3,  4,  5]
+
+
+        //这种方法同样可以将数组的第一项移动到最后一项，同时保留原数组的索引。
+    </script>
+</body>
+
+</html>

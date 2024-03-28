@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const afun=async ()=>{
+            const a='123'
+            const aawait=await Promise.resolve(a)
+            console.log(aawait,'******')
+        }
+        afun()
+        
+
+        async function delayfun() {
+            //延迟函数
+            const delay = function(ms) {
+                console.log(typeof ms)
+                typeof ms !== 'number' ? ms=1000 : null;
+                return new Promise(resolve => {
+                    setTimeout(() => {
+                        resolve()
+                    }, ms)
+                })
+            }
+            await delay("3000")
+            console.log('3秒后')
+        }
+        delayfun()
+    </script>
+</body>
+
+</html>

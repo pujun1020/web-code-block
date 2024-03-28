@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .mydiv {
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mydiv"></div>
+    <script>
+        var mydiv = document.querySelector('.mydiv');
+        //创建元素节点，追加
+        var newdiv = document.createElement('div');
+        newdiv.innerHTML = '我是新创建的元素';
+        mydiv.appendChild(newdiv);
+        //创建文本节点，追加
+        var text = document.createTextNode('我是新创建的文本节点');
+        mydiv.appendChild(text);
+
+        mydiv.appendChild(newdiv);
+        mydiv.appendChild(text);
+
+        // appendChild(Node)这个方法一般是在指定元素节点的最后一个子节点之后添加节点，但如果Node是页面中的DOM对象，那么就不是添加节点了，就是直接Move节点。
+        //借助querySelector方法获取元素节点,可实时监听页面dom变化，结合可做左右按钮点击轮播切换
+
+
+        //元素到窗口顶部的距离
+        var top = mydiv.getBoundingClientRect().top;
+        //offsetHeight = 内容高度 + padding + border
+        //clientheight = 内容高度 + padding
+        //scrollHeight = 内容实际尺寸 + padding
+        //window.cancelAnimationFrame() 
+        //window.requestAnimationFrame()
+    </script>
+</body>
+
+</html>

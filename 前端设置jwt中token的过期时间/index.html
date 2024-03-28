@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        Storage.prototype.setStorageWithAge = (key, value, age) => {
+            if (isNaN(age) || age < 1) throw new Error("age must be a number");
+            const obj = {
+                data: value, //存储值
+                time: Date.now(), //存值时间戳
+                maxAge: age, //过期时间
+            };
+            localStorage.setItem(key, JSON.stringify(obj));
+        };
+
+        Storage.prototype.getStorageWithAge = key => {
+            const { data, time, maxAge } = JSON.parse(localStorage.getItem(key));
+            console.log(time + maxAge > Date.now(),888)
+            console.log(time , maxAge ,Date.now(),888)
+            if (time + maxAge <= Date.now()) {
+                localStorage.removeItem(key);
+                return '';
+            }
+            return data;
+        };
+
+        localStorage.setStorageWithAge('amingxiansen', '测试过期时间', 6000);
+        setTimeout(
+            () => console.log(localStorage.getStorageWithAge('amingxiansen')),
+            2000
+        )
+    </script>
+</body>
+</html>

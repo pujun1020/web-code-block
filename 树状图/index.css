@@ -1,0 +1,95 @@
+.tree-wapper {
+    --line-left-right: 50px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    padding: 0 20px;
+}
+.tree-node {
+    display: flex;
+    align-items: center;
+    gap: var(--line-left-right);
+}
+.tree-node-children {
+    display: flex;
+    align-items: center;
+    gap: var(--line-left-right);
+}
+.tree-node-child-childrenoperate {
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+}
+.tree-node-children-wapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--line-left-right);
+}
+.tree-node-child-name{
+    position: relative;
+}
+.tree-node-child-name::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: calc(var(--line-left-right) / -1);
+    width: var(--line-left-right);
+    height: 1px;
+    background: #ddd;
+}
+.tree-node-child-name::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: calc(var(--line-left-right) / -1);
+    width: var(--line-left-right);
+    height: 1px;
+    background: #ddd;
+}
+.tree-node-child-operate{
+    position: relative;
+}
+.tree-node-child-operate::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: calc(var(--line-left-right) / -1);
+    width: var(--line-left-right);
+    height: 1px;
+    background: #ddd;
+}
+.unify {
+    padding: 10px 15px;
+    text-align: center;
+    border-radius: 3px;
+    box-shadow: 0 1px 5px rgba(0,0,0,.15);
+    width: max-content;
+}
+.tree-line {
+    height: var(--tree-line-h);
+    width: 1px;
+    background: #ddd;
+}
+.tree-line2 {
+    height: var(--tree-line-h2);
+    width: 1px;
+    background: #ddd;
+}
+.tree-node-name::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: calc(var(--line-left-right) / -1);
+    width: var(--line-left-right);
+    height: 1px;
+    background: #ddd;
+}
+.tree-node-name{
+    position: relative;
+}
+

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/jquery.min.js"></script>
+    <script src="./index.js"></script>
+    <style>
+        .myloder{
+            position: fixed;
+            inset: 0;
+        }
+        .myloder::after,.myloder::before{
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 50%;
+            top: 0;
+            left: 0;
+            background: #fff;
+            transition: all 0.9s;
+            border: none;
+        }
+        .myloder::before{
+            top: auto;
+            bottom: 0;
+            background-color: #f5f6fa;
+        }
+        .myloder.active{
+            visibility: hidden;
+        }
+        .myloder.active::after,.myloder.active::before{
+            height: 0%;
+        }
+        .myloder.active img{
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .myloder img{
+            position: fixed;
+            top: 35%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 999;
+            opacity: 1;
+            transform: all 0.9s;
+        }
+        .loder-line{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0%;
+            height: 4px;
+            background-color: #1a76d1;
+            animation: line-width 3s infinite;
+            z-index: 99;
+        }
+        .loder-line2{
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100vw;
+            height: 3px;
+            background-color: #a5abbd;
+            z-index: 98;
+        }
+        
+      
+        @keyframes line-width {
+            100%{
+                width: 100%;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="myloder">
+        <div class="loder-line"></div>
+        <div class="loder-line2"></div>
+        <img src="../img/logo3.png" alt="">
+    </div>
+   <div class="btn">9999</div>
+</body>
+
+</html>

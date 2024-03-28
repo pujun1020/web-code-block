@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* .divclass {
+            position: relative;
+            width: 300px;
+            background: #7c72c5;
+            height: 100px;
+            margin: 60px auto;
+            border-radius: 15px 15px 0 0;
+        }
+        .divclass::after {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(at left top, transparent 30px, #7c72c5 31px);
+            left: -30px;
+            bottom: 0;
+        }
+        .divclass::before {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(at right top, transparent 30px, #7c72c5 31px);
+            right: -30px;
+            bottom: 0;
+        } */
+        .divclass {
+            position: relative;
+            width: 300px;
+            background: #7c72c5;
+            height: 100px;
+            margin: 60px auto;
+            border-radius: 15px;
+        }
+        .divclass::after {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(at left top, transparent 30px, #7c72c5 31px);
+            left: -30px;
+            bottom: 30px;
+        }
+        .divclass::before {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(at right top, transparent 30px, #7c72c5 31px);
+            right: -30px;
+            bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="divclass"></div>
+</body>
+</html>

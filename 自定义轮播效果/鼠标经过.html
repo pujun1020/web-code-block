@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .cda:hover::after {
+      height: calc(100% - 60px);
+      opacity: 1 !important;
+      transform: scale(1) !important;
+  }
+  .cda::after {
+      height: 100px;
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      bottom: 30px;
+      left: 30px;
+      content: '';
+      opacity: 0;
+      z-index: 1;
+      border-left: 1px solid #fff;
+      border-right: 1px solid #fff;
+      transition: all 0.5s linear;
+      transform: translate(0, 50%);
+  }
+  .cda:hover::before {
+    width: calc(100% - 60px);
+    opacity: 1 !important;
+    /* transform: scale(1); */
+    transform: scale(1) !important;
+}
+.cda::before {
+    width: 100px;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    bottom: 30px;
+    left: 30px;
+    content: '';
+    opacity: 0;
+    z-index: 1;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    transform: translate(50%, 0);
+    transition: all 0.5s linear;
+}
+  body{
+    background-color: #2f4858;
+  }
+  </style>
+</head>
+<body>
+  <div class="cda"></div>
+  
+</body>
+</html>

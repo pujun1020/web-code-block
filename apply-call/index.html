@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1.apply()方法
+        // 2.call()方法
+        // 3.bind()方法
+        let obj={
+            name:'zs',
+            age:18
+        }
+        function fn(x,y){
+            console.log(this)
+            console.log(x+y)
+            console.log(this.name+this.age)
+        }
+        /* fn.call(obj,1,2);
+        fn.apply(obj,[1,2]); */
+        /* fn() *///this是window对象
+        /* fn.bind(obj,1,2)()//this是obj对象
+        let fn1=fn.bind(obj,1,2)//this是obj对象
+        fn1() */
+        //立即执行函数多种写法
+        /* (function(x){
+            console.log(1,x)
+        })(10)
+        +function(x,y){
+            console.log(x+y)
+        }(1,2)
+        -function(x,y){
+            console.log(x+y)
+        }(1,2)
+        !function(x,y){
+            console.log(x+y)
+        }(1,2)
+        ~function(x,y){
+            console.log(x+y)
+        }(1,2) */
+        //箭头函数没有this,arguments,super,new.target
+        
+    </script>
+</body>
+</html>

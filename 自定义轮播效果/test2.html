@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .pujun-auto-switch-wapper {
+            display: flex;
+            gap: 40px;
+            width: 50%;
+            justify-content: space-between;
+            margin: 0 auto;
+            max-height: 500px;
+            overflow: hidden;
+        }
+
+        .auto-switch-item-btn-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+
+        }
+
+        .auto-switch-item-btns {
+            --progress-width: 0%;
+            flex: 0 0 30%;
+            display: flex;
+            align-items: center;
+        }
+
+        .auto-switch-item-imgs-wapper {
+            flex: 1;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        .auto-switch-item-imgs img {
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .auto-switch-item-img {
+            position: relative;
+        }
+
+        .auto-switch-item-imgs {
+            overflow-x: hidden;
+            transform: translateY(0px);
+            transition: transform cubic-bezier(.61, 2.06, 0, -0.01) 1s;
+        }
+
+        .auto-switch-item-img::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, .1);
+            transition: all 0.5s;
+        }
+
+        .auto-switch-item-img.active::after {
+            backdrop-filter: blur(0px);
+            background: transparent;
+        }
+
+        .auto-switch-item-progress {
+            position: relative;
+            width: 100%;
+            height: 2px;
+            margin-top: 24px;
+            background-color: #d8e2ef;
+            transition: width 1s;
+        }
+
+        .auto-switch-item-progress::after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background-color: transparent;
+            transition: width 2s;
+        }
+
+        .auto-switch-item-progress.active::after {
+            width: var(--progress-width);
+            background-color: #333;
+        }
+
+        .auto-switch-item-btn {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .auto-switch-item-title {
+            font-weight: 400;
+            color: #7D827D;
+            font-size: 19px;
+            transition: all 0.5s;
+        }
+
+        .auto-switch-item-title.active {
+            font-weight: bold;
+            color: #191A19;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="pujun-auto-switch-wapper">
+        <div class="auto-switch-item-btns">
+            <div class="auto-switch-item-btn-inner">
+                <div class="auto-switch-item-btn">
+                    <div class="auto-switch-item-title">Re-edit all vector</div>
+                    <div class="auto-switch-item-progress"></div>
+                </div>
+                <div class="auto-switch-item-btn">
+                    <div class="auto-switch-item-title">Change text within vectors</div>
+                    <div class="auto-switch-item-progress"></div>
+                </div>
+                <div class="auto-switch-item-btn">
+                    <div class="auto-switch-item-title">Create and manage layers</div>
+                    <div class="auto-switch-item-progress"></div>
+                </div>
+                <div class="auto-switch-item-btn">
+                    <div class="auto-switch-item-title">Turn photos into vectors</div>
+                    <div class="auto-switch-item-progress"></div>
+                </div>
+            </div>
+        </div>
+        <div class="auto-switch-item-imgs-wapper">
+            <div class="auto-switch-item-imgs">
+                <div class="auto-switch-item-img">
+                    <img src="https://images.dog.ceo/breeds/mastiff-tibetan/n02108551_2658.jpg" alt="">
+                </div>
+                <div class="auto-switch-item-img">
+                    <img src="https://images.dog.ceo/breeds/mastiff-tibetan/n02108551_2658.jpg" alt="">
+                </div>
+                <div class="auto-switch-item-img">
+                    <img src="https://images.dog.ceo/breeds/mastiff-tibetan/n02108551_2658.jpg" alt="">
+                </div>
+                <div class="auto-switch-item-img">
+                    <img src="https://images.dog.ceo/breeds/mastiff-tibetan/n02108551_2658.jpg" alt="">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let autoSwitchWapper = document.querySelector('.pujun-auto-switch-wapper');
+        let autoSwitchItemsBtns = document.querySelector('.auto-switch-item-btns');
+        let autoSwitchBtnItems = document.querySelectorAll('.auto-switch-item-btn');
+        let progressBars = document.querySelectorAll('.auto-switch-item-progress');
+        let autoswitchtitle = document.querySelectorAll('.auto-switch-item-title');
+        let imgactive = document.querySelectorAll('.auto-switch-item-img');
+        let imgitems = document.querySelector('.auto-switch-item-imgs');
+        let itemCount = autoSwitchBtnItems.length;
+        let activeIndex = 0; // 当前显示的元素的索引
+        let startTime = Date.now(); // 获取定时器开始时间
+        let duration = 6000; // 定时器持续时间为六秒钟
+        let timeouttimer;
+        let stopAutoSlide = true; // 是否停止自动轮播
+        var isClicked = false;// 是否点击了进度条
+        let ClickItemIndex;// 是否点击了按钮
+        progressBars[0].classList.add('active'); // 给第一个进度条添加active类
+        autoswitchtitle[0].classList.add('active'); // 给第一个进度条添加active类
+        imgactive[0].classList.add('active'); // 给第一个进度条添加active类
+        function showSlider() {
+            progressBars.forEach((item, index) => {
+                item.classList.remove('active');
+                progressBars[activeIndex].classList.add('active');
+            })
+            autoswitchtitle.forEach((item, index) => {
+                item.classList.remove('active');
+                autoswitchtitle[activeIndex].classList.add('active');
+            })
+            imgactive.forEach((item, index) => {
+                item.classList.remove('active');
+                imgactive[activeIndex].classList.add('active');
+            })
+            imgitems.style.transform = `translateY(-${imgactive[activeIndex].offsetTop}px)`
+            autoSwitchItemsBtns.style.setProperty('--progress-width', '0%'); // 更新进度条的宽度
+            startTime = Date.now();
+            startAutoSlide();
+        }
+        // 点击按钮切换轮播项
+        autoSwitchBtnItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                if (isClicked) {
+                    if (!item.querySelector(".auto-switch-item-progress").classList.contains('active')) {
+                        console.log("已经点击了进度条");
+                        activeIndex = index;
+                        stopAutoSlide = false;
+                        showSlider();
+                    }
+                    return
+                }; // 如果已经点击了进度条，则终止函数，不执行下面的代码
+                activeIndex = index;
+                stopAutoSlide = false;
+                showSlider();
+                isClicked = true;
+            })
+        })
+        // 切换到下一个轮播项
+        function nextSlide() {
+            activeIndex = (activeIndex + 1) % itemCount; // 循环切换// 确保循环到第一个元素
+            showSlider()
+        }
+        // 切换到上一个轮播项
+        function prevSlide() {
+            activeIndex = (activeIndex - 1 + itemCount) % itemCount; // 循环切换,// 确保循环回到最后一个元素
+        }
+        // 自动切换,控制progress进度
+        function startAutoSlide() {
+            let intervalId = setInterval(function () {
+                let currentTime = Date.now(); // 获取当前时间
+                let elapsedTime = currentTime - startTime; // 计算已经经过的时间
+                let percentage = (elapsedTime / duration) * 100; // 计算百分比
+                if (percentage > 100) {
+                    percentage = 100; // 确保百分比为100%
+                    clearInterval(intervalId); // 清除定时器
+                    if (timeouttimer) {
+                        clearTimeout(timeouttimer);
+                    }
+                    if (stopAutoSlide) {
+                        timeouttimer = setTimeout(nextSlide, 2000); // 2秒后重新启动自动切换
+                    }
+                }
+
+                autoSwitchItemsBtns.style.setProperty('--progress-width', percentage + '%'); // 更新进度条的宽度
+
+            }, 500); // 每秒执行一次
+        }
+        startAutoSlide();
+    </script>
+</body>
+
+</html>

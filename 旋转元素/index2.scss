@@ -1,0 +1,89 @@
+$size: 300px;
+$imgsize: 80px;
+
+.mycontainer {
+    width: $size;
+    height: $size;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    border-radius: 50%;
+    animation: myrotate 20s linear infinite;
+
+    .myitem {
+        width: $imgsize;
+        height: $imgsize;
+        position: absolute;
+        margin-top: -40px;
+
+        .myimg img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+    }
+}
+
+.myimg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.textboxcontent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    inset: 0;
+}
+.mybigbox{
+    display: flex;
+    align-items: center;
+}
+.mybigbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+$n: 4;
+$pdeg: 360deg / $n;
+
+.mycontainer {
+    .myitem {
+        transform-origin: center $size / 2 + $imgsize / 2;
+
+        @for $i from 1 through $n {
+            &:nth-child(#{$i}) {
+                $d: (
+                    $i - 1) * $pdeg;
+                transform: rotate($d
+                );
+
+            .myimg {
+                --initdeg:#{-$d};
+                transform: rotate(-$d);
+                animation: myrotate 20s linear infinite reverse;
+            }
+        }
+    }
+}
+
+
+}
+
+.mycontainer:hover {
+    animation-play-state: paused;
+
+    .myitem .myimg {
+        animation-play-state: paused;
+    }
+}
+
+@keyframes myrotate {
+    to {
+        transform: rotate(calc(360deg + var(--initdeg, 0deg)));
+    }
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 浏览器内置对象 */
+        /* URLSearchParams */
+        /* FormData */
+        /* Map */
+        /* Set */
+        /* Promise */
+        /* async/await */
+        /* WebSocket */
+        const url = new URLSearchParams()
+        const urla = new FormData()
+        console.log(url)
+        console.log(urla)
+        /*Map */
+        const map = new Map();
+        map.set('name', '张三');
+        map.set('age', 18);
+        const mapdata = Object.fromEntries(map);
+        /*遍历对象mapdata*/
+        console.log(map)
+        for (const [key, value] of Object.entries(mapdata)) {
+            console.log(`${key}: ${value}`,88);
+        }
+
+        Object.keys(mapdata).forEach(key => {
+            console.log(`${key}: ${mapdata[key]}`);
+        });
+
+        for (const key in mapdata) {
+            // 确保 key 不是继承自原型链上的属性
+            if (mapdata.hasOwnProperty(key)) {
+                console.log(`${key}: ${mapdata[key]}`);
+            }
+        }
+
+        Object.entries(mapdata).forEach(([key, value]) => {
+            console.log(`${key}: ${value}`,88);
+        });
+    </script>
+</body>
+</html>

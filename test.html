@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .div-wrapper {
+            display: flex;
+            align-items: flex-end;
+            width:800px;
+            height: 600px;
+            background-color: #ccc;
+        }
+        .div-item {
+            width: 100px;
+            height: 100px;
+            background-color: #f00;
+        }
+    </style>
+</head>
+<body>
+    <div class="div-wrapper">
+        <a href="#" class="diva">
+            <div class="div-item">item</div>
+        </a>
+    </div>
+    <script>
+        
+        var a = document.querySelector('.diva');
+        var item = document.querySelector('.div-item');
+        var div = document.querySelector('.div-wrapper');
+        console.log(item.offsetTop);
+    </script>
+</body>
+</html>

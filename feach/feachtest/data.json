@@ -1,0 +1,576 @@
+{
+    "jsonapi": {
+        "version": "1.0",
+        "meta": {
+            "links": {
+                "self": {
+                    "href": "http://jsonapi.org/format/1.0/"
+                }
+            }
+        }
+    },
+    "data": [
+        {
+            "type": "node--zhiyezhaopin",
+            "id": "9dee7317-b44e-4bed-8176-27473d1ee56a",
+            "links": {
+                "self": {
+                    "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/9dee7317-b44e-4bed-8176-27473d1ee56a?resourceVersion=id%3A219"
+                }
+            },
+            "attributes": {
+                "drupal_internal__nid": 169,
+                "drupal_internal__vid": 219,
+                "langcode": "zh-hans",
+                "revision_timestamp": "2023-10-31T13:07:59+00:00",
+                "revision_log": null,
+                "status": true,
+                "title": "行政助理",
+                "created": "2023-10-31T11:09:00+00:00",
+                "changed": "2023-10-31T13:07:59+00:00",
+                "promote": true,
+                "sticky": false,
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "gva_node_layout": "fw",
+                "gva_breadcrumb": null,
+                "gva_header": "header-2",
+                "gva_node_class": "hidden-title",
+                "gva_box_layout": null,
+                "content_translation_source": "und",
+                "content_translation_outdated": false,
+                "body": {
+                    "value": "<p>负责公司的所有行政事务，例如管理办公室、安排会议、协调交通和住宿、与分包商合作、负责文书工作、归档、记账、与首席执行官和会计师合作、回复电子邮件、接待客人等。</p>",
+                    "format": "full_html",
+                    "processed": "<p>负责公司的所有行政事务，例如管理办公室、安排会议、协调交通和住宿、与分包商合作、负责文书工作、归档、记账、与首席执行官和会计师合作、回复电子邮件、接待客人等。</p>",
+                    "summary": ""
+                },
+                "field_zhiweichakangengduowenben": "查看更多",
+                "field_zhiweide": "广州",
+                "field_zhiweifabushijian": "2023-10-12",
+                "field_zhiweigongsiming": "广州以琳生物产业创业投资管理有限公司"
+            },
+            "relationships": {
+                "node_type": {
+                    "data": {
+                        "type": "node_type--node_type",
+                        "id": "a7419f72-5130-4d92-87c3-d2c7b0dfb2ab",
+                        "meta": {
+                            "drupal_internal__target_id": "zhiyezhaopin"
+                        }
+                    },
+                    "links": {
+                        "related": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/9dee7317-b44e-4bed-8176-27473d1ee56a/node_type?resourceVersion=id%3A219"
+                        },
+                        "self": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/9dee7317-b44e-4bed-8176-27473d1ee56a/relationships/node_type?resourceVersion=id%3A219"
+                        }
+                    }
+                },
+                "revision_uid": {
+                    "data": {
+                        "type": "user--user",
+                        "id": "a24038be-c281-437e-9974-3a8d078c619b",
+                        "meta": {
+                            "drupal_internal__target_id": 1
+                        }
+                    },
+                    "links": {
+                        "related": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/9dee7317-b44e-4bed-8176-27473d1ee56a/revision_uid?resourceVersion=id%3A219"
+                        },
+                        "self": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/9dee7317-b44e-4bed-8176-27473d1ee56a/relationships/revision_uid?resourceVersion=id%3A219"
+                        }
+                    }
+                },
+                "uid": {
+                    "data": {
+                        "type": "user--user",
+                        "id": "a24038be-c281-437e-9974-3a8d078c619b",
+                        "meta": {
+                            "drupal_internal__target_id": 1
+                        }
+                    },
+                    "links": {
+                        "related": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/9dee7317-b44e-4bed-8176-27473d1ee56a/uid?resourceVersion=id%3A219"
+                        },
+                        "self": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/9dee7317-b44e-4bed-8176-27473d1ee56a/relationships/uid?resourceVersion=id%3A219"
+                        }
+                    }
+                },
+                "field_zhaopinfenlei": {
+                    "data": {
+                        "type": "taxonomy_term--zhaopinfenlei",
+                        "id": "52d289bf-7796-4d7b-a1d7-da5b10d14531",
+                        "meta": {
+                            "drupal_internal__target_id": 21
+                        }
+                    },
+                    "links": {
+                        "related": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/9dee7317-b44e-4bed-8176-27473d1ee56a/field_zhaopinfenlei?resourceVersion=id%3A219"
+                        },
+                        "self": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/9dee7317-b44e-4bed-8176-27473d1ee56a/relationships/field_zhaopinfenlei?resourceVersion=id%3A219"
+                        }
+                    }
+                },
+                "field_zhaopinqiyelogo": {
+                    "data": {
+                        "type": "file--file",
+                        "id": "de11ffba-9121-4c20-9154-d29834f12f86",
+                        "meta": {
+                            "alt": "",
+                            "title": "",
+                            "width": 144,
+                            "height": 90,
+                            "drupal_internal__target_id": 422
+                        }
+                    },
+                    "links": {
+                        "related": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/9dee7317-b44e-4bed-8176-27473d1ee56a/field_zhaopinqiyelogo?resourceVersion=id%3A219"
+                        },
+                        "self": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/9dee7317-b44e-4bed-8176-27473d1ee56a/relationships/field_zhaopinqiyelogo?resourceVersion=id%3A219"
+                        }
+                    }
+                },
+                "field_zhiweichakangengduojiantou": {
+                    "data": null,
+                    "links": {
+                        "related": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/9dee7317-b44e-4bed-8176-27473d1ee56a/field_zhiweichakangengduojiantou?resourceVersion=id%3A219"
+                        },
+                        "self": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/9dee7317-b44e-4bed-8176-27473d1ee56a/relationships/field_zhiweichakangengduojiantou?resourceVersion=id%3A219"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "type": "node--zhiyezhaopin",
+            "id": "3846ce99-f5dd-47b7-9a6d-21eb71f1afb0",
+            "links": {
+                "self": {
+                    "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/3846ce99-f5dd-47b7-9a6d-21eb71f1afb0?resourceVersion=id%3A220"
+                }
+            },
+            "attributes": {
+                "drupal_internal__nid": 168,
+                "drupal_internal__vid": 220,
+                "langcode": "zh-hans",
+                "revision_timestamp": "2023-10-31T13:27:44+00:00",
+                "revision_log": null,
+                "status": true,
+                "title": "眼科植入物产品测试工程师",
+                "created": "2023-10-31T09:23:39+00:00",
+                "changed": "2023-10-31T13:27:44+00:00",
+                "promote": true,
+                "sticky": false,
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "gva_node_layout": "fw",
+                "gva_breadcrumb": null,
+                "gva_header": null,
+                "gva_node_class": "hidden-title",
+                "gva_box_layout": null,
+                "content_translation_source": "und",
+                "content_translation_outdated": false,
+                "body": {
+                    "value": "<ul><li>工作职责：</li></ul><ol><li>与注册团队合作，了解和审查无源医疗器械的产品技术要求和注册要求；</li><li>协助项目经理主任确定适用的测试项目、标准和协议；</li><li>与CRO一起与测试实验室沟通，协调测试事宜和时间表；</li><li>在测试过程中陪同并提供必要的支持和解释，协助解决与测试相关的问题和挑战，并提出改进建议；</li><li>协助解决检测样品的进口和清关事宜。</li></ol>",
+                    "format": "full_html",
+                    "processed": "<ul><li>工作职责：</li></ul><ol><li>与注册团队合作，了解和审查无源医疗器械的产品技术要求和注册要求；</li><li>协助项目经理主任确定适用的测试项目、标准和协议；</li><li>与CRO一起与测试实验室沟通，协调测试事宜和时间表；</li><li>在测试过程中陪同并提供必要的支持和解释，协助解决与测试相关的问题和挑战，并提出改进建议；</li><li>协助解决检测样品的进口和清关事宜。</li></ol>",
+                    "summary": ""
+                },
+                "field_zhiweichakangengduowenben": "查看更多",
+                "field_zhiweide": "广州",
+                "field_zhiweifabushijian": "2023-10-12",
+                "field_zhiweigongsiming": "广州科恩尼特医疗科技有限公司"
+            },
+            "relationships": {
+                "node_type": {
+                    "data": {
+                        "type": "node_type--node_type",
+                        "id": "a7419f72-5130-4d92-87c3-d2c7b0dfb2ab",
+                        "meta": {
+                            "drupal_internal__target_id": "zhiyezhaopin"
+                        }
+                    },
+                    "links": {
+                        "related": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/3846ce99-f5dd-47b7-9a6d-21eb71f1afb0/node_type?resourceVersion=id%3A220"
+                        },
+                        "self": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/3846ce99-f5dd-47b7-9a6d-21eb71f1afb0/relationships/node_type?resourceVersion=id%3A220"
+                        }
+                    }
+                },
+                "revision_uid": {
+                    "data": {
+                        "type": "user--user",
+                        "id": "a24038be-c281-437e-9974-3a8d078c619b",
+                        "meta": {
+                            "drupal_internal__target_id": 1
+                        }
+                    },
+                    "links": {
+                        "related": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/3846ce99-f5dd-47b7-9a6d-21eb71f1afb0/revision_uid?resourceVersion=id%3A220"
+                        },
+                        "self": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/3846ce99-f5dd-47b7-9a6d-21eb71f1afb0/relationships/revision_uid?resourceVersion=id%3A220"
+                        }
+                    }
+                },
+                "uid": {
+                    "data": {
+                        "type": "user--user",
+                        "id": "a24038be-c281-437e-9974-3a8d078c619b",
+                        "meta": {
+                            "drupal_internal__target_id": 1
+                        }
+                    },
+                    "links": {
+                        "related": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/3846ce99-f5dd-47b7-9a6d-21eb71f1afb0/uid?resourceVersion=id%3A220"
+                        },
+                        "self": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/3846ce99-f5dd-47b7-9a6d-21eb71f1afb0/relationships/uid?resourceVersion=id%3A220"
+                        }
+                    }
+                },
+                "field_zhaopinfenlei": {
+                    "data": {
+                        "type": "taxonomy_term--zhaopinfenlei",
+                        "id": "3c936240-73d5-41f8-a0e9-5efafd617c97",
+                        "meta": {
+                            "drupal_internal__target_id": 20
+                        }
+                    },
+                    "links": {
+                        "related": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/3846ce99-f5dd-47b7-9a6d-21eb71f1afb0/field_zhaopinfenlei?resourceVersion=id%3A220"
+                        },
+                        "self": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/3846ce99-f5dd-47b7-9a6d-21eb71f1afb0/relationships/field_zhaopinfenlei?resourceVersion=id%3A220"
+                        }
+                    }
+                },
+                "field_zhaopinqiyelogo": {
+                    "data": {
+                        "type": "file--file",
+                        "id": "e1c7add4-8bce-4511-9ad4-20689b7acce5",
+                        "meta": {
+                            "alt": "",
+                            "title": "",
+                            "width": 248,
+                            "height": 153,
+                            "drupal_internal__target_id": 421
+                        }
+                    },
+                    "links": {
+                        "related": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/3846ce99-f5dd-47b7-9a6d-21eb71f1afb0/field_zhaopinqiyelogo?resourceVersion=id%3A220"
+                        },
+                        "self": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/3846ce99-f5dd-47b7-9a6d-21eb71f1afb0/relationships/field_zhaopinqiyelogo?resourceVersion=id%3A220"
+                        }
+                    }
+                },
+                "field_zhiweichakangengduojiantou": {
+                    "data": null,
+                    "links": {
+                        "related": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/3846ce99-f5dd-47b7-9a6d-21eb71f1afb0/field_zhiweichakangengduojiantou?resourceVersion=id%3A220"
+                        },
+                        "self": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/3846ce99-f5dd-47b7-9a6d-21eb71f1afb0/relationships/field_zhiweichakangengduojiantou?resourceVersion=id%3A220"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "type": "node--zhiyezhaopin",
+            "id": "b243f229-3304-41d6-aa68-28b86890f413",
+            "links": {
+                "self": {
+                    "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/b243f229-3304-41d6-aa68-28b86890f413?resourceVersion=id%3A308"
+                }
+            },
+            "attributes": {
+                "drupal_internal__nid": 227,
+                "drupal_internal__vid": 308,
+                "langcode": "zh-hans",
+                "revision_timestamp": "2024-01-11T01:20:17+00:00",
+                "revision_log": null,
+                "status": true,
+                "title": "登陆",
+                "created": "2024-01-11T01:19:39+00:00",
+                "changed": "2024-01-11T01:20:17+00:00",
+                "promote": true,
+                "sticky": false,
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "gva_node_layout": null,
+                "gva_breadcrumb": null,
+                "gva_header": null,
+                "gva_node_class": null,
+                "gva_box_layout": null,
+                "content_translation_source": "und",
+                "content_translation_outdated": false,
+                "body": {
+                    "value": "<p>dsad嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</p>",
+                    "format": "full_html",
+                    "processed": "<p>dsad嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</p>",
+                    "summary": ""
+                },
+                "field_zhiweichakangengduowenben": "6666",
+                "field_zhiweide": "广州",
+                "field_zhiweifabushijian": "222",
+                "field_zhiweigongsiming": "广州科恩尼特医疗科技有限公司"
+            },
+            "relationships": {
+                "node_type": {
+                    "data": {
+                        "type": "node_type--node_type",
+                        "id": "a7419f72-5130-4d92-87c3-d2c7b0dfb2ab",
+                        "meta": {
+                            "drupal_internal__target_id": "zhiyezhaopin"
+                        }
+                    },
+                    "links": {
+                        "related": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/b243f229-3304-41d6-aa68-28b86890f413/node_type?resourceVersion=id%3A308"
+                        },
+                        "self": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/b243f229-3304-41d6-aa68-28b86890f413/relationships/node_type?resourceVersion=id%3A308"
+                        }
+                    }
+                },
+                "revision_uid": {
+                    "data": {
+                        "type": "user--user",
+                        "id": "a24038be-c281-437e-9974-3a8d078c619b",
+                        "meta": {
+                            "drupal_internal__target_id": 1
+                        }
+                    },
+                    "links": {
+                        "related": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/b243f229-3304-41d6-aa68-28b86890f413/revision_uid?resourceVersion=id%3A308"
+                        },
+                        "self": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/b243f229-3304-41d6-aa68-28b86890f413/relationships/revision_uid?resourceVersion=id%3A308"
+                        }
+                    }
+                },
+                "uid": {
+                    "data": {
+                        "type": "user--user",
+                        "id": "a24038be-c281-437e-9974-3a8d078c619b",
+                        "meta": {
+                            "drupal_internal__target_id": 1
+                        }
+                    },
+                    "links": {
+                        "related": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/b243f229-3304-41d6-aa68-28b86890f413/uid?resourceVersion=id%3A308"
+                        },
+                        "self": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/b243f229-3304-41d6-aa68-28b86890f413/relationships/uid?resourceVersion=id%3A308"
+                        }
+                    }
+                },
+                "field_zhaopinfenlei": {
+                    "data": {
+                        "type": "taxonomy_term--zhaopinfenlei",
+                        "id": "3c936240-73d5-41f8-a0e9-5efafd617c97",
+                        "meta": {
+                            "drupal_internal__target_id": 20
+                        }
+                    },
+                    "links": {
+                        "related": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/b243f229-3304-41d6-aa68-28b86890f413/field_zhaopinfenlei?resourceVersion=id%3A308"
+                        },
+                        "self": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/b243f229-3304-41d6-aa68-28b86890f413/relationships/field_zhaopinfenlei?resourceVersion=id%3A308"
+                        }
+                    }
+                },
+                "field_zhaopinqiyelogo": {
+                    "data": {
+                        "type": "file--file",
+                        "id": "1a0cc1dd-f2e8-4c7e-ab8c-afcfb27306dd",
+                        "meta": {
+                            "alt": "",
+                            "title": "",
+                            "width": 1920,
+                            "height": 1440,
+                            "drupal_internal__target_id": 489
+                        }
+                    },
+                    "links": {
+                        "related": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/b243f229-3304-41d6-aa68-28b86890f413/field_zhaopinqiyelogo?resourceVersion=id%3A308"
+                        },
+                        "self": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/b243f229-3304-41d6-aa68-28b86890f413/relationships/field_zhaopinqiyelogo?resourceVersion=id%3A308"
+                        }
+                    }
+                },
+                "field_zhiweichakangengduojiantou": {
+                    "data": null,
+                    "links": {
+                        "related": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/b243f229-3304-41d6-aa68-28b86890f413/field_zhiweichakangengduojiantou?resourceVersion=id%3A308"
+                        },
+                        "self": {
+                            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin/b243f229-3304-41d6-aa68-28b86890f413/relationships/field_zhiweichakangengduojiantou?resourceVersion=id%3A308"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "included": [
+        {
+            "type": "file--file",
+            "id": "de11ffba-9121-4c20-9154-d29834f12f86",
+            "links": {
+                "self": {
+                    "href": "http://81.68.129.135:5172/jsonapi/file/file/de11ffba-9121-4c20-9154-d29834f12f86"
+                }
+            },
+            "attributes": {
+                "drupal_internal__fid": 422,
+                "langcode": "zh-hans",
+                "filename": "hehuo3_0.png",
+                "uri": {
+                    "value": "public://2023-10/hehuo3_0.png",
+                    "url": "/sites/default/files/2023-10/hehuo3_0.png"
+                },
+                "filemime": "image/png",
+                "filesize": 17085,
+                "status": true,
+                "created": "2023-10-31T11:09:17+00:00",
+                "changed": "2023-10-31T11:10:15+00:00"
+            },
+            "relationships": {
+                "uid": {
+                    "data": {
+                        "type": "user--user",
+                        "id": "a24038be-c281-437e-9974-3a8d078c619b",
+                        "meta": {
+                            "drupal_internal__target_id": 1
+                        }
+                    },
+                    "links": {
+                        "related": {
+                            "href": "http://81.68.129.135:5172/jsonapi/file/file/de11ffba-9121-4c20-9154-d29834f12f86/uid"
+                        },
+                        "self": {
+                            "href": "http://81.68.129.135:5172/jsonapi/file/file/de11ffba-9121-4c20-9154-d29834f12f86/relationships/uid"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "type": "file--file",
+            "id": "e1c7add4-8bce-4511-9ad4-20689b7acce5",
+            "links": {
+                "self": {
+                    "href": "http://81.68.129.135:5172/jsonapi/file/file/e1c7add4-8bce-4511-9ad4-20689b7acce5"
+                }
+            },
+            "attributes": {
+                "drupal_internal__fid": 421,
+                "langcode": "zh-hans",
+                "filename": "big-logo_1.png",
+                "uri": {
+                    "value": "public://2023-10/big-logo_1.png",
+                    "url": "/sites/default/files/2023-10/big-logo_1.png"
+                },
+                "filemime": "image/png",
+                "filesize": 6066,
+                "status": true,
+                "created": "2023-10-31T10:00:11+00:00",
+                "changed": "2023-10-31T10:00:14+00:00"
+            },
+            "relationships": {
+                "uid": {
+                    "data": {
+                        "type": "user--user",
+                        "id": "a24038be-c281-437e-9974-3a8d078c619b",
+                        "meta": {
+                            "drupal_internal__target_id": 1
+                        }
+                    },
+                    "links": {
+                        "related": {
+                            "href": "http://81.68.129.135:5172/jsonapi/file/file/e1c7add4-8bce-4511-9ad4-20689b7acce5/uid"
+                        },
+                        "self": {
+                            "href": "http://81.68.129.135:5172/jsonapi/file/file/e1c7add4-8bce-4511-9ad4-20689b7acce5/relationships/uid"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "type": "file--file",
+            "id": "1a0cc1dd-f2e8-4c7e-ab8c-afcfb27306dd",
+            "links": {
+                "self": {
+                    "href": "http://81.68.129.135:5172/jsonapi/file/file/1a0cc1dd-f2e8-4c7e-ab8c-afcfb27306dd"
+                }
+            },
+            "attributes": {
+                "drupal_internal__fid": 489,
+                "langcode": "zh-hans",
+                "filename": "contact-bg.jpg",
+                "uri": {
+                    "value": "public://2024-01/contact-bg.jpg",
+                    "url": "/sites/default/files/2024-01/contact-bg.jpg"
+                },
+                "filemime": "image/jpeg",
+                "filesize": 115116,
+                "status": true,
+                "created": "2024-01-11T01:19:49+00:00",
+                "changed": "2024-01-11T01:20:17+00:00"
+            },
+            "relationships": {
+                "uid": {
+                    "data": {
+                        "type": "user--user",
+                        "id": "a24038be-c281-437e-9974-3a8d078c619b",
+                        "meta": {
+                            "drupal_internal__target_id": 1
+                        }
+                    },
+                    "links": {
+                        "related": {
+                            "href": "http://81.68.129.135:5172/jsonapi/file/file/1a0cc1dd-f2e8-4c7e-ab8c-afcfb27306dd/uid"
+                        },
+                        "self": {
+                            "href": "http://81.68.129.135:5172/jsonapi/file/file/1a0cc1dd-f2e8-4c7e-ab8c-afcfb27306dd/relationships/uid"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "links": {
+        "self": {
+            "href": "http://81.68.129.135:5172/jsonapi/node/zhiyezhaopin?include=field_zhaopinqiyelogo"
+        }
+    }
+}

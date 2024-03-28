@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //工厂模式
+  
+        //构造函数模式
+        function Person(name, age, gender) {
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+            this.fun=()=>{
+                console.log(this.age);
+            }
+        }
+        var p1 = new Person('Tom', 18, '男');
+        var p2 = new Person('Jerry', 20, '女');
+    </script>
+</body>
+
+</html>
