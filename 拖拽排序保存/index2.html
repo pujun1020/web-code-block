@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draggable Connect to Sortable</title>
+    <style>
+        .container {
+            width: 330px;
+            height: 330px;
+            background-color: lightgrey;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .image {
+            width: 100px;
+            height: 100px;
+            background-color: #fff5d7;
+            text-align: center;
+            line-height: 100px;
+            margin: 5px;
+            cursor: move;
+        }
+
+        .order {
+            width: 330px;
+            height: 50px;
+            background-color: lightgrey;
+            margin-top: 10px;
+            text-align: center;
+            line-height: 50px;
+            font-size: x-large;
+            font-family: Helvetica;
+        }
+    </style>
+</head>
+
+<body>
+    img.
+    <div class="container">
+        <div draggable="true" class="image" id="1"><img src="https://images.dog.ceo/breeds/affenpinscher/n02110627_13590.jpg" width="100px"></div>
+        <div draggable="true" class="image" id="2"><img src="https://images.dog.ceo/breeds/borzoi/n02090622_7377.jpg" width="100px"></div>
+        <div draggable="true" class="image" id="3"><img src="https://images.dog.ceo/breeds/terrier-bedlington/n02093647_201.jpg" width="100px"></div>
+        <div draggable="true" class="image" id="4"><img src="https://images.dog.ceo/breeds/pug/n02110958_11256.jpg" width="100px"></div>
+        <div draggable="true" class="image" id="5"><img src="https://images.dog.ceo/breeds/bouvier/n02106382_4504.jpg" width="100px"></div>
+        <div draggable="true" class="image" id="6"><img src="https://images.dog.ceo/breeds/mastiff-bull/n02108422_4396.jpg" width="100px"></div>
+        <div draggable="true" class="image" id="7"><img src="https://images.dog.ceo/breeds/bullterrier-staffordshire/n02093256_12174.jpg" width="100px"></div>
+        <div draggable="true" class="image" id="8"><img src="https://images.dog.ceo/breeds/buhund-norwegian/hakon2.jpg" width="100px"></div>
+        <div draggable="true" class="image" id="9"><img src="https://images.dog.ceo/breeds/spaniel-welsh/n02102177_716.jpg" width="100px"></div>
+      </div>
+      
+      <div id="order"></div>
+
+    <script>
+        //IMAGE ORDER
+
+        let order = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+        function showOrder(order) {
+            document.getElementById('order').textContent = "Order: " + order.toString();
+        }
+
+        showOrder(order);
+
+        //DRAG AND DROP SWAP
+
+        var draggedImage = null;
+        var items;
+
+        function dragStart(e) {
+            draggedImage = this;
+            e.dataTransfer.effectAllowed = "move";
+            e.dataTransfer.setData("item", this.innerHTML);
+        }
+
+        function dragOver(e) {
+            e.preventDefault();
+
+            e.dataTransfer.dropEffect = "move";
+            return false;
+        }
+
+        function dragEnter(e) {
+            this.classList.add("dragover");
+        }
+
+        function dragLeave(e) {
+            this.classList.remove("dragover");
+        }
+
+        function drop(e) {
+            e.stopPropagation();
+
+            if (draggedImage != this) {
+                draggedImage.innerHTML = this.innerHTML;
+                draggedImage.setAttribute("data-item", this.innerHTML);
+
+                let replacedImage = e.dataTransfer.getData("item");
+                this.innerHTML = replacedImage;
+                this.setAttribute("data-item", replacedImage);
+            }
+            return false;
+        }
+
+        function dragEnd(e) {
+            items.forEach(function (item) {
+                item.classList.remove("dragover");
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", event => {
+            items = document.querySelectorAll(".container .image");
+
+            items.forEach(function (item) {
+                item.addEventListener("dragstart", dragStart);
+                item.addEventListener("dragenter", dragEnter);
+                item.addEventListener("dragover", dragOver);
+                item.addEventListener("dragleave", dragLeave);
+                item.addEventListener("drop", drop);
+                item.addEventListener("dragend", dragEnd);
+            });
+
+        });
+    </script>
+</body>
+
+</html>

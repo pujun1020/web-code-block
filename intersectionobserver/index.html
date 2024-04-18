@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            width: 330px;
+            margin: auto;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .image {
+            width: 330px;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 50px;
+        }
+
+        @keyframes enter-animation {
+            0% {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .image-animation {
+                animation: enter-animation 2s 1 forwards;
+            }
+        }
+       
+    </style>
+</head>
+
+<body>
+    <!--From
+https://coolcssanimation.com/how-to-trigger-a-css-animation-on-scroll/
+-->
+    <h1 class="image">Header text</h1>
+    <img class="image"
+        src="https://sf2.mariefranceasia.com/wp-content/uploads/sites/7/2017/09/gettyimages-667758985-540x410.jpg"
+        alt="" class="pinit-here">
+
+    <img class="image" src="https://live.staticflickr.com/65535/51846155419_af50cc514a_h.jpg" alt="vintergryde">
+
+    <img class="image" src="https://live.staticflickr.com/65535/49678442758_cb4cf78850_h.jpg" alt="DSC04327-3">
+
+    <img class="image" src="https://live.staticflickr.com/65535/49265392277_b2f789ab41_h.jpg" alt="Ærterisotto"
+        width="1280" height="1600">
+    <img class="image"
+        src="https://sf2.mariefranceasia.com/wp-content/uploads/sites/7/2017/09/gettyimages-667758985-540x410.jpg"
+        alt="" class="pinit-here">
+
+    <img class="image" src="https://live.staticflickr.com/65535/51846155419_af50cc514a_h.jpg" alt="vintergryde">
+
+    <img class="image" src="https://live.staticflickr.com/65535/49678442758_cb4cf78850_h.jpg" alt="DSC04327-3">
+
+    <img class="image" src="https://live.staticflickr.com/65535/49265392277_b2f789ab41_h.jpg" alt="Ærterisotto"
+        width="1280" height="1600">
+
+    <p class="image">Paragraf text</p>
+
+    <script>
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                // If the element has just entered the viewport
+                if (entry.isIntersecting) {
+                    console.log(entry)
+                    
+                    entry.target.classList.add('image-animation');
+                } else {
+                    // If the element is no longer in the viewport and is below the viewport
+                    if (entry.boundingClientRect.y > 0) {
+                        entry.target.classList.remove('image-animation');
+                    }
+                }
+            })
+        }, {
+            threshold: 0,
+            rootMargin: '0px 0px 100px 0px'
+        });
+
+        const viewbox = document.querySelectorAll('.image');
+        viewbox.forEach(image => {
+            observer.observe(image);
+        });
+    </script>
+</body>
+
+</html>

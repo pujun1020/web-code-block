@@ -1,0 +1,206 @@
+@import url("https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&display=swap");
+/* @property --clip-1 {
+  syntax: "<percentage>";
+  initial-value: 0%;
+  inherits: false;
+}
+
+@property --clip-2 {
+  syntax: "<percentage>";
+  initial-value: 0%;
+  inherits: false;
+} */
+body {
+  --clip-1:0%;
+  --clip-2:0%;
+  margin: 0;
+  font-family: "Annie Use Your Telescope", cursive;
+  background: radial-gradient(ivory 70%, transparent 30%),
+    radial-gradient(ivory 70%, transparent 30%), #f5f3f3;
+  background-size: 5px 5px;
+}
+
+figure {
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 40vmax;
+  margin-inline: auto;
+  padding-inline: 10vmax;
+  padding-block: 50vh;
+  max-width: 1400px;
+}
+
+article {
+  display: grid;
+  align-items: center;
+  gap: 8vmax;
+  @media screen and (min-width: 750px) {
+    grid-template-columns: 2fr 3fr;
+    gap: 10vmax;
+  }
+  
+}
+article:has(.entry + figure) {
+  @media screen and (min-width: 750px) {
+    grid-template-columns: 3fr 2fr;
+  }
+}
+.entry {
+  animation: revealEntry linear both;
+  animation-timeline: view(block);
+  animation-range: cover 20% contain 40%;
+}
+
+@keyframes revealEntry {
+  from {
+    color: transparent;
+    transform: translateY(20%);
+  }
+  to {
+    color: black;
+    transform: translateY(0%);
+  }
+}
+
+.entry p {
+  font-size: clamp(1.25rem, 0.9891rem + 1.3043vi, 2rem);
+  background-image: repeating-linear-gradient(
+    to top,
+    #95d9c3 0 0.125rem,
+    transparent 0.125rem 1lh
+  );
+  background-position-y: 0.8lh;
+  animation: fadein linear both;
+  animation-timeline: view(block);
+  animation-range: entry 10% contain 10%;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+figure {
+  --rotate: 20deg;
+
+  position: relative;
+  aspect-ratio: 1;
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  container: frame;
+  container-type: size;
+
+  animation: rotate linear both;
+  animation-timeline: view(block);
+  animation-range: cover 20% contain 30%;
+  @media screen and (max-width: 749px) {
+    max-width: 350px;
+    align-self: center;
+  }
+}
+
+@keyframes rotate {
+  entry 100%,
+  exit 0% {
+    opacity: 1;
+    rotate: var(--rotate);
+  }
+  exit 100% {
+    opacity: 0;
+    rotate: 0deg;
+  }
+}
+
+
+
+img {
+  aspect-ratio: 1;
+  object-fit: cover;
+
+  clip-path: inset(var(--clip-1) var(--clip-1) var(--clip-2) var(--clip-1));
+  animation: createFrame linear both;
+  animation-timeline: view(block);
+  animation-range: cover 15% contain 40%;
+}
+
+@keyframes createFrame {
+  to {
+    --clip-1: 5%;
+    --clip-2: 15%;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+      rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  }
+}
+
+figcaption {
+  --clip-1: 100%;
+
+  position: absolute;
+  inset-inline: 5cqw;
+  bottom: 1.2cqh;
+  font-size: 8cqh;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  z-index: 1;
+
+  clip-path: inset(0 var(--clip-1) 0 0);
+  animation: revealText linear both;
+  animation-timeline: view(block);
+  animation-range: cover 25% contain 35%;
+}
+
+@keyframes revealText {
+  to {
+    --clip-1: 0%;
+  }
+}
+
+@supports not (animation-timeline: view(block)) {
+  .intro {
+    animation: none;
+  }
+  section * {
+    animation: none;
+  }
+  figure {
+    rotate: var(--rotate);
+  }
+  figcaption {
+    --clip-1: 0%;
+  }
+  img {
+    --clip-1: 5%;
+    --clip-2: 15%;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+      rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  }
+
+  .warning {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    padding: 1rem;
+    border: 5px solid deeppink;
+    background: white;
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+}
+
+

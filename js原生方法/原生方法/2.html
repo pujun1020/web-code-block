@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .parent{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+        .child{
+            width: 100px;   
+            height: 100px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+	    <input type="button" class="child" value="仙剑奇侠传" >
+	</div>
+	<script>
+        //阻止事件冒泡，但不会阻止默认行为
+        document.querySelector('.child').addEventListener('click',function(e){
+            console.log('阻止事件冒泡，但不会阻止默认行为');
+        })
+        //阻止事件冒泡，并阻止默认行为
+        document.querySelector('.parent').addEventListener('click',function(e){
+            console.log('阻止事件冒泡，并阻止默认行为');
+        })
+	</script>
+</body>
+</html>

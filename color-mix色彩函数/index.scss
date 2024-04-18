@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    min-height: 100vh;
+    font-family: "Exo", "Bungee Shade", cursive, Arial, sans-serif;
+    background-color: #557;
+    color: #fff;
+    display: grid;
+    place-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(min(100% - 2rem, 280px), 1fr));
+    padding: 1rem;
+    gap: 1rem;
+}
+
+:root {
+    --brand-color: #8832CC;
+
+    --brand-color-a10: color-mix(in oklch, var(--brand-color), transparent 90%);
+    --brand-color-a20: color-mix(in oklch, var(--brand-color), transparent 80%);
+    --brand-color-a30: color-mix(in oklch, var(--brand-color), transparent 70%);
+    --brand-color-a40: color-mix(in oklch, var(--brand-color), transparent 60%);
+    --brand-color-a50: color-mix(in oklch, var(--brand-color), transparent 50%);
+    --brand-color-a60: color-mix(in oklch, var(--brand-color), transparent 40%);
+    --brand-color-a70: color-mix(in oklch, var(--brand-color), transparent 30%);
+    --brand-color-a80: color-mix(in oklch, var(--brand-color), transparent 20%);
+    --brand-color-a90: color-mix(in oklch, var(--brand-color), transparent 10%);
+
+    --body-bg: #041f1ecc;
+    --base-color: var(--brand-color-a80);
+    --blend-color: var(--brand-color-a40);
+}
+
+
+body {
+    background: var(--body-bg);
+    background: linear-gradient(130deg,
+            var(--body-bg) 0%,
+            var(--body-bg) 86%,
+            var(--brand-color-a90) 86%,
+            var(--brand-color-a90) 87%,
+            var(--body-bg) 87%,
+            var(--body-bg) 91%,
+            var(--blend-color) 91%,
+            var(--blend-color) 95%,
+            var(--base-color) 95%,
+            var(--base-color) 100%),
+        url('data:image/svg+xml,<svg width="42" height="44" viewBox="0 0 42 44" xmlns="http://www.w3.org/2000/svg"><g id="Page-1" fill="none" fill-rule="evenodd"><g id="brick-wall" fill="%239C92AC" fill-opacity="0.4"><path d="M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z"/></g></g></svg>');
+}
+
+
+body>div {
+    display: inline-flex;
+    aspect-ratio: 21 / 9;
+    border: 2px solid var(--brand-color-a50);
+    border-radius: 10px;
+    box-shadow: 0 0 0 2px var(--brand-color-a20);
+    background-color: var(--bg);
+    justify-content: center;
+    align-items: center;
+}
+
+
+.tutorials {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 9999;
+    width: 64px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #3f517e;
+    padding: .5rem;
+    display: grid;
+    place-content: center;
+    transition: all .28s linear;
+
+    &:hover {
+        background: #4161b2;
+    }
+
+    & svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+        filter: invert(1);
+    }
+}

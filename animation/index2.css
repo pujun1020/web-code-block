@@ -1,0 +1,153 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Open+Sans&display=swap"); */
+main {
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+main section {
+ /*  scroll-margin-block-start: 30px; */
+  scroll-snap-align: start;
+}
+
+img {
+  flex: 0 0 50%;
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  animation: linear inAndOut;
+  animation-timeline: view();
+}
+
+section {
+  display: flex;
+  align-items: center;
+  min-height: 300px;
+  height: 50vh;
+}
+section:nth-child(even) {
+  background: black;
+  color: white;
+  flex-direction: row-reverse;
+}
+section:nth-child(even) img {
+  animation-name: inAndOutReverse;
+}
+
+.text {
+  padding: 4rem;
+  flex: 0 0 50vw;
+  animation: linear inAndOutVertical;
+  animation-timeline: view();
+}
+
+@keyframes inAndOut {
+  entry 0% {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  entry 100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  exit 0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  exit 100% {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes inAndOutReverse {
+  entry 0% {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+  entry 100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  exit 0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  exit 100% {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+}
+
+/* The vertical keyframes */
+@keyframes inAndOutVertical {
+  entry 0% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+  entry 100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  exit 0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  exit 100% {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+}
+@media screen and (max-width: 700px) {
+  section {
+    height: 100dvh;
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+  section img,
+  section .text {
+    flex: 0 0 100%;
+    animation-name: inAndOutVertical;
+  }
+  img {
+    height: 60dvh;
+    flex-grow: 1;
+  }
+  .text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40dvh;
+    padding: 0.6rem;
+  }
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+body {
+  font-size: 1.2rem;
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  font-size: 2rem;
+  letter-spacing: 0.05em;
+  margin: 0 0 1rem;
+}
+
+/*# sourceMappingURL=index2.css.map */

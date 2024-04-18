@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .grid {
+            display: inline-grid;
+            grid-template-columns: repeat(3, 1fr);
+            background-color: #d3d3d3;
+            gap: 0.3rem;
+            padding: 0.3rem;
+        }
+
+        .item {
+            display: inline-flex;
+            background-color: #fffac2;
+            padding: 0.3rem;
+        }
+    </style>
+</head>
+<!-- https://sortablejs.github.io/Sortable/ -->
+<body>
+    <div class="grid">
+        <div class="item" data-index="1"><img src="https://placehold.co/40x40/0bf/fff?text=1" alt="1"></div>
+        <div class="item" data-index="2"><img src="https://placehold.co/40x40/0fb/fff?text=2" alt="2"></div>
+        <div class="item" data-index="3"><img src="https://placehold.co/40x40/bf0/fff?text=3" alt="3"></div>
+        <div class="item" data-index="4"><img src="https://placehold.co/40x40/b0f/fff?text=4" alt="4"></div>
+        <div class="item" data-index="5"><img src="https://placehold.co/40x40/fb0/fff?text=5" alt="5"></div>
+        <div class="item" data-index="6"><img src="https://placehold.co/40x40/f0b/fff?text=6" alt="6"></div>
+        <div class="item" data-index="7"><img src="https://placehold.co/40x40/8f0/fff?text=7" alt="7"></div>
+        <div class="item" data-index="8"><img src="https://placehold.co/40x40/f80/fff?text=8" alt="8"></div>
+        <div class="item" data-index="9"><img src="https://placehold.co/40x40/08f/fff?text=9" alt="9"></div>
+    </div>
+
+    <div id="order"></div>
+    <script>
+        const elGrid = document.querySelector(".grid");
+        const elOrder = document.querySelector("#order");
+        const order = [...elGrid.children].map(el => el.dataset.index);
+        console.log(...elGrid.children)
+        console.log(order)
+        let elDrag;
+
+        const showOrder = () => elOrder.textContent = `Order: ${order}`;
+
+        const events = {
+            dragstart() { elDrag = this; },
+            dragover(ev) { ev.preventDefault(); },
+            drop() {
+                if (elDrag === this) return;
+                const ia = [...elGrid.children].indexOf(elDrag);
+                const ib = [...elGrid.children].indexOf(this);
+                elDrag.replaceWith(this.cloneNode(true));
+                this.replaceWith(elDrag);
+                [order[ia], order[ib]] = [order[ib], order[ia]];
+                showOrder();
+            }
+        };
+
+        [...elGrid.children].forEach((el, i) => el.draggable = true);
+        ["dragstart", "dragover", "drop"].forEach(evName => {
+            elGrid.addEventListener(evName, (ev) => {
+                const elItem = ev.target.closest(".item");
+                if (!elItem) return;
+                events[evName].call(elItem, ev);
+            });
+        });
+        showOrder();
+    </script>
+</body>
+
+</html>

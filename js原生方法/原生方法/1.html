@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul li {
+            list-style: none;
+            cursor: pointer;
+            padding: 10px;
+            border: 1px solid #000;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div data-index="2" a="123">9999999</div>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <script>
+        document.addEventListener('readystatechange', function () {
+            if (document.readyState === 'complete') {
+                // 获取自定义属性
+                var div = document.querySelector('div');
+                var index = div.dataset.index;
+                console.log(index);
+                div.addEventListener('click', function (e) {
+                    // 设置自定义属性
+                    e.target.dataset.index = 100;
+                    console.log(e.target.dataset.index);
+                    // 删除自定义属性
+                    delete e.target.dataset.index;
+                })
+                // 使用atrrbuites修改属性值
+                div.setAttribute('a', 100);
+                console.log(div.getAttribute('a'));
+                console.log(div.attributes);
+                let element = document.createElement('div');
+                element.setAttribute('data-index', 100);
+                element.innerHTML = '123';
+                div.insertAdjacentElement('beforebegin', element);
+                /* div.appendChild(element); */
+                // 获取元素
+            } else if (document.readyState === 'interactive') {
+                console.log('DOM加载中');
+            } else if (document.readyState === 'loading') {
+                console.log('DOM加载中3');
+            }
+        }
+        )
+        //阻止事件冒泡
+        var ul = document.querySelector('ul');
+        ul.addEventListener('click', function (e) {
+            console.log('ul');
+        })
+        var li = document.querySelectorAll('li');
+        li.forEach(function (item) {
+            item.addEventListener('click', function (e) {
+                e.stopPropagation();
+                console.log('li');
+            })
+
+        })
+    </script>
+</body>
+
+</html>

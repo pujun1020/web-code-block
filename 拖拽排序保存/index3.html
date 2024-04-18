@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            gap: 20px;
+        }
+
+        .container {
+            width: 162px;
+            height: 164px;
+            background-color: lightgrey;
+            display: flex;
+            flex-wrap: wrap;
+            border: 2px solid lightgrey;
+            border-radius: 3px;
+        }
+
+        .image.dragover {
+            background-color: yellow;
+        }
+
+        .image {
+            width: 50px;
+            height: 50px;
+            background-color: #fff5d7;
+            text-align: center;
+            line-height: 50px;
+            margin: 2px;
+            cursor: move;
+            border-radius: 2px;
+        }
+
+        .order {
+            width: 220px;
+            height: 30;
+            background-color: lightgrey;
+            margin: 10px 0;
+            text-align: center;
+            line-height: 30px;
+            font-family: Helvetica;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div draggable="true" class="image" id="1">1</div>
+        <div draggable="true" class="image" id="2">2</div>
+        <div draggable="true" class="image" id="3">3</div>
+        <div draggable="true" class="image" id="4">4</div>
+        <div draggable="true" class="image" id="5">5</div>
+        <div draggable="true" class="image" id="6">6</div>
+        <div draggable="true" class="image" id="7">7</div>
+        <div draggable="true" class="image" id="8">8</div>
+        <div draggable="true" class="image" id="9">9</div>
+    </div>
+    <div>
+        <div class="order" id="order"></div>
+        <button onclick="ids.sort((a,b)=>a-b)">Reset</button>
+    </div>
+    <script>
+        const $container = document.querySelector('.container');
+
+        let updatePromise;
+
+        const ids = new Proxy([], {
+            set(target, prop, val) {
+                // postpone the update with a microtask
+                updatePromise ??= Promise.resolve().then(() => {
+                    updatePromise = null;
+                    document.getElementById('order').textContent = 'Order: ' +
+                        target.join(', ');
+                    target.forEach(id => {
+                        $container.appendChild(document.getElementById(id));
+                    });
+                });
+                return Reflect.set(target, prop, val);
+            }
+        });
+
+        ids.push(...[...document.querySelectorAll('.container .image')].map(img => img.id));
+
+        let draggedImageId;
+
+        const events = {
+            dragstart: e => {
+                draggedImageId = e.target.id;
+                e.dataTransfer.effectAllowed = "move";
+            },
+            dragover: e => {
+                e.preventDefault();
+                e.dataTransfer.dropEffect = "move";
+            },
+            dragenter: e => {
+                const $image = e.target.closest('.image');
+                $image?.id === draggedImageId || $image?.classList.add("dragover");
+            },
+            dragleave: e => e.target.classList.remove("dragover"),
+            dragend: e => e.target.classList.remove("dragover"),
+            drop: e => {
+                if (e.target.id && draggedImageId !== e.target.id) {
+                    $container.querySelector('.dragover')?.classList.remove('dragover');
+                    const [from, to] = [ids.indexOf(draggedImageId), ids.indexOf(e.target.id)];
+                    [ids[from], ids[to]] = [ids[to], ids[from]];
+                }
+            }
+        };
+
+        for (const name in events) {
+            $container.addEventListener(name, events[name]);
+        }
+    </script>
+</body>
+
+</html>

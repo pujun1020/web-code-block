@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            width: 100vw;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+       /*  body {
+            display: grid;
+            grid-template-rows: 150px auto 100px 50px;
+
+            grid-template-columns: minmax(200px, 3fr) 9fr;
+
+        } */
+
+        /* 分为四行，根据分的两列，，原本的第一行第二行分配在了第一行
+            fr表示分配剩余空间，这里氛围了12份，第一列占3份，第二例占9份  */
+        /*    header {
+            grid-column: 1 / 3;
+        } */
+
+        /* 从第一列开始，在第三列之前结束。 我们的导航应从第二行开始，共跨越 2 行。 */
+        /*    nav {
+            grid-row: 2 / span 2;
+        }
+        */
+        /* Grid 最强大的功能之一是能够在不考虑 DOM 顺序的情况下放置列表项。 */
+
+        body {
+            display: grid;
+            grid-template-rows: 150px auto 100px;
+            grid-template-columns: minmax(200px, 3fr) 9fr;
+            grid-template-areas: "header header"
+                "nav    content"
+                "nav    footer";
+        }
+
+        header {
+            grid-area: header;
+        }
+
+        nav {
+            grid-area: nav;
+        }
+    </style>
+</head>
+
+<body>
+    <header style="background-color: #ff0000;"></header>
+    <nav style="background-color: black;"></nav>
+    <main style="background-color: #00ff01;"></main>
+    <footer style="background-color: blueviolet;"></footer>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ::highlight(example) {
+            color: hotpink;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>CSS Custom Highlight API example</h1>
+
+    <div class="warning">
+        <p>Your browser does not support the Custom Highlight API. Please try Chrome 105+, Safari 17.2+, or Firefox
+            Nightly</p>
+    </div>
+
+    <p id="text">This here is a piece of text that has custom highlights applied to it. The source code below is
+        responsible for that.</p>
+
+    <footer>
+        <p>Demo for <a href="https://brm.us/syntax-highlighting" target="_top">https://brm.us/syntax-highlighting</a>
+        </p>
+    </footer>
+    <script>
+        // Show warning in incompatible browsers
+        if (!CSS.highlights) {
+            document.querySelector('.warning').style.display = 'block';
+        } else {
+            // Create Highlight
+            const h = new Highlight();
+
+            // Add ranges to the Highlight
+            const r1 = new Range();
+            r1.setStart(text.firstChild, 13);
+            r1.setEnd(text.firstChild, 28);
+            h.add(r1);
+
+            const r2 = new Range();
+            r2.setStart(text.firstChild, 38);
+            r2.setEnd(text.firstChild, 56);
+            h.add(r2);
+
+            // Register the highlight into the registry
+            // This makes the ::highlight() CSS work
+            CSS.highlights.set('example', h);
+        }
+    </script>
+</body>
+
+</html>

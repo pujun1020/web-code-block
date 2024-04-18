@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @scope (.light-scheme) {
+            :scope {
+                background-color: plum;
+            }
+
+            a {
+                color: darkmagenta;
+            }
+        }
+
+        @scope (.dark-scheme) {
+            :scope {
+                background-color: darkmagenta;
+                color: antiquewhite;
+            }
+
+            a {
+                color: plum;
+            }
+        }
+        @supports (animation-timeline: view()) {
+            .light-scheme {
+                color: red;
+            }
+        }
+        @supports not (animation-timeline: view()) {
+            .light-scheme {
+                color: #000;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="light-scheme">
+        <p>
+            MDN 涵盖了很多有关
+            <a href="/zh-CN/docs/Web/HTML">HTML</a>、<a href="/zh-CN/docs/Web/CSS">CSS</a>
+            和
+            <a href="/zh-CN/docs/Web/JavaScript">JavaScript</a> 的信息。
+        </p>
+    </div>
+
+    <div class="dark-scheme">
+        <p>
+            MDN 涵盖了很多有关
+            <a href="/zh-CN/docs/Web/HTML">HTML</a>、<a href="/zh-CN/docs/Web/CSS">CSS</a>
+            和
+            <a href="/zh-CN/docs/Web/JavaScript">JavaScript</a> 的信息。
+        </p>
+    </div>
+    <script>
+        const supportsCSS = !!((window.CSS && window.CSS.supports) || window.supportsCSS || false)
+console.log(supportsCSS)
+    </script>
+</body>
+
+</html>

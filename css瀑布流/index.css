@@ -1,0 +1,48 @@
+.masonry {
+  width: 1440px;
+  margin: 20px auto;
+  column-count: 4;
+  column-gap: 30px;
+}
+.masonry .item {
+  width: 100%;
+  break-inside: avoid;
+  margin-bottom: 30px;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+.masonry .item img {
+  width: 100%;
+}
+.masonry h2 {
+  padding: 8px 0;
+}
+.masonry P {
+  color: #555;
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1439.98px) {
+  .masonry {
+    width: 96vw;
+    columns: 3;
+    column-gap: 20px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1023.98px) {
+  .masonry {
+    width: 96vw;
+    columns: 2;
+    column-gap: 20px;
+  }
+}
+@media screen and (max-width: 767.98px) {
+  .masonry {
+    width: 96vw;
+    columns: 1;
+  }
+}
+
+/*# sourceMappingURL=index.css.map */

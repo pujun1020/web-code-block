@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,body {
+
+            
+            scroll-snap-type: y mandatory;
+        }
+
+      
+
+        section {
+            height: 100vh;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            
+        }
+
+
+
+        .one {
+            background-color: rgb(174, 51, 51);
+        }
+
+        .two {
+            background-color: rgb(44, 44, 198);
+        }
+
+        .three {
+            background-color: grey;
+        }
+
+        .four {
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <section id="section-1" class="one">
+    </section>
+    <section id="section-2" class="two">
+    </section>
+    <section id="section-3" class="three">
+    </section>
+    <section id="section-4" class="four">
+    </section>
+
+</body>
+
+</html>

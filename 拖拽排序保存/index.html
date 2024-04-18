@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draggable Sortable Items</title>
+    <style>
+        #container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .item {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            cursor: move;
+        }
+
+        .dragging {
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div class="item" draggable="true" data-index="1">Item 1</div>
+        <div class="item" draggable="true">Item 2</div>
+        <div class="item" draggable="true">Item 3</div>
+        <div class="item" draggable="true">Item 4</div>
+        <div class="item" draggable="true">Item 5</div>
+    </div>
+
+    <script>
+        const container = document.getElementById('container');
+        let items = container.querySelectorAll('.item');
+        let draggingItem = null;
+
+        // 获取保存的排序
+        let newOrder = JSON.parse(localStorage.getItem('order')) || [];
+
+        items.forEach(item => {
+            item.addEventListener('dragstart', () => {
+                draggingItem = item;
+                item.classList.add('dragging');
+            });
+
+            item.addEventListener('dragend', () => {
+                draggingItem = null;
+                item.classList.remove('dragging');
+                updateOrder();
+            });
+
+            item.addEventListener('dragover', e => {
+                e.preventDefault();
+            });
+
+            item.addEventListener('drop', (e) => {
+                e.preventDefault();
+                const draggingIndex = Array.from(items).indexOf(draggingItem);
+                const itemIndex = Array.from(items).indexOf(item);
+                if (draggingItem !== item) {
+                    const dragY = e.clientY;
+                    console.log(dragY);
+                    const itemY = item.getBoundingClientRect().top + item.clientHeight / 2;
+                    console.log(itemY);
+
+                    if (dragY < itemY) {
+                        container.insertBefore(draggingItem, item);
+                    } else {
+                        container.insertBefore(draggingItem, item.nextSibling);
+                    }
+
+                    updateOrder();
+                }
+            });
+        });
+
+        function updateOrder() {
+            newOrder = Array.from(container.children).map(item => item.textContent);
+            localStorage.setItem('order', JSON.stringify(newOrder));
+        }
+
+        // 初始化排序
+        newOrder.forEach(text => {
+            const item = Array.from(items).find(item => item.textContent === text);
+            container.appendChild(item);
+        });
+        
+    </script>
+</body>
+
+</html>

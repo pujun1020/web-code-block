@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        body{
+
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -18,9 +20,10 @@
             background: #222;
             gap: 50px;
             flex-direction: column;
-            --rgb:45, 45, 45;
+            --rgb: 45, 45, 45;
         }
-        a{
+
+        .hightlighter {
             position: relative;
             padding: 20px 60px;
             background: rgba(var(--rgb), 1);
@@ -31,35 +34,40 @@
             color: #fff;
             overflow: hidden;
         }
-        a:hover{
+
+        .hightlighter:hover {
             color: var(--clr);
             text-shadow: 0 0 15px var(--clr),
-                            0 0 10px var(--clr);
+                0 0 10px var(--clr);
             transition: all 0.5s ease;
-            
+
         }
-        a span{
+
+        .hightlighter span {
             position: relative;
             z-index: 1;
             letter-spacing: 0.2em;
 
         }
-        a::before{
+
+        .hightlighter::before {
             content: '';
             position: absolute;
             top: var(--y);
             left: var(--x);
             width: 200px;
             height: 200px;
-            background: radial-gradient(var(--clr),transparent,transparent);
-            transform: translate(-50%,-50%);
-            transition: 0.5s,top 0s,left 0s;
+            background: radial-gradient(var(--clr), transparent, transparent);
+            transform: translate(-50%, -50%);
+            transition: 0.5s, top 0s, left 0s;
             opacity: 0;
         }
-        a:hover::before{
+
+        .hightlighter:hover::before {
             opacity: 1;
         }
-        a::after{
+
+        .hightlighter::after {
             content: '';
             position: absolute;
             inset: 2px;
@@ -68,23 +76,36 @@
         }
     </style>
 </head>
+
 <body>
-    <a href="#" style="--clr:#0f0;"><span>按钮</span></a>
-    <a href="#" style="--clr:#ff0;"><span>按钮</span></a>
-    <a href="#" style="--clr:#0ff;"><span>按钮</span></a>
-    <script>
-        let btns=document.querySelectorAll('a');
-        btns.forEach(btn=>{
-            btn.addEventListener('mousemove',(e)=>{
+    <div class="menu-parent-wrapper" ref="mounsehover">
+        <ul class="menu-parent" ref="menudom">
+            <li class="item">首页</li>
+            <li class="item">关于</li>
+            <li class="item">个人</li>
+            <li class="item">相册</li>
+            <li class="item">笔记</li>
+            <li class="item">开发</li>
+            <li class="line-icon-wapper">
+                <div class="line-icon"></div>
+            </li>
+        </ul>
+
+
+
+        <div style="--clr:#0f0;" class="hightlighter"><span>按钮</span></div>
+        <script>
+            let btns = document.querySelector('.hightlighter');
+            btns.addEventListener('mousemove', (e) => {
                 e.preventDefault();
-                let x=e.pageX-btn.offsetLeft;
-                let y=e.pageY-btn.offsetTop;
-                console.log(x,y);
-                console.log(btn.offsetLeft,btn.offsetTop);
-                btn.style.setProperty('--x',`${x}px`);
-                btn.style.setProperty('--y',`${y}px`);
+                let x = e.pageX - btns.offsetLeft;
+                let y = e.pageY - btns.offsetTop;
+                console.log(x, y);
+                console.log(btns.offsetLeft, btns.offsetTop);
+                btns.style.setProperty('--x', `${x}px`);
+                btns.style.setProperty('--y', `${y}px`);
             })
-        })
-    </script>
+        </script>
 </body>
+
 </html>
