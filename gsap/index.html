@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+        }
+
+        .section {
+            font-size: 5rem;
+        }
+
+
+        .wrapper {
+            display: flex;
+        }
+
+        section {
+            font-weight: 900;
+            transition: color 0.3s;
+            flex: 1 1 100%;
+            min-width: 100%;
+            height: 100vh;
+        }
+
+        section:nth-child(1) {
+            background-color: #8d7dae;
+        }
+
+        section:nth-child(2) {
+            background-color: #8c3dae;
+        }
+
+        section:nth-child(3) {
+            background-color: #0d3dae;
+        }
+
+        section:nth-child(4) {
+            background-color: #8d3d3e;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <section class="section">
+            Part One
+        </section>
+        <section class="section">
+            Part Two
+        </section>
+        <section class="section">
+            Part Three
+        </section>
+        <section class="section">
+            Part Four
+        </section>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        const sections = gsap.utils.toArray("section");
+        let maxWidth = 0;
+
+        const getMaxWidth = () => {
+            maxWidth = 0;
+            sections.forEach((section) => {
+                maxWidth += section.offsetWidth;
+            });
+        };
+        getMaxWidth();
+        ScrollTrigger.addEventListener("refreshInit", getMaxWidth);
+
+        gsap.to(sections, {
+            x: () => `-${maxWidth - window.innerWidth}`,
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".wrapper",
+                pin: true,
+                scrub: true,
+                end: () => `+=${maxWidth}`,
+                invalidateOnRefresh: true
+            }
+        });
+
+        sections.forEach((sct, i) => {
+            ScrollTrigger.create({
+                trigger: sct,
+                start: () => 'top top-=' + (sct.offsetLeft - window.innerWidth / 2) * (maxWidth / (maxWidth - window.innerWidth)),
+                end: () => '+=' + sct.offsetWidth * (maxWidth / (maxWidth - window.innerWidth)),
+                toggleClass: { targets: sct, className: "active" }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

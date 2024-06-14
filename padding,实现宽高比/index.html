@@ -6,44 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .item {
-            width: 50%;
-            margin: 0 auto;
-            background-color: aquamarine;
-        }
-
-        .inner {
+       /*  .item {
             position: relative;
-            width: 100%;
+            width: 90%;
+            margin: 0 auto;
             height: 0;
-            /* 4:3 */
-            /* padding-top: 75%; */
-            /* 设置内边距为宽高比为4:3的元素的padding-top */
-            /* 16:9 */
-            padding-top: 56.25%;
-            /* 设置内边距为宽高比为16:9的元素的padding-top padding百分比是父元素宽度的百分比*/
-            /* 16:10 */
-            /* padding-top: 62.5%; */
-            background-color: blueviolet;
+            padding-top: 56.25%;高度由父元素的宽度确定
+            background-color: aquamarine;
+        } */
+        .item {
+           
+            width: 90%;/* 必须设置宽度，确定宽高比，高度由宽度确定 */
+            margin: 0 auto; 
+            aspect-ratio: 16/9;
+            background-color: rgb(3, 202, 20);
         }
+       /*  .inner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            background-color: blueviolet;
+        } */
     </style>
 </head>
 
 <body>
     <div class="item">
+        <img src="https://picsum.photos/id/1015/500/300" alt="">
         <div class="inner"><!-- 假文 >lorem100 -->
-            <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium saepe error dicta magnam nam
-                omnis, neque adipisci delectus nulla dolorum aspernatur animi blanditiis rem rerum voluptas sapiente
-                enim qui alias magni consectetur expedita distinctio. Officiis ducimus, praesentium nulla possimus
-                deleniti facere quaerat at quis quae et, vero, natus blanditiis. Amet voluptatibus perferendis officia
-                culpa? Ducimus ratione aperiam a officia veritatis, deleniti laboriosam nihil quod fugit modi libero
-                sapiente architecto voluptatibus ea ipsa perferendis illo corrupti adipisci itaque in qui reiciendis
-                iusto. Inventore a sit eveniet consequatur accusantium in commodi libero nesciunt ipsam. Vero eius
-                dolore nam quidem aliquid quae necessitatibus.</div>
         </div>
-
     </div>
-    
+
 </body>
 
 </html>

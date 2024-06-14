@@ -37,7 +37,6 @@
                 animation: enter-animation 2s 1 forwards;
             }
         }
-       
     </style>
 </head>
 
@@ -75,7 +74,7 @@ https://coolcssanimation.com/how-to-trigger-a-css-animation-on-scroll/
                 // If the element has just entered the viewport
                 if (entry.isIntersecting) {
                     console.log(entry)
-                    
+
                     entry.target.classList.add('image-animation');
                 } else {
                     // If the element is no longer in the viewport and is below the viewport
@@ -86,7 +85,7 @@ https://coolcssanimation.com/how-to-trigger-a-css-animation-on-scroll/
             })
         }, {
             threshold: 0,
-            rootMargin: '0px 0px 100px 0px'
+            rootMargin: '0px 0px 100px 0px'//在元素进入视口之前提前100px触发
         });
 
         const viewbox = document.querySelectorAll('.image');
@@ -97,3 +96,5 @@ https://coolcssanimation.com/how-to-trigger-a-css-animation-on-scroll/
 </body>
 
 </html>
+
+

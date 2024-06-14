@@ -6,7 +6,7 @@
 }
 .masonry .item {
   width: 100%;
-  break-inside: avoid;
+  break-inside: avoid;/* 只有给定父元素高度的时候，才会出现break-inside这个CSS属性定义页面、列或区域发生中断 */
   margin-bottom: 30px;
   border: 1px solid #ddd;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);

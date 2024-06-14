@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ::-webkit-scrollbar {
+            width: 0;
+        }
+
+        body {
+            height: 2000px;
+        }
+
+        #scrollPath {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 10px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        #progressBar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 10px;
+            background: linear-gradient(rgb(112, 241, 213),
+                    rgb(224, 101, 179),
+                    rgb(250, 229, 96),
+                    rgb(84, 184, 243),
+                    rgb(146, 96, 222));
+            border-radius: 20px;
+        }
+
+        #progressBar:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, #ee9ca7, #ffdde1);
+            filter: blur(25px);
+        }
+
+        #progressBar:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, #ff7e5f, #feb47b);
+            filter: blur(55px);
+        }
+    </style>
+</head>
+
+<body>
+    <!--colorful scroll bar-->
+    <div id="progressBar"></div>
+    <div id="ScrollPath"></div>
+    <script>
+        let progress = document.getElementById('progressBar');
+        let totalHeight = document.body.scrollHeight - window.innerHeight;
+        window.addEventListener('scroll', function () {
+            let progressHeight = (document.documentElement.scrollTop / totalHeight) * 100;
+            if (progressHeight > 0 && progressHeight < 30) {
+                progress.style.backgroundImage = 'linear-gradient(to top, #FF7E5F, #E46782);';
+            } else if (progressHeight >= 30 && progressHeight < 60) {
+                console.log(progressHeight);
+                progress.style.backgroundImage = 'linear-gradient(to top, #000, #fff) !important;';
+            } else if (progressHeight >= 60 && progressHeight < 90) {
+                progress.style.backgroundImage = 'linear-gradient(to top, #FF7E5F, #E46782);';
+            } else {
+                progress.style.backgroundImage = 'linear-gradient(to top, #E46782, #FF7E5F);';
+            }
+            progress.style.height = progressHeight + "%";
+        })
+    </script>
+</body>
+
+</html>

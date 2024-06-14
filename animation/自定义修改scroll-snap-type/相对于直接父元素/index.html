@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="./index.css">
+
+</head>
+
+<body>
+    <div class="scroll-snap-container">
+        <section class="scroll-snap-section">
+            <img src='../../../全屏滚动/1.jpg' alt=''>
+            <div class="text">
+                <h2>Support for Drupal 7 ending January 2025</h2>
+                <p>These scroll driven animations</p>
+            </div>
+        </section>
+        <section class="scroll-snap-section">
+            <img src='../../../全屏滚动/1.jpg' alt=''>
+            <div class="text">
+                <h2>And the fact that</h2>
+                <p>combined with scroll-snap</p>
+            </div>
+        </section>
+        <section class="scroll-snap-section">
+            <img src='../../../全屏滚动/2.jpg' alt=''>
+            <div class="text">
+                <h2>These can create some cool effects</h2>
+                <p>When entering or leaving the scroll view</p>
+            </div>
+        </section>
+        <section class="scroll-snap-section">
+            <img src='../../../全屏滚动/3.jpg' alt=''>
+            <div class="text">
+                <h2>I really think this opens a lot of possibilities</h2>
+                <p>For a performant web, with a bit of</p>
+            </div>
+        </section>
+        <section class="scroll-snap-section">
+            <img src='../../../全屏滚动/4.jpg' alt=''>
+            <div class="text">
+                <h2>Extra ooooomph</h2>
+                <p>(yes, i'm running a bit out of inspiration here)</p>
+            </div>
+        </section>
+        <section class="scroll-snap-section">
+            <img src='../../../全屏滚动/5.jpg' alt=''>
+            <div class="text">
+                <h2>These are some pretty architecture images right?</h2>
+                <p>Just used unsplash for them</p>
+            </div>
+        </section>
+        <section class="scroll-snap-section">
+            <img src='../../../全屏滚动/6.jpg' alt=''>
+            <div class="text">
+                <h2>Time for me to stop adding some random stuff here</h2>
+                <p>"Lorem ipsum dolor sit amet" could work just as well</p>
+            </div>
+        </section>
+        <section class="scroll-snap-section">
+            <img src='../../../全屏滚动/7.jpg' alt=''>
+            <div class="text">
+                <h2>For the love of Scroll Driven Animations</h2>
+                <p>and a bit for scroll-snap as well</p>
+            </div>
+        </section>
+    </div>
+    <script>
+        
+        const snapSections = document.querySelectorAll('.scroll-snap-section');
+        let snapContainer = document.querySelector('.scroll-snap-container');
+        let windowwidth = document.querySelector("html").offsetWidth;
+        document.addEventListener('scroll', function () {
+            if(snapContainer.getBoundingClientRect().top <= 0){
+                console.log(snapContainer.getBoundingClientRect().top,'----------*****')
+                snapContainer.classList.add('active');
+            }else{
+                snapContainer.classList.remove('active');
+            }
+            
+        })
+        // 定义 debounce 函数
+        function debounce(func, wait, immediate) {
+            var timeout;
+            return function () {
+                var context = this, args = arguments;
+                var later = function () {
+                    timeout = null;
+                    if (!immediate) func.apply(context, args);
+                };
+                var callNow = immediate && !timeout;
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+                if (callNow) func.apply(context, args);
+            };
+        };
+        console.log(snapSections[1].getBoundingClientRect().top, snapSections[1].offsetTop)
+        let scrollDebounce = debounce(function () {
+            console.log('scroll')
+            snapSections.forEach((section) => {
+                //console.log(snapSections[0].offsetTop,'----------*****')不能实时获取offsetTop,元素必须粘性定位才能获取
+                //相对于直接父元素
+                let snapContainerHeight = snapContainer.clientHeight;
+                let snapContainerTop = snapContainer.getBoundingClientRect().top;
+                let sectionTop = section.getBoundingClientRect().top;
+                let sectionHeight = section.clientHeight;
+                if (sectionTop < (snapContainerHeight - sectionHeight) + snapContainerTop && sectionTop + sectionHeight > 1 + snapContainerTop) {
+                    section.classList.add('active');
+                } else if (sectionTop >= snapContainerHeight - sectionHeight && sectionTop <= snapContainerHeight) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
+
+
+            })
+        }, 200)
+        //992屏幕下
+        if (windowwidth <= 768) {
+            snapSections[0].classList.remove('active');
+            snapSections[1].classList.remove('active');
+            snapContainer.classList.add('active768')
+            snapContainer.removeEventListener('scroll')
+        } else {
+            if (snapContainer.classList.contains('active768')) {
+                snapContainer.classList.remove('active768')
+            }
+            snapSections[0].classList.add('active');
+            snapSections[1].classList.add('active');
+            snapContainer.addEventListener('scroll', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                scrollDebounce();
+                if (snapContainer.scrollTop >= snapSections[0].clientHeight - 1) {
+                    snapContainer.classList.add('scroll-snap-container-scrollbar');
+                } else {
+                    snapContainer.classList.remove('scroll-snap-container-scrollbar');
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>

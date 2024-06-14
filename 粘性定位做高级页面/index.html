@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            overflow: hidden;
+        }
+
+        .section-wrapper {
+            position: relative;
+            height: 90vh;
+            overflow-x: hidden;
+        }
+
+        section {
+            position: relative;
+            height: 100%;
+            background: url('../全屏滚动/5.jpg');
+            background-size: cover;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+        }
+
+        section::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, var(--opacity));
+            transition: background-color 1s cubic-bezier(.19, 1, .22, 1);
+            /* backdrop-filter: blur(5px); */
+            /* opacity: var(--opacity); */
+        }
+
+
+
+        section:nth-child(5)::after {
+            background: initial;
+            backdrop-filter: initial;
+        }
+
+        section:nth-child(1) {
+            background: url("../全屏滚动/1.jpg") no-repeat center center;
+            background-size: cover;
+            position: sticky;
+            top: 0;
+        }
+
+        section:nth-child(2) {
+            background: url("../全屏滚动/3.jpg") no-repeat center center;
+            background-size: cover;
+            position: sticky;
+            top: 0px;
+        }
+
+        section:nth-child(3) {
+            background: url("../全屏滚动/2.jpg") no-repeat center center;
+            background-size: cover;
+            position: sticky;
+            top: 0px;
+        }
+
+        section:nth-child(4) {
+            background: url("../全屏滚动/4.jpg") no-repeat center center;
+            background-size: cover;
+            position: sticky;
+            top: 0px;
+        }
+
+        /* https://owlfurnitureandobjects.com/about */
+    </style>
+</head>
+
+<body>
+    <div class="section-wrapper">
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
+    </div>
+    <script>
+        let sectionWrapper = document.querySelector('.section-wrapper');
+        let sections = document.querySelectorAll('section');
+        let opacity = 0;
+        let blurs = 0;
+        //根据滚动设置每一屏伪元素的opacity
+        sections[0].style.setProperty('--opacity', opacity);
+        sections[1].style.setProperty('--opacity', opacity);
+        sections[2].style.setProperty('--opacity', opacity);
+        sections[3].style.setProperty('--opacity', opacity);
+        sections[0].style.setProperty('--blur', blurs);
+        sections[1].style.setProperty('--blur', blurs);
+        sections[2].style.setProperty('--blur', blurs);
+        sections[3].style.setProperty('--blur', blurs);
+        //根据滚动设置每一屏伪元素的opacity
+        sectionWrapper.addEventListener('scroll', function (e) {
+            /* console.log(sections[0].offsetTop) */
+            sections.forEach(function (section, index) {
+
+                if (index != sections.length - 1) {
+                    if (-sections[index].offsetTop <= 0 && !(sections[0].offsetTop >= sections[0].offsetHeight * (index + 1))) {
+                        opacity = (sections[index].offsetTop / sections[index].offsetHeight);
+                        blurs = (sections[index].offsetTop / sections[index].offsetHeight);
+                        sections[index].style.setProperty('--opacity', Math.max(0, Math.min(1, opacity - index)));
+                        sections[index].style.setProperty('--blur', Math.max(0, Math.min(5, blurs * 5)));
+
+                    }
+                }
+            })
+            /* if (-sections[0].offsetTop <= 0 && !(sections[0].offsetTop >= sections[0].offsetHeight * 1)) {
+                opacity = (sections[0].offsetTop / sections[0].offsetHeight).toFixed(2);
+                sections[0].style.setProperty('--opacity', opacity);
+
+            }
+            if (-sections[1].offsetTop <= 0 && !(sections[0].offsetTop >= sections[0].offsetHeight * 2)) {
+                opacity = (sections[1].offsetTop / sections[1].offsetHeight).toFixed(2);
+                sections[1].style.setProperty('--opacity', opacity - 1);
+                console.log(opacity, '***');
+            }
+            if (-sections[2].offsetTop <= 0 && !(sections[0].offsetTop >= sections[0].offsetHeight * 3)) {
+                opacity = (sections[2].offsetTop / sections[2].offsetHeight).toFixed(2);
+                sections[2].style.setProperty('--opacity', opacity - 2);
+            }
+            if (-sections[3].offsetTop <= 0 && !(sections[0].offsetTop >= sections[0].offsetHeight * 4)) {
+                opacity = (sections[3].offsetTop / sections[3].offsetHeight).toFixed(2);
+                sections[3].style.setProperty('--opacity', opacity - 3);
+            } */
+
+        })
+
+    </script>
+</body>
+
+</html>

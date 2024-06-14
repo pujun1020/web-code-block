@@ -1,38 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smooth Scroll Demo</title>
-<link rel="stylesheet" href="styles.css">
-<style>
-    
-#content {
-  height: 200vh; /* 填充页面以便滚动 */
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tspan {
+            stroke: blue;
+            stroke-dasharray: 0;
+            animation: my-stroke 2s forwards ease-out;
+        }
 
-#scrollToElement {
-  margin-top: 100vh; /* 定义目标元素位置 */
-}
-</style>
+        @keyframes my-stroke {
+            0% {
+                stroke-dasharray: 10;
+            }
+
+            10% {
+                stroke-dasharray: 9;
+            }
+
+            20% {
+                stroke-dasharray: 8;
+            }
+
+            30% {
+                stroke-dasharray: 7;
+            }
+
+            40% {
+                stroke-dasharray: 6;
+            }
+
+            50% {
+                stroke-dasharray: 5;
+            }
+
+            60% {
+                stroke-dasharray: 4;
+            }
+
+            70% {
+                stroke-dasharray: 3;
+            }
+
+            80% {
+                stroke-dasharray: 2;
+            }
+
+            90% {
+                stroke-dasharray: 1;
+            }
+
+            100% {
+                stroke-dasharray: 0;
+            }
+
+        }
+
+        .svg2 .textpath {}
+    </style>
 </head>
+
 <body>
-<div id="content">
-  <p>This is some content. Scroll down to see the button.</p >
-  <button onclick="smoothScrollToElement()">Scroll to Element</button>
-  <div id="scrollToElement">Element to Scroll to</div>
-</div>
+    <svg class="svghover" height="40" width="250" xmlns="http://www.w3.org/2000/svg">
+        <text x="5" y="30" fill="red" font-size="35">I Love
+            <tspan class="tspan" fill="none" stroke="green">SVG</tspan>!
+        </text>
+    </svg>
 
-<script>
-    function smoothScrollToElement() {
-  const targetElement = document.getElementById('scrollToElement');
-  const targetPosition = targetElement.offsetTop;
 
-  window.scrollTo({
-    top: targetPosition,
-    behavior: 'smooth'
-  });
-}
-</script>
+
+    <svg class="svg2" height="200" width="350" xmlns="http://www.w3.org/2000/svg">
+        <path id="lineAC" d="M 30 180 q 150 -250 300 0" stroke="blue" stroke-width="2" fill="none" />
+        <text style="fill:red;font-size:25px;">
+            <textPath class="textpath" href="#lineAC" startOffset="-300">
+                <animate attributeName="startOffset" begin="0s" dur="3s" from="-300" to="70" fill="freeze" />
+                I love SVG! I love SVG!
+            </textPath>
+        </text>
+    </svg>
 </body>
+
 </html>

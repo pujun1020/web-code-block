@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complex Scroll Animation</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      /* 设置页面高度，用于滚动 */
+      color: #333;
+      /*  scroll-snap-type: y mandatory;
+      scroll-behavior: smooth; */
+    }
+
+    .scroll-page {
+      /* position: fixed;
+      inset: 0; */
+      height: 100vh;
+      background: red;
+      padding-left: 20px;
+      overflow: hidden;
+    }
+
+    .section {
+      height: 100vh;
+      /* 设置每个 section 高度为视口高度 */
+      display: flex;
+      justify-content: center;
+      /* align-items: center; 添加会出现问题，会导致出现滚动条当前元素向上偏移，scrollHeight读取不准*/
+      position: relative;
+    }
+
+    main {
+      transform: translateY(var(--scroll-y));
+      transition: transform 1000ms ease;
+    }
+
+    .section:nth-child(even) {
+      background-color: #4CAF50;
+      /* 设置偶数 section 背景色 */
+      color: white;
+    }
+
+    .section:nth-child(odd) {
+      background-color: #2196F3;
+      /* 设置奇数 section 背景色 */
+      color: white;
+    }
+
+    .section.activeScroll {
+      background: linear-gradient(to bottom, #B721FF, #2AF598, #fec051, #FEE140, #FA709A);
+      overflow-y: scroll;
+      overflow-x: hidden;
+    }
+
+    #section3 .content {
+      height: 2000px;
+    }
+
+
+    .content {
+      text-align: center;
+      opacity: 1;
+      transition: opacity 0.5s ease-in-out;
+      max-width: 80%;
+      margin: 0 auto;
+    }
+
+    .button {
+      padding: 10px 20px;
+      font-size: 1.2em;
+      background-color: #fff;
+      color: #333;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #ddd;
+    }
+
+    .timeline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: #ddd;
+      z-index: 9999;
+    }
+
+    .timeline-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background-color: #2196F3;
+      border-radius: 1px;
+      width: 0%;
+      transition: width 1s ease;
+    }
+
+    .animation-object {
+      position: absolute;
+      bottom: 0;
+      width: 100px;
+      height: 100px;
+      background-color: #FFC107;
+      border-radius: 50%;
+      animation: bounce 2s infinite alternate;
+      z-index: 99;
+    }
+
+    @keyframes bounce {
+      0% {
+        transform: translateY(0);
+      }
+
+      100% {
+        transform: translateY(-20px);
+      }
+    }
+
+    .image-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="timeline">
+    <div class="timeline-progress" id="timelineProgress"></div>
+  </div>
+
+  <div class="animation-object" id="animationObject"></div>
+  <div class="scroll-page">
+    <main class="scroll-page-inner">
+      <div class="section" id="section1">
+        <div class="content">
+          <h1>Welcome to Our Website!</h1>
+          <p>This is a demo of a complex scroll animation.</p>
+          <button class="button">Learn More</button>
+        </div>
+      </div>
+
+      <div class="section" id="section2">
+        <div class="content">
+          <h2>About Us</h2>
+          <p>We are a team of creative individuals passionate about web design and development.</p>
+          <button class="button">Our Services</button>
+        </div>
+      </div>
+
+      <div class="section" id="section3">
+        <div class="content">
+          <h2>Our Services</h2>
+          <p>We offer a wide range of services including web design, development, and digital marketing.</p>
+          <button class="button">Contact Us</button>
+        </div>
+      </div>
+
+      <div class="section" id="section4">
+        <div class="content">
+          <h2>Contact Us</h2>
+          <p>Get in touch with us today to discuss your project!</p>
+          <button class="button">Back to Top</button>
+        </div>
+      </div>
+
+
+
+      <div class="section" id="section5">
+        <div class="image-container">
+          <img src="https://via.placeholder.com/800x600" alt="Placeholder Image">
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    let activeIndex = 0;
+    let itemCount = document.querySelectorAll('.section').length;
+    var sections = document.querySelectorAll('.section');
+    let section0 = sections[0].offsetTop
+    var timelineProgress = document.getElementById('timelineProgress');
+    var animationObject = document.getElementById('animationObject');
+    var scrollPageHeight = document.querySelector('.scroll-page').scrollHeight;
+    let scrollPageInner = document.querySelector('.scroll-page').offsetHeight;
+    let maxScroll = scrollPageHeight - scrollPageInner;
+    let scrollPage = document.querySelector('.scroll-page');
+
+
+    // 定义 debounce 函数
+    function debounce(func, wait, immediate) {
+      var timeout;
+      return function () {
+        var context = this, args = arguments;
+        var later = function () {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      };
+    };
+    let sectionWhelldebounce = debounce(function (e) {
+      if (e.deltaY < 0) {
+        document.addEventListener("wheel", wheelfun);
+      }
+
+    }, 100);
+    //根据滚动位置显示或隐藏滑动按钮
+    const handleSlideButtons = (currentIndex) => {
+      if (sections[currentIndex].scrollHeight > sections[currentIndex].clientHeight) {
+        setTimeout(() => {
+          sections[currentIndex].scrollTop = 1;
+        },100);
+        let currentmaxscroll = sections[currentIndex].scrollHeight - sections[currentIndex].clientHeight;
+        console.log(sections[currentIndex].scrollTop, '88888')
+        //添加类名
+        sections[currentIndex].classList.add('activeScroll');
+        //删除document事件whell
+        document.removeEventListener("wheel", wheelfun);
+        //判断滚动到底，添加document事件whell
+        let sectionScrolldebounce = debounce(function (e) {
+          // 检查滚动值是否接近最大滚动距离,定义一个向下误差范围
+          const bottomRange = Math.abs(currentmaxscroll - sections[currentIndex].scrollTop) >= 0 && Math.abs(currentmaxscroll - sections[currentIndex].scrollTop) <= 2;
+          console.log(bottomRange, 'bottomRange')
+          if (bottomRange) {
+            //添加document事件whell
+            //console.log(sections[currentIndex].scrollHeight - sections[currentIndex].clientHeight - 1)
+            //sections[currentIndex].scrollTop = sections[currentIndex].scrollHeight - sections[currentIndex].clientHeight - 1;
+            document.addEventListener("wheel", wheelfun);
+            
+          }
+          // 检查滚动值是否接近最大滚动距离,定义一个向上误差范围
+          const topRange = Math.abs(sections[currentIndex].scrollTop) <= 0;
+          console.log(topRange, 'topRange')
+          if (topRange) {
+            //添加document事件whell
+            //sections[currentIndex].scrollTop = 1;
+            document.addEventListener("wheel", wheelfun);
+            
+          }
+        }, 200)
+        // 监听滚动事件
+        sections[currentIndex].addEventListener("scroll", sectionScrolldebounce);
+      }
+
+
+    }
+    let scrollwheeldebounce = debounce(function (e) {
+      if (e.deltaY > 0) {
+        activeIndex++
+        if (activeIndex >= itemCount) {
+          activeIndex = itemCount - 1;
+          // 动画结束后的回调
+          return;
+        }
+        handleSlideButtons(activeIndex)
+        animateSections(sections[activeIndex].offsetTop)
+        //document.documentElement.scrollTop ? document.documentElement.scrollTop = sections[activeIndex].offsetTop : document.body.scrollTop = sections[activeIndex].offsetTop;
+        document.documentElement.style.setProperty('--scroll-y', `${-sections[activeIndex].offsetTop}px`);
+        //console.log(activeIndex)
+        //滚动进度条
+        let progress = (sections[activeIndex].offsetTop / maxScroll) * 100;
+        timelineProgress.style.width = progress + '%';
+      } else {
+        activeIndex--
+        if (activeIndex < 0) {
+          activeIndex = 0;
+          return;
+        }
+        handleSlideButtons(activeIndex)
+        animateSections(sections[activeIndex].offsetTop)
+        //document.documentElement.scrollTop ? document.documentElement.scrollTop = sections[activeIndex].offsetTop : document.body.scrollTop = sections[activeIndex].offsetTop;
+        document.documentElement.style.setProperty('--scroll-y', `${-sections[activeIndex].offsetTop}px`);
+        //滚动进度条
+        let progress = (sections[activeIndex].offsetTop / maxScroll) * 100;
+        timelineProgress.style.width = progress + '%';
+      }
+    }, 200)
+
+
+    // 监听滚动事件
+    window.addEventListener('scroll', function () {
+      animateSections();
+    });
+    let wheelfun = function (e) {
+      scrollwheeldebounce(e)
+    }
+    document.addEventListener("wheel", wheelfun);
+
+
+
+    function animateSections(translateYvalue) {
+      sections.forEach((section) => {
+        var sectionTop = section.offsetTop;
+        var sectionHeight = section.offsetHeight;
+        //console.log(sectionTop, sectionHeight, translateYvalue)
+        if (translateYvalue >= sectionTop && translateYvalue < sectionTop + sectionHeight) {
+          section.classList.add('active');
+        } else {
+          section.classList.remove('active');
+        }
+      })
+
+    }
+    // 初始化
+    animateSections(section0);
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complex Scroll Animation</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      /* 设置页面高度，用于滚动 */
+      color: #333;
+      /*  scroll-snap-type: y mandatory;
+      scroll-behavior: smooth; */
+    }
+
+    .scroll-page {
+      /* position: fixed;
+      inset: 0; */
+      height: 100vh;
+      /* background: red; */
+      /* padding-left: 20px; */
+      overflow: hidden;
+    }
+
+    .section {
+      height: 100vh;
+      /* 设置每个 section 高度为视口高度 */
+      overflow: hidden;
+      /* align-items: center; 添加会出现问题，会导致出现滚动条当前元素向上偏移，scrollHeight读取不准*/
+      position: relative;
+    }
+
+    main {
+      transform: translateY(var(--scroll-y));
+      transition: transform 700ms ease-in;
+    }
+
+    .section:nth-of-type(1) {
+      background: url(./1.jpg) no-repeat center center;
+      background-size: cover;
+    }
+
+    .section:nth-of-type(2) {
+      background: url(./2.jpg) no-repeat center center;
+      background-size: cover;
+    }
+
+    .section:nth-of-type(3) {
+      background: url(./3.jpg) no-repeat center center;
+      background-size: cover;
+    }
+
+    .section:nth-of-type(4) {
+      background: url(./4.jpg) no-repeat center center;
+      background-size: cover;
+    }
+
+    .section:nth-of-type(5) {
+      background: url(./5.jpg) no-repeat center center;
+      background-size: cover;
+    }
+
+    .section.activeScroll {
+      overflow-y: scroll;
+      overflow-x: hidden;
+    }
+
+    .section.activeScroll::-webkit-scrollbar {
+      background-color: transparent;
+      width: 9px;
+    }
+
+    .section.activeScroll::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, .4);
+      border-radius: 16px;
+      border: 4px solid transparent;
+    }
+
+    .section.activeScroll::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+
+
+    .content {
+      text-align: center;
+    }
+
+    .button {
+      padding: 10px 20px;
+      font-size: 1.2em;
+      background-color: #fff;
+      color: #333;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #ddd;
+    }
+
+    .timeline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: rgba(241, 245, 249, 1);
+      z-index: 9999;
+    }
+
+    .timeline-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background-color: #2196F3;
+      border-radius: 1px;
+      width: 0%;
+      transition: width 1s ease;
+    }
+
+    .animation-object-lock {
+      position: absolute;
+      bottom: 0;
+      width: 100px;
+      height: 100px;
+      background: rgb(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 50%;
+      animation: bounce 2s infinite alternate;
+      z-index: 99;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .animation-object-lock.active {
+      opacity: 1;
+    }
+
+    @keyframes bounce {
+      0% {
+        transform: translateY(0);
+      }
+
+      100% {
+        transform: translateY(-20px);
+      }
+    }
+
+
+    
+  </style>
+</head>
+
+<body>
+  <div class="timeline">
+    <div class="timeline-progress" id="timelineProgress"></div>
+  </div>
+
+  <div class="scroll-page">
+    <main class="scroll-page-inner">
+      <div class="section" id="section1">
+        <div class="content">
+          <h1>Welcome to Our Website!</h1>
+          <p>This is a demo of a complex scroll animation.</p>
+          <button class="button">Learn More</button>
+        </div>
+      </div>
+
+      <div class="section" id="section2">
+        <div class="content">
+          <h2>About Us</h2>
+          <p>We are a team of creative individuals passionate about web design and development.</p>
+          <button class="button">Our Services</button>
+        </div>
+      </div>
+
+      <div class="section" id="section3">
+        <div class="content">
+          <h2>Our Services</h2>
+          <p>We offer a wide range of services including web design, development, and digital marketing.</p>
+          <button class="button">Contact Us</button>
+        </div>
+      </div>
+
+      <div class="section" id="section4">
+        <div class="content">
+          <h2>Contact Us</h2>
+          <p>Get in touch with us today to discuss your project!</p>
+          <button class="button">Back to Top</button>
+        </div>
+      </div>
+
+
+
+      <div class="section" id="section5">
+        <div class="content">
+          <h2>Contact Us</h2>
+          <p>Get in touch with us today to discuss your project!</p>
+          <button class="button">Back to Top</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    let activeIndex = 0;
+    let itemCount = document.querySelectorAll('.section').length;
+    var sections = document.querySelectorAll('.section');
+    let section0 = sections[0].offsetTop
+    var timelineProgress = document.getElementById('timelineProgress');
+    var animationObject = document.getElementById('animationObject');
+    var scrollPageHeight = document.querySelector('.scroll-page').scrollHeight;
+    let scrollPageInner = document.querySelector('.scroll-page').offsetHeight;
+    let maxScroll = scrollPageHeight - scrollPageInner;
+    let scrollPage = document.querySelector('.scroll-page');
+
+    // 定义 debounce 函数
+    function debounce(func, wait, immediate) {
+      var timeout;
+      return function () {
+        var context = this, args = arguments;
+        var later = function () {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      };
+    };
+    
+    let scrollwheeldebounce = debounce(function (e) {
+      if (e.deltaY > 0) {
+        topFun()
+      } else {
+        bottomFun()
+      }
+    }, 200)
+    let topFun = () => {
+      activeIndex++
+      if (activeIndex >= itemCount) {
+        activeIndex = itemCount - 1;
+        // 动画结束后的回调
+        return;
+      }
+      animateSections(sections[activeIndex].offsetTop)
+      document.documentElement.style.setProperty('--scroll-y', `${-sections[activeIndex].offsetTop}px`);
+      //console.log(activeIndex)
+      //滚动进度条
+      let progress = (sections[activeIndex].offsetTop / maxScroll) * 100;
+      timelineProgress.style.width = progress + '%';
+    }
+    let bottomFun = () => {
+      activeIndex--
+      if (activeIndex < 0) {
+        activeIndex = 0;
+        return;
+      }
+      animateSections(sections[activeIndex].offsetTop)
+      document.documentElement.style.setProperty('--scroll-y', `${-sections[activeIndex].offsetTop}px`);
+      //滚动进度条
+      let progress = (sections[activeIndex].offsetTop / maxScroll) * 100;
+      timelineProgress.style.width = progress + '%';
+    }
+   
+    let wheelfun = function (e) {
+      scrollwheeldebounce(e)
+    }
+    document.addEventListener("wheel", wheelfun);
+
+
+    //给满足条件的屏添加类名
+    function animateSections(translateYvalue) {
+      sections.forEach((section) => {
+        var sectionTop = section.offsetTop;
+        var sectionHeight = section.offsetHeight;
+        if (translateYvalue >= sectionTop && translateYvalue < sectionTop + sectionHeight) {
+          section.classList.add('active');
+        } else {
+          section.classList.remove('active');
+        }
+      })
+
+    }
+    // 初始化
+    animateSections(section0);
+  </script>
+
+</body>
+
+</html>

@@ -2,248 +2,266 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        .pujun-auto-switch-wapper {
-            display: flex;
-            gap: 40px;
-            width: 50%;
-            justify-content: space-between;
-            margin: 0 auto;
-            max-height: 500px;
-            overflow: hidden;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complex Scroll Animation</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      /* 设置页面高度，用于滚动 */
+      color: #333;
+      /*  scroll-snap-type: y mandatory;
+      scroll-behavior: smooth; */
+    }
 
-        .auto-switch-item-btn-inner {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
+    .scroll-page {
+      height: 100vh;
+      overflow: hidden;
+    }
 
-        }
+    .inner-page-main {
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
 
-        .auto-switch-item-btns {
-            --progress-width: 0%;
-            flex: 0 0 30%;
-            display: flex;
-            align-items: center;
-        }
+    .scroll-page-inner {
+      transform: translateY(var(--scroll-y));
+      transition: transform 700ms ease-in;
+    }
 
-        .auto-switch-item-imgs-wapper {
-            flex: 1;
-            overflow: hidden;
-            border-radius: 15px;
-        }
+    .inner-page-main:nth-of-type(1) {
+      background: url(/全屏滚动/1.jpg) no-repeat center center;
+      background-size: cover;
+    }
 
-        .auto-switch-item-imgs img {
-            width: 100%;
-            object-fit: cover;
-        }
+    .inner-page-main:nth-of-type(2) {
+      background: url(/全屏滚动/2.jpg) no-repeat center center;
+      background-size: cover;
+    }
 
-        .auto-switch-item-img {
-            position: relative;
-        }
+    .inner-page-main:nth-of-type(3) {
+      background: url(/全屏滚动/3.jpg) no-repeat center center;
+      background-size: cover;
+    }
 
-        .auto-switch-item-imgs {
-            overflow-x: hidden;
-            transform: translateY(0px);
-            transition: transform cubic-bezier(.61, 2.06, 0, -0.01) 1s;
-        }
+    .inner-page-main:nth-of-type(4) {
+      background: url(/全屏滚动/4.jpg) no-repeat center center;
+      background-size: cover;
+    }
 
-        .auto-switch-item-img::after {
-            content: '';
-            display: block;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            backdrop-filter: blur(5px);
-            background: rgba(255, 255, 255, .1);
-            transition: all 0.5s;
-        }
+    .inner-page-main:nth-of-type(5) {
+      background: url(/全屏滚动/1.jpg) no-repeat center center;
+      background-size: cover;
+    }
 
-        .auto-switch-item-img.active::after {
-            backdrop-filter: blur(0px);
-            background: transparent;
-        }
+    .inner-page-main.activeScroll {
+      overflow-y: scroll;
+      overflow-x: hidden;
+    }
 
-        .auto-switch-item-progress {
-            position: relative;
-            width: 100%;
-            height: 2px;
-            margin-top: 24px;
-            background-color: #d8e2ef;
-            transition: width 1s;
-        }
+    .inner-page-main.activeScroll::-webkit-scrollbar {
+      background-color: transparent;
+      width: 9px;
+    }
 
-        .auto-switch-item-progress::after {
-            content: '';
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 100%;
-            background-color: transparent;
-            transition: width 2s;
-        }
+    .inner-page-main.activeScroll::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, .4);
+      border-radius: 16px;
+      border: 4px solid transparent;
+    }
 
-        .auto-switch-item-progress.active::after {
-            width: var(--progress-width);
-            background-color: #333;
-        }
+    .inner-page-main.activeScroll::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
 
-        .auto-switch-item-btn {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            cursor: pointer;
-        }
 
-        .auto-switch-item-title {
-            font-weight: 400;
-            color: #7D827D;
-            font-size: 19px;
-            transition: all 0.5s;
-        }
+    .content {
+      text-align: center;
+    }
 
-        .auto-switch-item-title.active {
-            font-weight: bold;
-            color: #191A19;
-        }
-    </style>
+    .button {
+      padding: 10px 20px;
+      font-size: 1.2em;
+      background-color: #fff;
+      color: #333;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #ddd;
+    }
+
+    .pujun-timeline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: rgba(241, 245, 249, 1);
+      z-index: 9999;
+    }
+
+    .timeline-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background-color: #2196F3;
+      border-radius: 1px;
+      width: 0%;
+      transition: width 1s ease;
+    }
+
+
+
+    
+  </style>
 </head>
 
 <body>
-    <div class="pujun-auto-switch-wapper">
-        <div class="auto-switch-item-btns">
-            <div class="auto-switch-item-btn-inner">
-                <div class="auto-switch-item-btn">
-                    <div class="auto-switch-item-title">Re-edit all vector</div>
-                    <div class="auto-switch-item-progress"></div>
-                </div>
-                <div class="auto-switch-item-btn">
-                    <div class="auto-switch-item-title">Change text within vectors</div>
-                    <div class="auto-switch-item-progress"></div>
-                </div>
-                <div class="auto-switch-item-btn">
-                    <div class="auto-switch-item-title">Create and manage layers</div>
-                    <div class="auto-switch-item-progress"></div>
-                </div>
-                <div class="auto-switch-item-btn">
-                    <div class="auto-switch-item-title">Turn photos into vectors</div>
-                    <div class="auto-switch-item-progress"></div>
-                </div>
-            </div>
-        </div>
-        <div class="auto-switch-item-imgs-wapper">
-            <div class="auto-switch-item-imgs">
-                <div class="auto-switch-item-img">
-                    <img src="https://images.dog.ceo/breeds/mastiff-tibetan/n02108551_2658.jpg" alt="">
-                </div>
-                <div class="auto-switch-item-img">
-                    <img src="https://images.dog.ceo/breeds/mastiff-tibetan/n02108551_2658.jpg" alt="">
-                </div>
-                <div class="auto-switch-item-img">
-                    <img src="https://images.dog.ceo/breeds/mastiff-tibetan/n02108551_2658.jpg" alt="">
-                </div>
-                <div class="auto-switch-item-img">
-                    <img src="https://images.dog.ceo/breeds/mastiff-tibetan/n02108551_2658.jpg" alt="">
-                </div>
-            </div>
-        </div>
+  <div class="pujun-timeline">
+    <div class="timeline-progress" id="timelineProgress"></div>
+  </div>
 
+  <div class="scroll-page">
+    <div class="scroll-page-inner">
+      <div class="inner-page-main" id="section1">
+        <div class="content">
+          <h1>Welcome to Our Website!</h1>
+          <p>This is a demo of a complex scroll animation.</p>
+          <button class="button">Learn More</button>
+        </div>
+      </div>
+
+      <div class="inner-page-main" id="section2">
+        <div class="content">
+          <h2>About Us</h2>
+          <p>We are a team of creative individuals passionate about web design and development.</p>
+          <button class="button">Our Services</button>
+        </div>
+      </div>
+
+      <div class="inner-page-main" id="section3">
+        <div class="content">
+          <h2>Our Services</h2>
+          <p>We offer a wide range of services including web design, development, and digital marketing.</p>
+          <button class="button">Contact Us</button>
+        </div>
+      </div>
+
+      <div class="inner-page-main" id="section4">
+        <div class="content">
+          <h2>Contact Us</h2>
+          <p>Get in touch with us today to discuss your project!</p>
+          <button class="button">Back to Top</button>
+        </div>
+      </div>
+
+
+
+      <div class="inner-page-main" id="section5">
+        <div class="content">
+          <h2>Contact Us</h2>
+          <p>Get in touch with us today to discuss your project!</p>
+          <button class="button">Back to Top</button>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <script>
-        let autoSwitchWapper = document.querySelector('.pujun-auto-switch-wapper');
-        let autoSwitchItemsBtns = document.querySelector('.auto-switch-item-btns');
-        let autoSwitchBtnItems = document.querySelectorAll('.auto-switch-item-btn');
-        let progressBars = document.querySelectorAll('.auto-switch-item-progress');
-        let autoswitchtitle = document.querySelectorAll('.auto-switch-item-title');
-        let imgactive = document.querySelectorAll('.auto-switch-item-img');
-        let imgitems = document.querySelector('.auto-switch-item-imgs');
-        let itemCount = autoSwitchBtnItems.length;
-        let activeIndex = 0; // 当前显示的元素的索引
-        let startTime = Date.now(); // 获取定时器开始时间
-        let duration = 6000; // 定时器持续时间为六秒钟
-        let timeouttimer;
-        let stopAutoSlide = true; // 是否停止自动轮播
-        var isClicked = false;// 是否点击了进度条
-        let ClickItemIndex;// 是否点击了按钮
-        progressBars[0].classList.add('active'); // 给第一个进度条添加active类
-        autoswitchtitle[0].classList.add('active'); // 给第一个进度条添加active类
-        imgactive[0].classList.add('active'); // 给第一个进度条添加active类
-        function showSlider() {
-            progressBars.forEach((item, index) => {
-                item.classList.remove('active');
-                progressBars[activeIndex].classList.add('active');
-            })
-            autoswitchtitle.forEach((item, index) => {
-                item.classList.remove('active');
-                autoswitchtitle[activeIndex].classList.add('active');
-            })
-            imgactive.forEach((item, index) => {
-                item.classList.remove('active');
-                imgactive[activeIndex].classList.add('active');
-            })
-            imgitems.style.transform = `translateY(-${imgactive[activeIndex].offsetTop}px)`
-            autoSwitchItemsBtns.style.setProperty('--progress-width', '0%'); // 更新进度条的宽度
-            startTime = Date.now();
-            startAutoSlide();
-        }
-        // 点击按钮切换轮播项
-        autoSwitchBtnItems.forEach((item, index) => {
-            item.addEventListener('click', () => {
-                if (isClicked) {
-                    if (!item.querySelector(".auto-switch-item-progress").classList.contains('active')) {
-                        console.log("已经点击了进度条");
-                        activeIndex = index;
-                        stopAutoSlide = false;
-                        showSlider();
-                    }
-                    return
-                }; // 如果已经点击了进度条，则终止函数，不执行下面的代码
-                activeIndex = index;
-                stopAutoSlide = false;
-                showSlider();
-                isClicked = true;
-            })
-        })
-        // 切换到下一个轮播项
-        function nextSlide() {
-            activeIndex = (activeIndex + 1) % itemCount; // 循环切换// 确保循环到第一个元素
-            showSlider()
-        }
-        // 切换到上一个轮播项
-        function prevSlide() {
-            activeIndex = (activeIndex - 1 + itemCount) % itemCount; // 循环切换,// 确保循环回到最后一个元素
-        }
-        // 自动切换,控制progress进度
-        function startAutoSlide() {
-            let intervalId = setInterval(function () {
-                let currentTime = Date.now(); // 获取当前时间
-                let elapsedTime = currentTime - startTime; // 计算已经经过的时间
-                let percentage = (elapsedTime / duration) * 100; // 计算百分比
-                if (percentage > 100) {
-                    percentage = 100; // 确保百分比为100%
-                    clearInterval(intervalId); // 清除定时器
-                    if (timeouttimer) {
-                        clearTimeout(timeouttimer);
-                    }
-                    if (stopAutoSlide) {
-                        timeouttimer = setTimeout(nextSlide, 2000); // 2秒后重新启动自动切换
-                    }
-                }
+  <script>
+    let activeIndex = 0;
+    let itemCount = document.querySelectorAll('.inner-page-main').length;
+    var sections = document.querySelectorAll('.inner-page-main');
+    let section0 = sections[0].offsetTop
+    var timelineProgress = document.getElementById('timelineProgress');
+    var animationObject = document.getElementById('animationObject');
+    var scrollPageHeight = document.querySelector('.scroll-page').scrollHeight;
+    let scrollPageInner = document.querySelector('.scroll-page').offsetHeight;
+    let maxScroll = scrollPageHeight - scrollPageInner;
+    let scrollPage = document.querySelector('.scroll-page');
 
-                autoSwitchItemsBtns.style.setProperty('--progress-width', percentage + '%'); // 更新进度条的宽度
+    // 定义 debounce 函数
+    function debounce(func, wait, immediate) {
+      var timeout;
+      return function () {
+        var context = this, args = arguments;
+        var later = function () {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      };
+    };
+    
+    let scrollwheeldebounce = debounce(function (e) {
+      if (e.deltaY > 0) {
+        topFun()
+      } else {
+        bottomFun()
+      }
+    }, 200)
+    let topFun = () => {
+      activeIndex++
+      if (activeIndex >= itemCount) {
+        activeIndex = itemCount - 1;
+        // 动画结束后的回调
+        return;
+      }
+      animateSections(sections[activeIndex].offsetTop)
+      document.documentElement.style.setProperty('--scroll-y', `${-sections[activeIndex].offsetTop}px`);
+      //console.log(activeIndex)
+      //滚动进度条
+      let progress = (sections[activeIndex].offsetTop / maxScroll) * 100;
+      timelineProgress.style.width = progress + '%';
+    }
+    let bottomFun = () => {
+      activeIndex--
+      if (activeIndex < 0) {
+        activeIndex = 0;
+        return;
+      }
+      animateSections(sections[activeIndex].offsetTop)
+      document.documentElement.style.setProperty('--scroll-y', `${-sections[activeIndex].offsetTop}px`);
+      //滚动进度条
+      let progress = (sections[activeIndex].offsetTop / maxScroll) * 100;
+      timelineProgress.style.width = progress + '%';
+    }
+   
+    let wheelfun = function (e) {
+      scrollwheeldebounce(e)
+    }
+    document.addEventListener("wheel", wheelfun);
 
-            }, 500); // 每秒执行一次
+
+    //给满足条件的屏添加类名
+    function animateSections(translateYvalue) {
+      sections.forEach((section) => {
+        var sectionTop = section.offsetTop;
+        var sectionHeight = section.offsetHeight;
+        if (translateYvalue >= sectionTop && translateYvalue < sectionTop + sectionHeight) {
+          section.classList.add('active');
+        } else {
+          section.classList.remove('active');
         }
-        startAutoSlide();
-    </script>
+      })
+
+    }
+    // 初始化
+    animateSections(section0);
+    //点击btnmenu切换类名
+    
+  </script>
+
 </body>
 
 </html>

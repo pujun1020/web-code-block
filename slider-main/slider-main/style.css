@@ -1,164 +1,172 @@
-.pujun-document-wapper .pujun .section_our_solution .row {
-    align-items: center;
-  }
-  
-  .pujun-document-wapper .pujun .our_solution_category {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-  
-  .pujun-document-wapper .pujun .our_solution_category .solution_cards_box {
-    display: flex;
-    flex-direction: column;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+body{
+    font-family: Poppins;
+    margin: 0;
+    background-color: #010101;
+    color: #eee;
+}
+svg{
+    width: 25px;
+}
+header{
+    width: 1200px;
+    max-width: 90%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 50px 1fr 50px;
+    grid-template-rows: 50px;
     justify-content: center;
-  }
-  
-  .pujun-document-wapper .pujun .solution_cards_box .solution_card {
-    flex: 0 50%;
-    background: #fff;
-    box-shadow: 0 2px 4px 0 rgba(136, 144, 195, 0.2),
-      0 5px 15px 0 rgba(37, 44, 97, 0.15);
-    border-radius: 15px;
-    margin: 8px;
-    padding: 10px 15px;
+    align-items: center;
     position: relative;
-    z-index: 1;
-    overflow: hidden;
-    min-height: 265px;
-    transition: 0.7s;
-  }
-  
-  .pujun-document-wapper .pujun .solution_cards_box .solution_card:hover {
-    background: #309df0;
-    color: #fff;
-    z-index: 9;
-  }
-  
-  .pujun-document-wapper .pujun .solution_cards_box .solution_card:hover::before {
-    background: rgb(85 108 214 / 10%);
-  }
-  
-  .pujun-document-wapper .pujun .solution_cards_box .solution_card:hover .solu_title h3,
-  .pujun-document-wapper .pujun .solution_cards_box .solution_card:hover .solu_description p {
-    color: #fff;
-  }
-  
-  .pujun-document-wapper .pujun .solution_cards_box .solution_card:before {
-    content: "";
-    position: absolute;
-    background: rgb(85 108 214 / 5%);
-    width: 170px;
-    height: 400px;
-    z-index: -1;
-    transform: rotate(42deg);
-    right: -56px;
-    top: -23px;
-    border-radius: 35px;
-  }
-  
-  .pujun-document-wapper .pujun .solution_cards_box .solution_card:hover .solu_description button {
-    background: #fff !important;
-    color: #309df0;
-  }
-  
-  
-  .pujun-document-wapper .pujun .solution_card .solu_title div {
-    color: #212121;
-    font-size: 1.3rem;
-    margin-top: 13px;
-    margin-bottom: 13px;
-  }
-  
-  .pujun-document-wapper .pujun .solution_card .solu_description p {
-    font-size: 15px;
-    margin-bottom: 15px;
-  }
-  
-  .pujun-document-wapper .pujun .solution_card .solu_description button {
-    border: 0;
-    border-radius: 15px;
-    background: linear-gradient(
-      140deg,
-      #42c3ca 0%,
-      #42c3ca 50%,
-      #42c3cac7 75%
-    ) !important;
-    color: #fff;
-    font-weight: 500;
-    font-size: 1rem;
-    padding: 5px 16px;
-  }
-  
-  .pujun-document-wapper .pujun .our_solution_content div {
-    text-transform: capitalize;
-    margin-bottom: 1rem;
-    font-size: 2.5rem;
-  }
-  
-  .pujun-document-wapper .pujun .hover_color_bubble {
-    position: absolute;
-    background: rgb(54 81 207 / 15%);
-    width: 100rem;
-    height: 100rem;
-    left: 0;
-    right: 0;
-    z-index: -1;
-    top: 16rem;
-    border-radius: 50%;
-    transform: rotate(-36deg);
-    left: -18rem;
-    transition: 0.7s;
-  }
-  
-  .pujun-document-wapper .pujun .solution_cards_box .solution_card:hover .hover_color_bubble {
-    top: 0rem;
-  }
-  
-  .pujun-document-wapper .pujun .solution_cards_box .solution_card .so_top_icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: #fff;
-    overflow: hidden;
+    z-index: 100;
+}
+header .logo{
+    font-weight: bold;
+}
+header .menu{
+    padding: 0;
+    margin: 0;
+    list-style: none;
     display: flex;
-    align-items: center;
     justify-content: center;
-  }
-  
-  .pujun-document-wapper .pujun .solution_cards_box .solution_card .so_top_icon img {
+    gap: 20px;
+    font-weight: 500;
+}
+/* css slider */
+.pujun-slider{
+    height: 100vh;
+    margin-top: -50px;
+    position: relative;
+}
+.pujun-slider .pujun-list .myitem{
+    position: absolute;
+    inset: 0 0 0 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: .5s;
+}
+.pujun-slider .pujun-list .myitem img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.pujun-slider .pujun-list .myitem::after{
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-image: linear-gradient(
+        to top, #000 40%, transparent
+    );
+}
+.pujun-slider .pujun-list .myitem .content{
+    position: absolute;
+    left: 10%;
+    top: 20%;
+    width: 500px;
+    max-width: 80%;
+    z-index: 1;
+}
+.pujun-slider .pujun-list .myitem .content p:nth-child(1){
+    text-transform: uppercase;
+    letter-spacing: 10px;
+}
+.pujun-slider .pujun-list .myitem .content h2{
+    font-size: 100px;
+    margin: 0;
+}
+.pujun-slider .pujun-list .myitem.active{
+    opacity: 1;
+    z-index: 10;
+}
+@keyframes showContent {
+    to{
+        transform: translateY(0);
+        filter: blur(0);
+        opacity: 1;
+    }
+}
+.pujun-slider .pujun-list .myitem.active p:nth-child(1),
+.pujun-slider .pujun-list .myitem.active h2,
+.pujun-slider .pujun-list .myitem.active p:nth-child(3){
+    transform: translateY(30px);
+    filter: blur(20px);
+    opacity: 0;
+    animation: showContent .5s .7s ease-in-out 1 forwards;
+}
+.pujun-slider .pujun-list .myitem.active h2{
+    animation-delay: 1s;
+}
+.pujun-slider .pujun-list .myitem.active p:nth-child(3){
+    animation-duration: 1.3s;
+}
+.myarrows{
+    position: absolute;
+    top: 30%;
+    right: 50px;
+    z-index: 100;
+}
+.myarrows button{
+    background-color: #eee5;
+    border: none;
+    font-family: monospace;
     width: 40px;
-    height: 50px;
-    object-fit: contain;
-  }
-  
-  /*start media query*/
-  @media screen and (min-width: 320px) {
-    .pujun-document-wapper .pujun .sol_card_top_3 {
-      position: relative;
-      top: 0;
+    height: 40px;
+    border-radius: 5px;
+    font-size: x-large;
+    color: #eee;
+    transition: .5s;
+}
+.myarrows button:hover{
+    background-color: #eee;
+    color: black;
+}
+.mythumbnail{
+    position: absolute;
+    bottom: 50px;
+    z-index: 11;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    height: 250px;
+    padding: 0 50px;
+    box-sizing: border-box;
+    overflow: auto;
+    justify-content: center;
+}
+.mythumbnail::-webkit-scrollbar{
+    width: 0;
+}
+.mythumbnail .myitem{
+    width: 150px;
+    height: 220px;
+    filter: brightness(.5);
+    transition: .5s;
+    flex-shrink: 0;
+}
+.mythumbnail .myitem img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.mythumbnail .myitem.active{
+    filter: brightness(1.5);
+}
+.mythumbnail .myitem .content{
+    position: absolute;
+    inset: auto 10px 10px 10px;
+}
+@media screen and (max-width: 678px) {
+    .mythumbnail{
+        justify-content: start;
     }
-  
-    .pujun-document-wapper .pujun .our_solution_category {
-      width: 100%;
-      margin: 0 auto;
+    .pujun-slider .pujun-list .myitem .content h2{
+        font-size: 60px;
     }
-  
-    .pujun-document-wapper .pujun .our_solution_category .solution_cards_box {
-      flex: auto;
+    .myarrows{
+        top: 10%;
     }
-  }
-  
-  @media only screen and (min-width: 768px) {
-    .pujun-document-wapper .pujun .our_solution_category .solution_cards_box {
-      flex: 1;
-    }
-  }
-  
-  @media only screen and (min-width: 1024px) {
-    .pujun-document-wapper .pujun .sol_card_top_3 {
-      position: relative;
-      top: -3rem;
-    }
-
-  }
+}

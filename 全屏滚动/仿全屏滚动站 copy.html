@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complex Scroll Animation</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    .full-page-container {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 60px;
+    }
+
+    .scroll-page {
+      position: relative;
+    }
+
+
+
+
+
+
+
+
+
+    /* 首页banner */
+    .home-banner {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: url(./1.jpg) no-repeat center center;
+      background-size: cover;
+      overflow: hidden;
+    }
+
+    .home-banner-inner {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transform: translateX(var(--banner-x));
+      transition: transform 700ms ease-in;
+    }
+
+    .home-banner-inner-item {
+      height: 100%;
+      min-width: 100%;
+    }
+
+
+    .home-banner-inner-item:nth-child(1) {
+      background-color: rgba(119, 163, 58, 0.5);
+    }
+
+    .home-banner-inner-item:nth-child(2) {
+      background-color: rgba(20, 104, 189, 0.5);
+    }
+
+    .home-banner-inner-item:nth-child(3) {
+      background-color: rgba(37, 148, 72, 0.5);
+    }
+
+    .carousel-btn {
+      bottom: 7%;
+      right: 200px;
+      height: 50px;
+      width: 50px;
+      cursor: pointer;
+      font-size: 1.25rem;
+      position: absolute;
+      text-align: center;
+      line-height: 50px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.23);
+      transform: translateY(-50%);
+      transition: transform 0.1s linear;
+    }
+
+    .carousel-btn:active {
+      transform: translateY(-50%) scale(0.85);
+    }
+
+    .carousel-btn:last-child {
+      right: 100px;
+    }
+
+    .home-banner-inner-item-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+      font-size: 30px;
+      font-weight: 700;
+      height: 100%;
+      width: 100%;
+
+    }
+
+    .banner-page1:nth-of-type(1) .home-banner-inner-item-content {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, rgba(20, 104, 189, 0.5), rgba(20, 104, 189, 0.5)) no-repeat;
+      background-size: 0% 100%;
+      opacity: 0;
+      transition: background-size 700ms ease 700ms, opacity 700ms ease;
+    }
+
+    .banner-page1:nth-of-type(1).active .home-banner-inner-item-content {
+      background: linear-gradient(to right, rgba(20, 104, 189, 0.5), rgba(20, 104, 189, 0.5)) no-repeat;
+      background-size: 50% 100%;
+      opacity: 1;
+      background-position: left top;
+    }
+
+    /* 菜单 */
+    .scroll-page-menu {
+      color: #333;
+      font-size: 45px;
+      font-weight: 700;
+
+    }
+
+    .page-logo {
+      height: 46px;
+    }
+
+    .page-logo img {
+      max-width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .full-page-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      max-width: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-sizing: border-box;
+      padding: 20px 30px;
+      z-index: 99;
+      /* border-bottom: 1px solid #eeeeee;
+      background-image: radial-gradient(transparent 1px, #fff 1px);
+      background-size: 4px 4px;
+      backdrop-filter: saturate(50%) blur(4px);
+      border-bottom-color: #dcdfe6;
+      box-sizing: border-box; */
+    }
+
+    .timeline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: rgba(241, 245, 249, 1);
+      z-index: 9999;
+    }
+
+    .timeline-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background-color: #2196F3;
+      border-radius: 1px;
+      width: 0%;
+      transition: width 1s ease;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="timeline">
+    <div class="timeline-progress" id="timelineProgress"></div>
+  </div>
+
+
+  <div class="full-page-container">
+
+    <div class="scroll-page">
+      <div class="full-page-top">
+        <div class="page-logo">
+          <img src="./Logo.svg" alt="">
+        </div>
+        <div class="page-phone">
+          <i class='bx bxs-phone-call'></i>
+          <span>186-6666-9867</span>
+        </div>
+      </div>
+      <div class="home-banner">
+        <div class="home-banner-inner">
+          <div class="home-banner-inner-item banner-page1">
+            <div class="home-banner-inner-item-content">
+              轮播
+            </div>
+          </div>
+          <div class="home-banner-inner-item banner-page2">
+            <div class="home-banner-inner-item-content">
+              轮播
+            </div>
+          </div>
+          <div class="home-banner-inner-item banner-page3">
+            <div class="home-banner-inner-item-content">
+              轮播
+            </div>
+          </div>
+        </div>
+        <div class="next-btn carousel-btn">
+          <i class='bx bxs-chevron-left'></i>
+        </div>
+        <div class="prev-btn carousel-btn">
+          <i class='bx bxs-chevron-right'></i>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-page-menu">
+      菜单
+    </div>
+  </div>
+
+
+  <script>
+    //timeline
+    var timelineProgress = document.getElementById('timelineProgress');
+    //首页banner切换
+    let bannerindex = 0;
+    let bannerCount = document.querySelectorAll('.home-banner-inner-item').length;
+    let banners = document.querySelectorAll('.home-banner-inner-item');
+    let homebanner = document.querySelector('.home-banner');
+    let carouselbtn = document.querySelectorAll('.carousel-btn');
+    let bannerInner = document.querySelector('.home-banner-inner');
+    homebanner.style.setProperty('--banner-x', `${-banners[0].offsetLeft}px`);
+    document.querySelector('.next-btn').style.display = 'none';
+    banners[0].classList.add('active');
+    let maxScroll = document.querySelector('.home-banner').scrollWidth - document.querySelector('.home-banner').clientWidth;
+    let bannerBtnDebounce = debounce(function (item, event) {
+      if (item.classList.contains('next-btn')) {
+        bannerindex = (bannerindex - 1 + bannerCount) % bannerCount;
+        homebanner.style.setProperty('--banner-x', `${-banners[bannerindex].offsetLeft}px`);
+        document.querySelector('.next-btn').style.display = bannerindex <= 0 ? 'none' : 'block';
+        document.querySelector('.prev-btn').style.display = bannerindex >= bannerCount - 1 ? 'none' : 'block';
+        //添加类名
+        banners.forEach((item, index) => {
+          item.classList.remove('active');
+        })
+        banners[bannerindex].classList.add('active');
+        let progress = (banners[bannerindex].offsetLeft / maxScroll) * 100;
+        timelineProgress.style.width = progress + '%';
+      } else if (item.classList.contains('prev-btn')) {
+        bannerindex = (bannerindex + 1 + bannerCount) % bannerCount;
+        homebanner.style.setProperty('--banner-x', `${-banners[bannerindex].offsetLeft}px`);
+        document.querySelector('.prev-btn').style.display = bannerindex >= bannerCount - 1 ? 'none' : 'block';
+        document.querySelector('.next-btn').style.display = bannerindex <= 0 ? 'none' : 'block';
+        //添加类名
+        banners.forEach((item, index) => {
+          item.classList.remove('active');
+        })
+        banners[bannerindex].classList.add('active');
+        let progress = (banners[bannerindex].offsetLeft / maxScroll) * 100;
+        timelineProgress.style.width = progress + '%';
+      }
+    }, 200)
+    carouselbtn.forEach((item, index) => {
+      item.addEventListener('click', function (event) {
+        bannerBtnDebounce(item, event)
+      })
+    })
+
+    // 定义 debounce 函数
+    function debounce(func, wait, immediate) {
+      var timeout;
+      return function () {
+        var context = this, args = arguments;
+        var later = function () {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      };
+    };
+
+
+
+  </script>
+
+</body>
+
+</html>

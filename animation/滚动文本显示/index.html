@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper {
+            position: relative;
+        }
+
+        body {
+            background-color: #1b2725;
+        }
+
+        .scroll-reveal {
+            position: sticky;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 20px;
+            height: 100vh;
+            color: #fff;
+            border: 1px dotted #fff;
+        }
+
+        .scroll-reveal-inner {
+            max-width: 50%;
+        }
+
+        .scroll-reveal span {
+            color: hsl(0 0% 100% / 0.2);
+            font-size: clamp(14px, 18px, 25px);
+            background: linear-gradient(90deg, white, white) no-repeat;
+            background-size: var(--bj-size-x) 100%;
+            background-clip: text;
+            transition: background-size 1.5s cubic-bezier(.19,1,.22,1);
+            -moz-background-clip: text;
+            -webkit-background-clip: text;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <section class="scroll-reveal">
+
+        </section>
+        <section class="scroll-reveal reveal-text">
+            <div class="scroll-reveal-inner">
+                <h2 class="section-title">
+                    <span>Hi there 👋 I'm Alex and I'm pleased to meet you 😄</span>
+                </h2>
+                <p>
+                    <span>
+                        The scroll-reveal class will be applied to the element when the user scrolls to the element.
+                        The scroll-reveal class will be applied to the element when the user scrolls to the element.
+                        The scroll-reveal class will be applied to the element when the user scrolls to the element.
+                    </span>
+                </p>
+            </div>
+        </section>
+       
+        <section class="scroll-reveal reveal-text">
+            <div class="scroll-reveal-inner">
+                <h2 class="section-title">
+                    <span>Hi there 👋 😄</span>
+                </h2>
+                <div>
+                    <span>
+                        The scroll-reveal class will be applied to the element when the user scrolls to the element.
+                        The scroll-reveal class will be applied to the element when the user scrolls to the element.
+                        The scroll-reveal class will be applied to the element when the user scrolls to the element.
+                    </span>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script>
+        let scrollRevealSpan = document.querySelectorAll('.reveal-text span');
+        let revealElements = document.querySelectorAll('.reveal-text');
+        revealElements.forEach(function (element) {
+            element.style.setProperty('--bj-size-x', `${0}%`);
+        })
+        function updateReveal() {
+            revealElements.forEach(function (element) {
+                let elementTop = element.getBoundingClientRect().top;
+                let elementHeight = element.offsetHeight;
+                let windowHeight = window.innerHeight;
+                let scrollPosition = window.scrollY;
+                if (elementTop <= (windowHeight / 2) + 50 && !(Math.abs(elementTop) >= (windowHeight / 2) + 50)) {
+                    console.log(elementTop)
+                    let bgsize = (100 * ((windowHeight / 2) + 50 - elementTop) / windowHeight)
+                    bgsize = Math.max(0, Math.min(100, bgsize));
+                    element.style.setProperty('--bj-size-x', `${bgsize}%`);
+                }
+            })
+        }
+
+        function handleScroll() {
+            updateReveal();
+            requestAnimationFrame(handleScroll);
+        }
+        // 初次调用，确保在页面加载后立即更新状态
+        updateReveal();
+        // 监听滚动事件
+        window.addEventListener('scroll', handleScroll);
+
+
+
+    </script>
+</body>
+
+</html>

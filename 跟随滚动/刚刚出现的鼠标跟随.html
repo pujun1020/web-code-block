@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .sections {
+            height: 30vh;
+            background: linear-gradient(#f00, transparent);
+            background-size: 100%;
+
+        }
+
+        .scroll-history {
+            height: 100vh;
+            background: linear-gradient(#f00, #0f0, #00f);
+        }
+
+        .test {
+            height: 200vh;
+            background: #000;
+        }
+
+        p.tests {
+
+            background: #353535;
+        }
+
+        .testss {
+            height: 20vh;
+            transition: all 1s linear;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="tests">
+        <p class="testss"></p>
+    </div>
+    <div class="sections">
+
+    </div>
+    <div class="scroll-history">
+
+    </div>
+    <div class="test"></div>
+
+
+
+    <script>
+        //页面加载完毕
+        let scrollFlow = document.querySelector('.scroll-history');
+        let scrollFlowWindowTop = scrollFlow.getBoundingClientRect().top;
+        scrollFlow.style.setProperty('--scroll', '0%');
+        window.addEventListener('scroll', function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            let windowHeight = window.innerHeight || document.documentElement.clientHeight;
+            if (scrollTop + windowHeight >= scrollFlow.offsetTop && scrollTop <= scrollFlow.offsetTop + scrollFlow.scrollHeight) {
+console.log(scrollFlowWindowTop)
+                let sectionTop = scrollFlow.offsetTop;
+                let sectionHeight = scrollFlow.scrollHeight;
+                // 0% and 100%
+                let scrollPercen = ((scrollTop - scrollFlowWindowTop + windowHeight) / (sectionHeight + windowHeight)) * 100;
+                scrollPercen = Math.max(0, Math.min(100, scrollPercen)); // 区间处理
+                scrollPercen = scrollPercen.toFixed(2); // 保留两位小数
+                scrollFlow.style.setProperty('--scroll', `${scrollPercen}%`);
+                if (scrollPercen > 99) {
+                    scrollFlow.style.setProperty('--scroll', '100%');
+                }
+
+            }
+        });
+    </script>
+</body>
+
+</html>

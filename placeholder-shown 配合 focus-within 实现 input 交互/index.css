@@ -1,0 +1,50 @@
+.g-container {
+  position: relative;
+  margin: 100px auto;
+  display: flex;
+  flex-wrap: wrap;
+  width: 500px;
+  height: 60px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+.g-container > * {
+  border: none;
+  outline: none;
+}
+.g-container .g_input_search {
+  padding: 0 15px;
+  height: 100%;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+  box-sizing: border-box;
+}
+.g-container .g_input_search:not(:placeholder-shown) {
+  border: 1px solid #03a9f4;
+}
+.g-container .g_input_search:not(:placeholder-shown) + .g_button_search {
+  opacity: 1;
+}
+.g-container .g_input_search:placeholder-shown + .g_button_search {
+  opacity: 0;
+}
+.g-container .g_button_search {
+  background: #03a9f4;
+  color: #feffd4;
+  font-size: 15px;
+  cursor: pointer;
+  width: 100px;
+  height: calc(100% - 20px);
+  transition: 0.3s;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.g-container:focus-within {
+  transform: translateY(-4px);
+  border-color: #bbb;
+  box-shadow: 4px 4px 10px 2px #ddd;
+}
+
+/*# sourceMappingURL=index.css.map */

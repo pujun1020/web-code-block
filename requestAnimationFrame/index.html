@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>requestAnimationFrame(HTML5) - 代码示例 - FedJS</title>
+    <!--<style>-->
+        <!--body{-->
+            <!--width: 100%;-->
+            <!--height: 100%;-->
+        <!--}-->
+    <!--</style>-->
+</head>
+<body>
+<div id="test" style="width:1px;height:1px;background:#0f0;display: block;">0%</div>
+<div style="display: none"><input type="button" value="Run" id="Run"/></div>
+
+
+<script type="text/javascript">
+    requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+    var start =  null;
+    var test = document.getElementById("test");
+    var progress = 0;
+    var progressPX = 15;
+
+
+
+    function step(timestamp){
+        progressPX += 15;
+        progress += 1;
+
+        test.style.width = progressPX + "px";
+        test.style.height = progressPX + "px";
+        test.innerHTML = progress + "%";
+
+        if(progress < 100 && progress == 10){
+//            setTimeout(function () {
+                requestAnimationFrame(step);
+//            },1000)
+
+        }
+    }
+
+    requestAnimationFrame(step);
+
+    document.getElementById("Run").addEventListener("click", function () {
+        test.style.width = "1px";
+        test.style.height = "1px";
+        progressPX = 15;
+        progress = 1;
+
+        requestAnimationFrame(step);
+
+    },false);
+</script>
+
+<script>
+    // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+    // http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
+    // requestAnimationFrame polyfill by Erik Möller. fixes from Paul Irish and Tino Zijdel
+    // MIT license
+    (function() {
+        var lastTime = 0;
+        var vendors = ['ms', 'moz', 'webkit', 'o'];
+        for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+            window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+            window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
+        }
+        if (!window.requestAnimationFrame) window.requestAnimationFrame = function(callback, element) {
+            var currTime = new Date().getTime();
+            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+            var id = window.setTimeout(function() {
+                callback(currTime + timeToCall);
+            }, timeToCall);
+            lastTime = currTime + timeToCall;
+            return id;
+        };
+        if (!window.cancelAnimationFrame) window.cancelAnimationFrame = function(id) {
+            clearTimeout(id);
+        };
+    }());
+</script>
+
+</body>
+</html>

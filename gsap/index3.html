@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            overflow-y: hidden;
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+        }
+
+        .section {
+            font-size: 5rem;
+        }
+
+
+        .wrapper {
+            display: flex;
+        }
+
+        section {
+
+            font-weight: 900;
+            transition: color 0.3s;
+            flex: 1 1 100%;
+            min-width: 100%;
+            height: 100vh;
+        }
+
+        section:nth-child(1) {
+            background-color: #8d7dae;
+            background-image: url(https://source.unsplash.com/collection/954550/1920x1080);
+        }
+
+        section:nth-child(2) {
+            background-color: #8c3dae;
+        }
+
+        section:nth-child(3) {
+            background-color: #0d3dae;
+        }
+
+        section:nth-child(4) {
+            background-color: #8d3d3e;
+        }
+
+        .text {
+            position: sticky;
+            left: 0;
+            top: 0;
+            background-color: lightblue;
+            padding: 10px;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <section class="section">
+            <div class="text">Part One</div>
+        </section>
+        <section class="section">
+            Part Two
+        </section>
+        <section class="section">
+            Part Three
+        </section>
+        <section class="section">
+            Part Four
+        </section>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+    <script>
+        // 获取所有 section 元素
+        const sections = Array.from(document.querySelectorAll("section"));
+
+        // 计算所有 section 的总宽度
+        let maxWidth = sections.reduce((acc, section) => acc + section.offsetWidth, 0);
+
+        // 监听窗口尺寸变化事件，重新计算总宽度
+        window.addEventListener("resize", () => {
+            maxWidth = sections.reduce((acc, section) => acc + section.offsetWidth, 0);
+        });
+
+        // 监听滚动事件
+        document.addEventListener("scroll", () => {
+            const scrollLeft = window.scrollX || window.pageXOffset;
+
+            // 计算当前可视区域的左侧边界和右侧边界
+            const viewportLeft = scrollLeft;
+            const viewportRight = scrollLeft + window.innerWidth;
+
+            // 遍历所有 section
+            sections.forEach(section => {
+                const sectionLeft = section.offsetLeft;
+                const sectionRight = section.offsetLeft + section.offsetWidth;
+                // 如果当前 section 在可视区域内，则添加 active 类
+                if (sectionRight > viewportLeft && sectionLeft < viewportRight) {
+                    section.classList.add("active");
+                } else {
+                    section.classList.remove("active");
+                }
+            });
+        });
+
+        // 平滑滚动到指定位置
+        function smoothScroll(targetScrollLeft, duration) {
+            const initialScrollLeft = window.scrollX || window.pageXOffset;
+            const distance = targetScrollLeft - initialScrollLeft;
+            let startTime = null;
+
+            function step(timestamp) {
+                if (!startTime) startTime = timestamp;
+                const progress = timestamp - startTime;
+                const scrollProgress = easeInOutQuad(progress, initialScrollLeft, distance, duration);
+                window.scrollTo(scrollProgress, 0);
+                if (progress < duration) {
+                    requestAnimationFrame(step);
+                }
+            }
+
+            requestAnimationFrame(step);
+        }
+
+        // 缓动函数
+        function easeInOutQuad(t, b, c, d) {
+            t /= d / 2;
+            if (t < 1) return c / 2 * t * t + b;
+            t--;
+            return -c / 2 * (t * (t - 2) - 1) + b;
+        }
+
+        // 监听滚轮事件
+        /* document.addEventListener("wheel", e => {
+            console.log(window.scrollX)
+            const scrollStep = 300; // 滚动步长
+            const targetScrollLeft = window.scrollX + (e.deltaY > 0 ? scrollStep : -scrollStep) || window.pageXOffset + (e.deltaY > 0 ? scrollStep : -scrollStep);
+            smoothScroll(targetScrollLeft, 250); // 100 毫秒内实现滚动
+        }); */
+    </script>
+</body>
+
+</html>

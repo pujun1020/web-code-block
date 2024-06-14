@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //页面加载完毕
+        window.addEventListener('load', function () {
+
+            let section = document.querySelector('.technology-banner-wrapper-wrapper');
+            section.style.setProperty('--scroll', '0%');
+
+            window.addEventListener('scroll', function () {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop >= section.offsetTop && scrollTop <= section.offsetTop + section.offsetHeight) {
+                    let sectionTop = section.offsetTop;
+                    let sectionHeight = section.offsetHeight;
+                    // 0% and 100%
+                    let scrollPercen = ((scrollTop - sectionTop) / sectionHeight - 94) * 100;
+                    scrollPercen = Math.max(0, Math.min(100, scrollPercen)); // 区间处理
+                    scrollPercen = scrollPercen.toFixed(2); // 保留两位小数
+                    section.style.setProperty('--scroll', `${scrollPercen}%`);
+
+                    //transform偏移px,取整
+                    let transformPx = Math.round(scrollPercen);
+                    section.style.setProperty('--transformPx', `${transformPx}px`);
+                    if (scrollPercen > 99) {
+                        section.style.setProperty('--scroll', "100%");
+                    }
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>
