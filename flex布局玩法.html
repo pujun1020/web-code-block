@@ -1,0 +1,91 @@
+<script>
+    let arr = [1, 2, 3, 4, 5, 6, 5, 7, 8, 9, 10];
+    let indexof = arr.indexOf(5);
+    console.log(indexof);
+</script>
+<style>
+    .div-wrapper {
+        max-width: 1200px;
+        height: 60vh;
+        background-color: #ccc;
+
+    }
+
+    .div-inner {
+        position: relative;
+        display: flex;
+        overflow: hidden;
+        width: 100%;
+
+    }
+
+    .div-wrapper .div-inner div {
+        flex: 0 0 calc(100% / 6 - 16px);
+        width: calc(100% / 6 - 16px);
+        height: 50vh;
+        background-color: #ccc;
+        transition: all 0.5s;
+        margin-right: 20px;
+        border: 1px solid #000;
+    }
+
+    .div-wrapper div:nth-child(2) {
+        background-color: blueviolet;
+    }
+
+
+
+    .div-wrapper div:nth-child(6) {
+        background-color: rgb(151, 122, 177)
+    }
+
+    .div-wrapper .div-inner div:hover {
+        background-color: red;
+        flex: 0 0 calc(100% / 3 - 16px);
+    }
+
+    .div-wrapper .div-inner:has(div:nth-last-of-type(1):hover) {
+        background-color: brown;
+        justify-content: flex-end;
+    }
+
+
+    .div-wrapper .div-inner p{
+        flex: 0 0 calc(100% / 7 - 16px);
+        width: calc(100% / 7 - 16px);
+        height: 50vh;
+        background-color: #000;
+    }
+    .div-wrapper .div-inner p:nth-child(1){/* 先找同级的所有子元素元素，判断第一个是否为div，不区别对待 */
+        background-color: chartreuse;
+    }
+    .div-wrapper .div-inner div:nth-of-type(1){/* 先找到所有为div的子元素，找到第一个div，区别对待 */
+        background-color: rgb(222, 12, 96);
+    }
+</style>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="div-wrapper">
+        <div class="div-inner">
+          <!--   <p></p> -->
+            <div class=""></div>
+            <div class=""></div>
+            <div class=""></div>
+            <div class="a"></div>
+            <div class="a"></div>
+            <div class=""></div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

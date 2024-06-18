@@ -53,13 +53,14 @@
     <script>
         //页面加载完毕
         let scrollFlow = document.querySelector('.scroll-history');
-        let scrollFlowWindowTop = scrollFlow.getBoundingClientRect().top;
+        let scrollFlowWindowTop = scrollFlow.getBoundingClientRect().top;//动态获取
+        let scrollFlowWindowTop2=scrollFlow.offsetTop;//静态获取，不受页面滚动影响，即使页面滚动，该值也不会改变
         scrollFlow.style.setProperty('--scroll', '0%');
         window.addEventListener('scroll', function () {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             let windowHeight = window.innerHeight || document.documentElement.clientHeight;
             if (scrollTop + windowHeight >= scrollFlow.offsetTop && scrollTop <= scrollFlow.offsetTop + scrollFlow.scrollHeight) {
-console.log(scrollFlowWindowTop)
+                console.log(scrollFlowWindowTop,scrollFlowWindowTop2)
                 let sectionTop = scrollFlow.offsetTop;
                 let sectionHeight = scrollFlow.scrollHeight;
                 // 0% and 100%

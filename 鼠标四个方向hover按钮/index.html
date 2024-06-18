@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --bg: hsl(221, 37%, 10%);
+            --button-text: hsl(200, 60%, 12%);
+            --button-1-surface: hsl(197, 88%, 58%);
+            --button-2-surface: hsl(41, 96%, 56%);
+        }
+
+        body {
+            perspective: 1600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        html {
+            color-scheme: dark;
+            font-family: system-ui;
+            font-size: 2rem;
+            background: var(--bg);
+        }
+
+        .glassy-button {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            transition: transform 0.3s linear;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .glassy-button .glassy-button-inner {
+            width: 100%;
+            height: 100%;
+            background: var(--button-1-surface);
+        }
+
+        .glassy-button:hover {
+            transform: translateX(var(--x)) rotateX(var(--x1)) rotateY(var(--y1)) translateY(var(--y)) translateZ(100px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="glassy-button">
+        <div class="glassy-button-inner"></div>
+    </div>
+
+    <script>
+        const glassyButtons = document.querySelectorAll(".glassy-button");
+        glassyButtons.forEach((button) => {
+            button.addEventListener("mousemove", (event) => {
+                const rect = button.getBoundingClientRect();
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const offsetX = event.clientX - rect.left - centerX;
+                const offsetY = event.clientY - rect.top - centerY;
+
+                button.style.setProperty("--x", `${offsetX / 10}px`);
+                button.style.setProperty("--y", `${offsetY / 10}px`);
+                button.style.setProperty("--x1", `${offsetX / 10}deg`);
+                button.style.setProperty("--y1", `${offsetY / 10}deg`);
+            });
+
+            button.addEventListener("mouseleave", () => {
+                button.style.setProperty("--x", `0px`);
+                button.style.setProperty("--y", `0px`);
+                button.style.setProperty("--x1", `0deg`);
+                button.style.setProperty("--y1", `0deg`);
+            });
+        });
+    </script>
+</body>
+
+</html>

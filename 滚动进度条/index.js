@@ -1,4 +1,4 @@
-$(function () {
+
     /* let windowinnerheight=$(window).innerHeight();
     let windowinnerwidth=$("body").height();
     let scrollh=windowinnerwidth - windowinnerheight;
@@ -15,8 +15,8 @@ $(function () {
     console.log(window.innerHeight)
     window.addEventListener('scroll', function() {
       
-        var scrollTop = $(window).scrollTop();
-        let docHeight = document.body.offsetHeight;
+        var scrollTop = document.documentElement.scrollTop;
+        let docHeight = document.body.scrollHeight;
         let winHeight = window.innerHeight;
         let scrollPercent = scrollTop / (docHeight - winHeight) * 100;
         
@@ -25,10 +25,4 @@ $(function () {
         document.querySelector('.progressbox').style.width = progressWidth;
         
         });
-        $(".btn").click(function (e) { 
-            e.preventDefault();
-            let crpath=window.location.href;
-            console.log(crpath)
-            window.location.replace(crpath)
-        });
-});
+
