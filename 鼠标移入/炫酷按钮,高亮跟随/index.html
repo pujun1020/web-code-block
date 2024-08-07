@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #222;
+            gap: 50px;
+            flex-direction: column;
+            --rgb: 45, 45, 45;
+        }
+
+        .hightlighter {
+            position: relative;
+            padding: 20px 60px;
+            background: rgba(var(--rgb), 1);
+            border-radius: 50px;
+            font-size: 1.5em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .hightlighter:hover {
+            color: var(--clr);
+            text-shadow: 0 0 15px var(--clr),
+                0 0 10px var(--clr);
+            transition: all 0.5s ease;
+
+        }
+
+        .hightlighter span {
+            position: relative;
+            z-index: 1;
+            letter-spacing: 0.2em;
+
+        }
+
+        .hightlighter::before {
+            content: '';
+            position: absolute;
+            top: var(--y);
+            left: var(--x);
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(var(--clr), transparent, transparent);
+            transform: translate(-50%, -50%);
+            transition: 0.5s, top 0s, left 0s;
+            opacity: 0;
+        }
+
+        .hightlighter:hover::before {
+            opacity: 1;
+        }
+
+        .hightlighter::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            background: rgba(var(--rgb), 0.8);
+            border-radius: 48px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="menu-parent-wrapper" ref="mounsehover">
+        <ul class="menu-parent" ref="menudom">
+            <li class="line-icon-wapper">
+                <div class="line-icon"></div>
+            </li>
+        </ul>
+
+
+
+        <div style="--clr:#0f0;" class="hightlighter"><span>按钮</span></div>
+        <script>
+            let btns = document.querySelector('.hightlighter');
+            btns.addEventListener('mousemove', (e) => {
+                e.preventDefault();
+                let x = e.pageX - btns.offsetLeft;
+                let y = e.pageY - btns.offsetTop;
+                console.log(x, y);
+                console.log(btns.offsetLeft, btns.offsetTop);
+                btns.style.setProperty('--x', `${x}px`);
+                btns.style.setProperty('--y', `${y}px`);
+            })
+        </script>
+</body>
+
+</html>

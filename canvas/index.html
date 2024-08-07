@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        .banner-canvas {
+            height: 40vh;
+            width: 100vw;
+            background: url('https://www.drupal.org/files/cta/background/StarshotSpaceBG_Dark_0.png') no-repeat center center;
+            background-size: cover;
+        }
+    </style>
+    <div class="banner-canvas">
+        <canvas class="pujun-breadcrumb-webgl"></canvas>
+    </div>
+    <script>
+        window.addEventListener('load', function () {
+            var canvas = document.querySelector('.pujun-breadcrumb-webgl'),
+                ctx = canvas.getContext('2d'),
+                mouseSensitiveArea = 200; // 增强的鼠标灵敏度区域
+
+            canvas.width = document.querySelector('.banner-canvas').offsetWidth;
+            canvas.height = document.querySelector('.banner-canvas').offsetHeight;
+            ctx.lineWidth = .3;
+
+            // 创建颜色对象，允许指定最小值
+            function Color(min) {
+                min = min || 0;
+                this.r = colorValue(min);
+                this.g = colorValue(min);
+                this.b = colorValue(min);
+                this.style = createColorStyle(this.r, this.g, this.b);
+            }
+
+            // 生成随机颜色值的函数
+            function colorValue(min) {
+                return Math.floor(Math.random() * 255 + min);
+            }
+
+            // 创建颜色样式字符串的函数
+            function createColorStyle(r, g, b, alpha) {
+                return 'rgba(' + r + ',' + g + ',' + b + ',' + (alpha || 1) + ')';
+            }
+
+            // 混合颜色组件的函数
+            function mixComponents(comp1, weight1, comp2, weight2) {
+                return (comp1 * weight1 + comp2 * weight2) / (weight1 + weight2);
+            }
+
+            // 计算平均颜色样式的函数
+            function averageColorStyles(dot1, dot2) {
+                var color1 = dot1.color,
+                    color2 = dot2.color;
+
+                var r = mixComponents(color1.r, dot1.radius, color2.r, dot2.radius),
+                    g = mixComponents(color1.g, dot1.radius, color2.g, dot2.radius),
+                    b = mixComponents(color1.b, dot1.radius, color2.b, dot2.radius);
+                return createColorStyle(Math.floor(r), Math.floor(g), Math.floor(b), 0.8);
+            }
+
+            function Dot() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+
+                this.vx = -.5 + Math.random();
+                this.vy = -.5 + Math.random();
+
+                this.radius = Math.random() * 3; // 改进：增大圆点半径范围
+
+                this.color = new Color();
+            }
+
+            Dot.prototype = {
+                draw: function () {
+                    ctx.beginPath();
+                    ctx.fillStyle = this.color.style;
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+                    ctx.fill();
+                }
+            };
+
+            var mousePosition = {
+                x: 30 * canvas.width / 100,
+                y: 30 * canvas.height / 100
+            };
+
+            var dots = {
+                nb: 180, // 改进：增加圆点数量
+                distance: 80, // 改进：增加连接距离
+                d_radius: 120, // 改进：增加连接半径
+                array: []
+            };
+
+            function createDots() {
+                for (var i = 0; i < dots.nb; i++) {
+                    dots.array.push(new Dot());
+                }
+            }
+
+            function moveDots() {
+                for (var i = 0; i < dots.nb; i++) {
+                    var dot = dots.array[i];
+
+                    if (dot.y < 0 || dot.y > canvas.height) {
+                        dot.vx = dot.vx;
+                        dot.vy = -dot.vy;
+                    } else if (dot.x < 0 || dot.x > canvas.width) {
+                        dot.vx = -dot.vx;
+                        dot.vy = dot.vy;
+                    }
+                    dot.x += dot.vx;
+                    dot.y += dot.vy;
+                }
+            }
+
+            function connectDots() {
+                for (var i = 0; i < dots.nb; i++) {
+                    for (var j = 0; j < dots.nb; j++) {
+                        var i_dot = dots.array[i],
+                            j_dot = dots.array[j];
+
+                        if ((i_dot.x - j_dot.x) < dots.distance && (i_dot.y - j_dot.y) < dots.distance &&
+                            (i_dot.x - j_dot.x) > -dots.distance && (i_dot.y - j_dot.y) > -dots.distance) {
+                            if ((i_dot.x - mousePosition.x) < mouseSensitiveArea && (i_dot.y - mousePosition.y) < mouseSensitiveArea &&
+                                (i_dot.x - mousePosition.x) > -mouseSensitiveArea && (i_dot.y - mousePosition.y) > -mouseSensitiveArea) {
+                                ctx.beginPath();
+                                ctx.strokeStyle = averageColorStyles(i_dot, j_dot);
+                                ctx.moveTo(i_dot.x, i_dot.y);
+                                ctx.lineTo(j_dot.x, j_dot.y);
+                                ctx.stroke();
+                                ctx.closePath();
+                            }
+                        }
+                    }
+                }
+            }
+
+            function drawDots() {
+                for (var i = 0; i < dots.nb; i++) {
+                    var dot = dots.array[i];
+                    dot.draw();
+                }
+            }
+
+            function animateDots() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                moveDots();
+                connectDots();
+                drawDots();
+
+                requestAnimationFrame(animateDots);
+            }
+
+            document.querySelector('canvas').addEventListener('mousemove', function (e) {
+                mousePosition.x = e.pageX;
+                mousePosition.y = e.pageY;
+            });
+
+            document.querySelector('canvas').addEventListener('mouseleave', function (e) {
+                mousePosition.x = canvas.width / 2;
+                mousePosition.y = canvas.height / 2;
+            });
+
+            createDots();
+            requestAnimationFrame(animateDots);
+        }, false);
+
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+

@@ -15,14 +15,28 @@
             display: grid;
             grid-gap: 30px;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            align-items: center;
         }
 
         .item {
-            height: 300px;
+            aspect-ratio: 16 / 10;
+            background-color: black;
+            color: #fff;
+        }
+        .item:nth-child(2n){
+           
+        }
+        @media screen and (max-width: 576px) {
+        .grid-wrapper {
+            grid-gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        }
+        .item {
+            aspect-ratio: 16 / 12;
             background-color: black;
         }
-
-        
+            
+        }
     </style>
 </head>
 
@@ -30,13 +44,13 @@
 
     <div class="grid-wrapper-wrapper">
         <div class="grid-wrapper">
-            <div class="item"></div>
-            <div class="item"></div>
-            <div class="item"></div>
-            <div class="item"></div>
-            <div class="item"></div>
-            <div class="item"></div>
-            <div class="item"></div>
+            <div class="item">蒲俊</div>
+            <div class="item">蒲俊</div>
+            <div class="item">蒲俊</div>
+            <div class="item">蒲俊</div>
+            <div class="item">蒲俊</div>
+            <div class="item">蒲俊</div>
+            <div class="item">蒲俊</div>
         </div>
     </div>
     <script>

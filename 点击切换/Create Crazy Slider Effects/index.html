@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="bg-box">
+      <div class="bg" style="--s-clr: #408e20; --e-clr: #9acd31"></div>
+      <div class="bg" style="--s-clr: #550802; --e-clr: #f40401"></div>
+      <div class="bg" style="--s-clr: #696901; --e-clr: #ffff03"></div>
+      <div class="bg" style="--s-clr: #823043; --e-clr: #fac0cb"></div>
+    </div>
+
+    <div class="carousel">
+      <div class="list-img">
+        <div class="item">
+          <img src="./images/img1.png" alt="" />
+        </div>
+
+        <div class="item">
+          <img src="./images/img2.png" alt="" />
+        </div>
+
+        <div class="item">
+          <img src="./images/img3.png" alt="" />
+        </div>
+
+        <div class="item">
+          <img src="./images/img4.png" alt="" />
+        </div>
+      </div>
+
+      <div class="box-info">
+        <div class="list-info">
+          <div class="info">
+            <h2>Green Dragon</h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt,
+              odio nemo totam assumenda at quam iure, atque repellendus sapiente
+              laboriosam neque recusandae facere a! Suscipit numquam aperiam
+              labore fugiat itaque.
+            </p>
+            <a href="#" class="btn">View More</a>
+          </div>
+
+          <div class="info">
+            <h2>Red Dragon</h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt,
+              odio nemo totam assumenda at quam iure, atque repellendus sapiente
+              laboriosam neque recusandae facere a! Suscipit numquam aperiam
+              labore fugiat itaque.
+            </p>
+            <a href="#" class="btn">View More</a>
+          </div>
+
+          <div class="info">
+            <h2>Yellow Dragon</h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt,
+              odio nemo totam assumenda at quam iure, atque repellendus sapiente
+              laboriosam neque recusandae facere a! Suscipit numquam aperiam
+              labore fugiat itaque.
+            </p>
+            <a href="#" class="btn">View More</a>
+          </div>
+
+          <div class="info">
+            <h2>Pink Dragon</h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt,
+              odio nemo totam assumenda at quam iure, atque repellendus sapiente
+              laboriosam neque recusandae facere a! Suscipit numquam aperiam
+              labore fugiat itaque.
+            </p>
+            <a href="#" class="btn">View More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="navigation">
+      <span class="prev-btn"><i class="bx bx-chevron-left"></i></span>
+      <span class="next-btn"><i class="bx bx-chevron-right"></i></span>
+    </div>
+
+    <script>
+ const listInfo = document.querySelector(".list-info");
+const childCount = listInfo.childElementCount;
+const listImg = document.querySelector(".list-img");
+const prevBtn = document.querySelector(".prev-btn");
+const nextBtn = document.querySelector(".next-btn");
+const bgs = document.querySelectorAll(".bg");
+
+const activeColor = "white";
+const activeBorder = "2px solid white";
+const inactiveColor = "rgba(255,255,255,0.5)";
+const inactiveBorder = "2px solid rgba(255,255,255,0.5)";
+
+let index = 0;
+
+// Initialize first background as active
+bgs[index].classList.add("active");
+
+function changeBtnColor() {
+    // Determine if buttons should be inactive based on the current index
+    const nextInactive = index === childCount - 1;
+    const prevInactive = index === 0;
+
+    // Update next button styles
+    nextBtn.style.color = nextInactive ? inactiveColor : activeColor;
+    nextBtn.style.border = nextInactive ? inactiveBorder : activeBorder;
+
+    // Update previous button styles
+    prevBtn.style.color = prevInactive ? inactiveColor : activeColor;
+    prevBtn.style.border = prevInactive ? inactiveBorder : activeBorder;
+}
+
+function updateDisplay() {
+    // Update the display based on the current index
+    listInfo.style.transform = `translateY(${-index * (100 / childCount)}%)`;
+    listImg.style.transform = `translateY(${-index * 100}%)`;
+    
+    // Update background indicators
+    bgs.forEach((bg, i) => bg.classList.toggle("active", i === index));
+    
+    // Update button colors
+    changeBtnColor();
+}
+
+nextBtn.addEventListener("click", () => {
+    if (index < childCount - 1) {
+        index++;
+        updateDisplay();
+    }
+});
+
+prevBtn.addEventListener("click", () => {
+    if (index > 0) {
+        index--;
+        updateDisplay();
+    }
+});
+
+// Initial call to set button colors
+changeBtnColor();
+
+    </script>
+  </body>
+</html>

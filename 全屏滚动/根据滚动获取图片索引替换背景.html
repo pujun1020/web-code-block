@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        height: 2000px;
+        background-color: #333;
+    }
+  
+</style>
+<body>
+    <script>
+                let arrimg = ['1', '2', '3', '4']
+        window.addEventListener('scroll', () => {
+            let scrollY = window.scrollY;
+            let winHeight = window.innerHeight;
+            let docHeight = document.body.scrollHeight;
+            console.log((scrollY / winHeight % arrimg.length))
+        })
+        /* 如果 scrollY 为 300 像素，winHeight 为 600 像素，则这个结果为 0.5，表示页面向下滚动了 50%。
+
+% arrimg.length：这个操作符用于取模，arrimg.length 是图片数组的长度。取模操作确保结果在 0 到 arrimg.length - 1 之间，代表有效的数组索引。 */
+    </script>
+</body>
+</html>

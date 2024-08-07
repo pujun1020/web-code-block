@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #010718;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 246px;
+            overflow: hidden;
+        }
+
+        .container .text {
+            position: relative;
+            color: #4070F4;
+            font-size: 30px;
+            font-weight: 600;
+        }
+
+        .container .text.first-text {
+            color: #FFF;
+        }
+
+        .text.sec-text:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: #010718;
+            border-left: 2px solid #4070F4;
+            animation: animate 3s steps(9) infinite;
+        }
+
+        @keyframes animate {
+
+            40%,
+            60% {
+                left: calc(100% + 4px);
+            }
+
+            100% {
+                left: 0%;
+                
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <span class="text first-text">I'm a</span>
+        <span class="text sec-text">Freelancer</span>
+    </div>
+    <script>
+        const text = document.querySelector(".sec-text");
+        const textLoad = () => {
+            setTimeout(() => {
+                text.textContent = "Freelancer";
+            }, 0);
+            setTimeout(() => {
+                text.textContent = "Blogger";
+            }, 3000);
+            setTimeout(() => {
+                text.textContent = "YouTuber";
+            }, 6000); //1s = 1000 milliseconds
+        }
+        textLoad();
+        setInterval(textLoad, 9000);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .card-hover {
+            width: 500px;
+            height: 300px;
+            background-color: #f0f0f0;
+            overflow: hidden;
+            position: relative;
+            margin: 30px auto;
+        }
+
+        .card-hover-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            pointer-events: none;
+        }
+
+        .card-hover-inner-line {
+            width: 100%;
+            height: calc(100% / 4);
+            background-size: 0% 110%;
+            
+            background-repeat: no-repeat;
+            background-image: linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0.5));
+            background-position-y: top;
+            background-position-x: left;
+            
+        }
+
+        .card-hover:hover .card-hover-inner .card-hover-inner-line {
+            background-size: 100% 110%;
+            
+        }
+        .card-hover:hover .card-hover-inner .card-hover-inner-line:nth-child(1) {
+            transition-delay: 0s;
+            transition: background-size .4s cubic-bezier(.785,.135,.15,.86);
+        }
+        .card-hover:hover .card-hover-inner .card-hover-inner-line:nth-child(2) {
+            transition-delay: 0.1s;
+            transition: background-size .4s cubic-bezier(.25,.46,.45,.94);
+        }
+
+        .card-hover:hover .card-hover-inner .card-hover-inner-line:nth-child(3) {
+            transition-delay: 0.2s;
+            transition: background-size .4s cubic-bezier(.23,1,.32,1);
+        }
+
+        .card-hover:hover .card-hover-inner .card-hover-inner-line:nth-child(4) {
+            transition-delay: 0.3s;
+            transition: background-size .4s cubic-bezier(.785,.135,.15,.86);
+        }
+
+        .card-hover:not(:hover) .card-hover-inner .card-hover-inner-line{
+            background-position-x: right;
+        }
+        .card-hover:not(:hover) .card-hover-inner .card-hover-inner-line:nth-child(4){
+            transition-delay: 0.3s;
+            transition: background-size .4s cubic-bezier(.23,1,.32,1);
+        }
+        .card-hover:not(:hover) .card-hover-inner .card-hover-inner-line:nth-child(3){
+            transition-delay: 0.2s;
+            transition: background-size .4s cubic-bezier(.25,.46,.45,.94);
+        }
+        .card-hover:not(:hover) .card-hover-inner .card-hover-inner-line:nth-child(2){
+            transition-delay: 0.1s;
+            transition: background-size .4s cubic-bezier(.785,.135,.15,.86);
+            
+        }
+        .card-hover:not(:hover) .card-hover-inner .card-hover-inner-line:nth-child(1){
+            transition-delay: 0s;
+            transition: background-size .4s cubic-bezier(.785,.135,.15,.86);
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+    <div class="card-hover">
+        <img src="https://images.dog.ceo/breeds/retriever-curly/n02099429_3077.jpg" alt="">
+        <div class="card-hover-inner">
+            <div class="card-hover-inner-line"></div>
+            <div class="card-hover-inner-line"></div>
+            <div class="card-hover-inner-line"></div>
+            <div class="card-hover-inner-line"></div>
+        </div>
+    </div>
+    <div class="card-hover">
+        <img src="https://images.dog.ceo/breeds/retriever-curly/n02099429_3077.jpg" alt="">
+        <div class="card-hover-inner">
+            <div class="card-hover-inner-line"></div>
+            <div class="card-hover-inner-line"></div>
+            <div class="card-hover-inner-line"></div>
+            <div class="card-hover-inner-line"></div>
+        </div>
+    </div>
+    <script>
+/*         let cardItem=document.querySelectorAll('.card-hover');
+        cardItem.forEach(item=>{
+            item.addEventListener('mouseenter',()=>{
+                item.classList.add('active');
+            })
+            item.addEventListener('mouseleave',()=>{
+                item.classList.remove('active');
+            })
+        }) */
+    </script>
+</body>
+
+</html>

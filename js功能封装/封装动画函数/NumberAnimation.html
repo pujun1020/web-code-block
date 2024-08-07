@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./NumberAnimation.js"></script>
+</head>
+<body>
+    
+    <div id="number">0</div>
+    <button id="btn">结束动画</button>
+    <button id="btn2">开始动画</button>
+    <script>
+        var number = document.getElementById('number');
+        var btn = document.getElementById('btn');
+        let btn2 = document.getElementById('btn2');
+        let returnValue =NumberAnimation(0,888,2000,(value)=>{
+            number.innerHTML = value;
+        })
+        btn.addEventListener('click',()=>{
+            returnValue.cancel()
+        })
+        btn2.addEventListener('click',()=>{
+            returnValue.start()
+        })
+        
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .btn {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="btn"></div>
+    <script>
+        var isAnimating = false; // 动画状态标志
+        var btn = document.querySelector('.btn');
+        function mymove(x, y) {
+            if (isAnimating) return; // 如果正在播放动画，则不执行后续操作
+            isAnimating = true; // 设置动画状态为true
+
+
+            let btnBox = btn.getBoundingClientRect();
+            let ballx = btnBox.x + btnBox.width / 2;
+            let bally = btnBox.y + btnBox.height / 2;
+            let ratate = Math.atan2(y - bally, x - ballx) * 180 / Math.PI;
+
+            btn.getAnimations().forEach((anim) => {
+                anim.cancel()
+            });
+            btn.animate(
+                [
+                    {
+                        transform: `translate(${ballx}px,${bally}px) rotate(${ratate}deg)`,
+                    },
+                    {
+                        transform: `translate(${ballx}px,${bally}px) rotate(${ratate}deg) scaleX(1.5)`,
+                        offset: 0.6,
+                    },
+                    {
+                        transform: `translate(${x}px,${y}px) rotate(${ratate}deg) scaleX(1)`,
+                        offset: 0.8,
+                    },
+                    {
+                        transform: `translate(${x}px,${y}px) rotate(${ratate}deg)`,
+                    },
+
+                ],//关键帧
+                {
+                    duration: 500,
+                    fill: 'forwards',
+                }//动画配置
+            ).onfinish = () => {
+                isAnimating = false; // 动画结束后，将动画状态标志设置为false
+            };
+        }
+        window.addEventListener('click', (e) => {
+            mymove(e.clientX, e.clientY);
+        });
+    </script>
+</body>
+
+</html>

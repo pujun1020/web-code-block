@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        body {
+            height: 400vh;
+        }
+
+        .counter {
+            counter-reset: headings;
+
+        }
+
+        .counter2 {
+            counter-reset: none;
+        }
+
+        .counter h2 {
+            counter-increment: headings;
+        }
+
+        .counter h2::after {
+            content: counter(headings);
+            color: red;
+        }
+
+        .counter:hover+*+* {
+            color: rebeccapurple;
+        }
+
+        .example {
+
+            color: oklch(75%, 0.25, 250);
+            /* A color in oklch */
+
+            background-color: oklab(0.623, 0.172, -0.079);
+            /* A color in oklab */
+
+        }
+    </style>
+    <div class="example">example</div>
+    <div class="counter">
+        <h2 --i="蒲俊">zh急急急急急急斤斤计较</h2>
+        <h2 --i="蒲俊">zh急急急急急急斤斤计较</h2>
+    </div>
+    <div class="counter">hhhhhhhhh</div>
+    <div class="counter2">
+        <h2 --i="蒲俊">zh急急急急急急斤斤计较</h2>
+    </div>
+    <style>
+        body {
+            overflow: hidden;
+        }
+
+        .cart {
+            background-color: rgb(100, 210, 128);
+            height: 50px;
+            width: 50px;
+            border: 1px solid black;
+            border-radius: 50px;
+            position: absolute;
+            left: 10vw;
+            top: 30vh;
+            animation: x 4s linear forwards,
+                y 4s cubic-bezier(0.55, 0, 0.2, -5000) forwards;
+            animation-delay: 0s, 0s;
+        }
+
+        @keyframes x {
+            to {
+                left: 40vw;
+            }
+        }
+
+        @keyframes y {
+            to {
+                top: 29.99vh;
+            }
+        }
+    </style>
+    <div id="the-cart" class="cart"></div>
+    <script type="module">
+
+
+        /* console.log(60 / 3000 % 6) */
+        import { createApp } from 'https://unpkg.com/petite-vue?module'
+
+        createApp({
+            // exposed to all expressions
+            count: 0,
+            // getters
+            get plusOne() {
+                return this.count + 1
+            },
+            // methods
+            increment() {
+                this.count++;
+                console.log(this.$refs.reference)
+            }
+        }).mount()
+
+
+    </script>
+
+    <!-- v-scope value can be omitted -->
+    <div v-cloak>
+        <p ref="reference">pujun{{ count }}</p>
+        <p>{{ plusOne }}</p>
+        <button @click="increment">increment</button>
+    </div>
+    <div>
+        <div v-effect="$el.textContent = count"></div>
+        <button @click="count++">++</button>
+    </div>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</body>
+
+</html>

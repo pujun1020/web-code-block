@@ -381,41 +381,75 @@
             </div>
         </div>
     </div>
+    <style>
+        .play-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-image: url(/sites/default/files/2023-07/gibfbg.png);
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+
+        .play-video .myicon {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80px;
+            height: 80px;
+            background: rgba(0, 0, 0, 0.5);
+            background-position: center center;
+            background-size: 100% 100%;
+            border-radius: 50%;
+            transition: background-size 0.5s;
+            z-index: 99;
+        }
+    </style>
     <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            //判断是否是在微信环境
+            function isWechat() {
+                return /MicroMessenger/i.test(navigator.userAgent);
+            }
 
-        let downloadBtn = document.querySelectorAll('.download-btn-wrapper .download-btn');
-        let linkUrl = document.querySelector('.link-url');
-        let downloadTip = document.querySelector('.download-tip');
-        let clickCopy = document.querySelector('.click-copy');
-        //判断是否是在微信环境
-        function isWechat() {
-            return /MicroMessenger/i.test(navigator.userAgent);
+            //判断是否是微信环境
+            if (isWechat()) {
+                let video = document.querySelector('.me-video');
+                let { offsetWidth, offsetHeight } = video
+                video.insertAdjacentHTML('afterend', '<div class="play-video"><div class="myicon"><i class="fa fa-play"></i></div></div>');
+                video.setAttribute('autoplay', false);
+                video.setAttribute('muted', false);
+                video.setAttribute('playsinline', false);
+                video.setAttribute('loop', false);
+                let playBtn = document.querySelector('.play-video');
+                playBtn.style.width = offsetWidth + 'px';
+                playBtn.style.height = offsetHeight + 'px';
+                playBtn.addEventListener('click', function () {
+                    video.play();
+                    playBtn.style.display = 'none';
+                })
+
+            } else {
+
+                //禁用视频自动播放,兼容微信浏览器
+
+
+                console.log(document.querySelector('.me-video'))
+            }
+        })
+
+        if(isWechat()){
+            document.quqerySelector(".isnone-banner").outerHTML=''
+        }else{
+            document.querySelector(".breadcrumbs").outerHTML=''
         }
-
-        //判断是否是微信环境
-        if (isWechat()) {
-            document.querySelector('.guided-download-wrapper').style.height = window.innerHeight - 64 + 'px';
-            console.log(window.innerHeight - 64 + 'px')
-            downloadBtn[0].addEventListener('click', function () {
-                console.log('点击了下载按钮');
-                downloadTip.classList.add('show');
-            });
-            clickCopy.addEventListener('click', function () {
-                console.log('点击了复制按钮', linkUrl.textContent);
-                // 复制链接到剪贴板
-                let range = document.createRange();
-                range.selectNode(linkUrl);
-                window.getSelection().removeAllRanges();
-                window.getSelection().addRange(range);
-                document.execCommand('copy');
-                clickCopy.classList.add('active')
-                setTimeout(function () {
-                    downloadTip.classList.remove('show');
-                    clickCopy.classList.remove('active');
-                }, 2000);
-            })
-        }
-
     </script>
 </body>
 

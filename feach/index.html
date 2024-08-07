@@ -26,7 +26,6 @@
             /*js笔记*/
             const urlparam=new URLSearchParams('foo=bar&baz=qux');
             console.log(urlparam)
-           
         })
         const obj={
             foo:'bar',
@@ -38,6 +37,7 @@
         myForm.addEventListener('submit', function(event) {
             event.preventDefault(); // 阻止表单默认的提交行为
             var formData = new FormData(myForm);
+            formData.append('name', 'John Doe'); // 添加一个额外的字段
             console.log(formData.get('name')); // 获取表单中的name值
             console.log(formData); 
             console.log(Object.fromEntries(formData.entries())); 

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --bg: hsl(221, 37%, 10%);
+            --button-text: hsl(200, 60%, 12%);
+            --button-1-surface: hsl(197, 88%, 58%);
+            --button-2-surface: hsl(41, 96%, 56%);
+        }
+
+        body {
+            perspective: 1600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        html {
+            color-scheme: dark;
+            font-family: system-ui;
+            font-size: 2rem;
+            background: var(--bg);
+        }
+
+        .glassy-card {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            transition: transform 0.3s linear;
+            transform: perspective(900px) translateY(var(--x,0px)) translateY(var(--y,0px)) translateZ(var(--z,0px)) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
+            cursor: pointer;
+        }
+
+        .glassy-card .glassy-card-inner {
+            width: 100%;
+            height: 100%;
+            background: var(--button-2-surface);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="glassy-card">
+        <div class="glassy-card-inner"></div>
+    </div>
+    <script>
+        const glassyCards = document.querySelectorAll(".glassy-card");
+        let xyRange=[-5,5];
+        function getRotateDeg(range,value,length){
+            return (value / length * (range[1] - range[0])) + range[0];
+        }
+        glassyCards.forEach((card) => {
+            card.addEventListener("mousemove", (e) => {
+                const {offsetX,offsetY}=e;
+                const {offsetWidth,offsetHeight}=card;
+                const rx=getRotateDeg(xyRange,offsetX,offsetWidth);
+                const ry=getRotateDeg(xyRange,offsetY,offsetHeight);
+                card.style.setProperty("--rx", `${rx}deg`);
+                card.style.setProperty("--ry", `${ry}deg`);
+                card.style.setProperty("--y", `${ry}px`);
+                card.style.setProperty("--x", `${rx}px`);
+                card.style.setProperty("--z", `30px`);
+            });
+
+            card.addEventListener("mouseleave", () => {
+                card.style.setProperty("--rx", `0deg`);
+                card.style.setProperty("--ry", `0deg`);
+                card.style.setProperty("--z", `0px`);
+                card.style.setProperty("--y", `0px`);
+                card.style.setProperty("--x", `0px`);
+            });
+        });
+    </script>
+</body>
+
+</html>

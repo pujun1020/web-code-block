@@ -1,0 +1,124 @@
+<div class="why-change-wn">
+  <div class="why-change-wn-left">
+    <div class="why-change-wn-left-title">
+      <h2><span class="pujun-span">为什么</span>选择我们?</h2>
+      <h3>我们提供专业的服务，让您的应用程序更上一层楼，我们相信基于隐私和信任的长久的合作关系</h3>
+    </div>
+    <div class="why-change-wn-left-tab">
+      <ul>
+        <li>隐私第一</li>
+        <li>以客户为中心</li>
+        <li>维护协助</li>
+        <li>面向未来</li>
+      </ul>
+    </div>
+    <div class="why-change-wn-left-tab-content">
+      <div class="why-change-wn-left-tab-content-inner">
+        <div class="why-change-wn-left-tab-content-item">
+          <div class="why-change-wn-left-tab-content-item-title">隐私和安全大于一切</div>
+          <div class="why-change-wn-left-tab-content-item-content">
+            我们不占有您的数据，永远不会卖给广告商，即使您使用的是免费版本。这是我们坚守∞年的承诺，我们永远把您的隐私放到第一位。
+          </div>
+        </div>
+        <div class="why-change-wn-left-tab-content-item">
+          <div class="why-change-wn-left-tab-content-item-title">产品可靠，回报率高</div>
+          <div class="why-change-wn-left-tab-content-item-content">
+            我们的终端管理完全基于自主技术从零开始研发的，不通过收购来实现市场扩张，而是扎扎实实地从客户的需求来开发我们的产品。
+          </div>
+        </div>
+        <div class="why-change-wn-left-tab-content-item">
+          <div class="why-change-wn-left-tab-content-item-title">耐心产品维护</div>
+          <div class="why-change-wn-left-tab-content-item-content">
+           耐心沟通，进行产品维护处理。
+          </div>
+        </div>
+        <div class="why-change-wn-left-tab-content-item">
+          <div class="why-change-wn-left-tab-content-item-title">我们面向未来</div>
+          <div class="why-change-wn-left-tab-content-item-content">
+            我们从一开始就进入了终端管理领域，并且一直走在前列。选择我们，您就会一直领先一步。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="why-change-wn-right">
+    <img src="/sites/default/files/cardsite-img/software/why-change-us.png" alt="">
+  </div>
+</div>
+
+
+
+<style>
+.why-change-wn-left-tab-content-inner {
+    transition: transform 0.5s cubic-bezier(0.47,1.64,0.41,0.8);
+}
+.why-change-wn-left-tab-content {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+}
+.why-change-wn-left-tab-content-item-title {
+    color: #5C99FF;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+.why-change-wn-left-tab-content-item {
+    margin-bottom: 30px;
+}
+.why-change-wn-left-tab-content::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 200px;
+    background: linear-gradient(to top, #fff 10%, transparent);
+    z-index: 1;
+}
+.why-change-wn-left-title h3 {
+    font-size: 16px;
+    font-weight: 300;
+    margin-bottom: 30px;
+}
+.why-change-wn-left-tab li {
+    padding: 10px 5px;
+    cursor: pointer;
+    background: #F1F6FF;
+    text-align: center;
+}
+.why-change-wn-left-tab {
+    margin-bottom: 20px;
+}
+  .why-change-wn {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+  }
+.why-change-wn-left-tab ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-gap: 20px;
+    padding-left: 0;
+}
+.why-change-wn-left-title h2 {
+    font-size: 36px;
+    line-height: 40px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+</style>
+<script>
+  let whyChangeWnLeftTabContentItems = document.querySelectorAll('.why-change-wn-left-tab-content-item');
+  let whyChangeWnLeftTabContentInner = document.querySelector('.why-change-wn-left-tab-content-inner');
+  let whyTabs = document.querySelectorAll('.why-change-wn-left-tab ul li');
+  whyTabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => {
+      whyChangeWnLeftTabContentInner.style.transform = `translateY(-${whyChangeWnLeftTabContentItems[index].offsetTop}px)`;
+        whyTabs.forEach((tab) => {
+        tab.classList.remove('active');
+      });
+      tab.classList.add('active');
+    });
+  });
+</script>

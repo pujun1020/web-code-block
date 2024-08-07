@@ -1,0 +1,147 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+.carousel {
+  height: 100vh;
+  padding: 0 10%;
+  overflow: hidden;
+}
+
+.carousel .box-info {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 250px;
+  aspect-ratio: 13/5;
+  overflow: hidden;
+}
+
+.box-info .list-info {
+  transition: 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.list-info .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
+  height: 250px;
+}
+
+.info h2 {
+  font-size: 50px;
+  line-height: 1;
+}
+
+.info p {
+  font-size: 16px;
+  margin: 20px 0;
+}
+
+.info .btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 180px;
+  height: 50px;
+  background: transparent;
+  border: 2px solid #fff;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  font-size: 16px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  /* margin: 0 24px; */
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.info .btn:hover {
+  transform: translateX(24px) scale(1.1);
+}
+
+.carousel .list-img {
+  height: 100%;
+  transition: 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.list-img .item {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.item img {
+  position: absolute;
+  right: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.4));
+}
+
+.navigation {
+  position: absolute;
+  bottom: 7%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.navigation span {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  aspect-ratio: 1/1;
+  background: transparent;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  margin: 0 20px;
+  font-size: 55px;
+  color: #fff;
+  transition: 0.5s;
+}
+
+.navigation span:first-child {
+  color: rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.navigation span:hover {
+  transform: scale(1.2);
+}
+
+.bg-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* z-index: -1; */
+}
+
+.bg-box .bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+ /*  z-index: -1; */
+  background: linear-gradient(360deg, var(--s-clr), var(--e-clr));
+  transition: 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.bg-box .bg{
+  clip-path: circle(0% at 50% 50%);
+}
+
+.bg-box .bg.active  {
+  clip-path: circle(75% at 50% 50%);
+}
